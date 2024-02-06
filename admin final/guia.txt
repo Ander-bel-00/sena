@@ -1,0 +1,4 @@
+Dentro de la pagina visitas, agregar un id a la "card" ya que en el index.html ya existe una clase card -> darle estilos con #card-calendar -> evitar doble clasiicación 
+
+++++++++  Linea de codigo:   ≈613 css   ++++++++++
+
