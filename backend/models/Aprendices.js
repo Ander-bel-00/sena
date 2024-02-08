@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 
+
 // Crear el modelo aprendiz con el que se creará la tabla con los campos necesarios.
 const Aprendiz = sequelize.define('Aprendices', {
     id_aprendiz:{
@@ -115,11 +116,18 @@ const Aprendiz = sequelize.define('Aprendices', {
     fecha_fin_lectiva: {
         type: DataTypes.DATE,
         allowNull: false,
+    },
+    contrasena: {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
 },{
     sequelize,
     modelName: 'Aprendices'
 });
 
-// Exportar el modeo para permitir su uso.
+
+
+
+// Exportar el modelo para permitir su uso.
 module.exports = Aprendiz;

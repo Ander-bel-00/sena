@@ -1,8 +1,15 @@
 const Aprendices = require('../models/Aprendices');
+const bcrypt = require('bcryptjs');
+
 
 // Registrar nuevo aprendiz a la Base de datos.
 exports.nuevoAprendiz = async (req, res, next) => {
     try{
+        // Encriptar la contraseña antes de guardarla en la base de datos
+        const hashedPassword = await bcrypt.hash(req.body.contrasena, 10); // 10 es el número de rondas de hashing
+
+        // Reemplazar la contraseña original por la contraseña encriptada
+        req.body.contrasena = hashedPassword;
 
         // Crea la tabla Aprendices en la base de datos en caso de que no existir.
         await Aprendices.sync({ force: false });
@@ -23,6 +30,7 @@ exports.nuevoAprendiz = async (req, res, next) => {
         next();
     }
 };
+
 
 // Obtener los datos de todos los aprendices almacenados en la base de datos.
 exports.mostrarAprendices = async (req, res, next) => {
