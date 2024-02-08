@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Bitácoras cargadas</title>
+    <!--MAIN CSS-->
+    <link rel="stylesheet" href="./css/bitacoras.css">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous" type="text/css">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" type="text/css">
+    <!-- Faicon -->
+    <link rel="icon" href="img/sena-verde.png">
+    <!-- Iconos de Boostrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <div id="confirmacionCierreSesion" class="modal">
+        <div class="modal-content">
+            <p>¿Estás seguro de que deseas cerrar sesión?</p>
+            <button id="confirmarCierreSesion">Sí, cerrar sesión</button>
+            <button id="cancelarCierreSesion">Cancelar</button>
+        </div>
+    </div>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Aprendiz</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                
+                <li> 
+                    <a href="../../index.html">
+                        <i class="bi bi-house-door-fill"></i> Inicio
+                    </a>
+                </li>
+                <li> 
+                    <a href="../perfil/perfil.html">
+                        <i class="bi bi-person-fill"></i> Perfil
+                    </a>
+                </li>
+
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" 
+                        class="dropdown-toggle" id="Documentos"><i class="bi bi-file-earmark-arrow-up-fill"></i></i>Documentos</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#"><i class="bi bi-cloud-arrow-up"></i>Cargar bitácoras</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="bi bi-upload"></i>Cargar formulários</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="bi bi-pen"></i>Registrar o visualizar firma
+                                digital
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="descargarBitacorasBtn">
+                                <i class="bi bi-file-earmark-arrow-down"></i> Descargar formato de bitácoras
+                            </a>
+                        </li>                        
+                        <li>
+                            <a href="#"><i class="bi bi-download"></i>Descargar formato de formulario
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="bi bi-eye-fill"></i>Visitas</a>
+                </li>
+                <li>
+                    <a href="#" id="cerrarSesionButton"><i class="bi bi-box-arrow-in-right"></i>Cerrar sesión</a>
+                </li>
+            </ul>
+        </nav>
+
+      
+            
+        <!--Main Header-->
+        <div id="content">
+            <header>
+                <nav class="nav1">
+                    <div class="nav-logo">
+                        <button type="button" id="sidebarCollapse">
+                            <i class="fas fa-align-left"></i>
+                            <span>Menú</span>
+                          </button>
+                    </div>
+                    <ul class="nav-links">
+                        <h2 class="seep">S.E.E.P</h2>
+                    </ul>
+                    <button class="campana" id="campana"><i class="bi bi-bell-fill"></i></button>
+                    <div id="notificaciones">
+                        <h5>Notificaciones</h5>
+                        <div class="notifi-content">
+                            <h6>Visita Programada</h6>
+                            <p><strong>Vistia para el 03/09/2024 a las 12:30 pm</strong></p>
+                        </div>
+                        <div class="notifi-content">
+                            <h6>Visita Programada</h6>
+                            <p><strong>Vistia para el 03/09/2024 a las 12:30 pm</strong></p>
+                        </div>
+                        <div class="notifi-content">
+                            <h6>Visita Programada</h6>
+                            <p><strong>Vistia para el 03/09/2024 a las 12:30 pm</strong></p>
+                        </div>
+                    </div>
+                    <img src="./img/sena-verde.png" class="imagen1">
+                  </nav>
+            </header>
+
+            <!-- contenido por dentro -->
+
+            <!--Create a table--> 
+
+            <div class="tabla">
+                <div class="columna">Bitácora N°</div>
+                <div class="columna">fecha de publicación</div>
+                <div class="columna">Estado</div>
+            
+                <div class="fila">1</div>
+                <div class="fila"><b>Cargada el 22/03/2024</b></div>
+                <div class="fila">
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </div>
+            
+                <div class="fila">2</div>
+                <div class="fila"><b>Cargada el 22/03/2024</b></div>
+                <div class="fila">
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </div>
+            
+                <div class="fila">3</div>
+                <div class="fila"><b>Cargada el 22/03/2024</b></div>
+                <div class="fila">
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </div>
+                <div class="fila">4</div>
+                <div class="fila"><b>Cargada el 22/03/2024</b></div>
+                <div class="fila">
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </div>
+                <div class="fila">5</div>
+                <div class="fila"><b>Cargada el 22/03/2024</b></div>
+                <div class="fila">
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </div>
+                <div class="fila">6</div>
+                <div class="fila"><b>Cargada el 22/03/2024</b></div>
+                <div class="fila">
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </div>
+                <div class="fila">7</div>
+                <div class="fila"><b>Cargada el 22/03/2024</b></div>
+                <div class="fila">
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </div>
+                <div class="fila">8</div>
+                <div class="fila"><b>Cargada el 22/03/2024</b></div>
+                <div class="fila">
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </div>
+                <div class="fila">9</div>
+                <div class="fila"><b>Sin cargar</b></div>
+                <div class="fila">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+                <div class="fila">10</div>
+                <div class="fila"><b>Sin cargar</b></div>
+                <div class="fila">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+                <div class="fila">11</div>
+                <div class="fila"><b>Sin cargar</b></div>
+                <div class="fila">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+                <div class="fila">12</div>
+                <div class="fila"><b>Sin cargar</b></div>
+                <div class="fila">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+            </div>
+            
+            <!-- <ul id="bitacoras">
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°1 <b>Cargada el 22/03/2024</b></strong></p>
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </li>
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°2 <b>Cargada el 22/03/2024</b></strong></p>
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </li>
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°3 <b>Cargada el 22/03/2024</b></strong></p>
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </li>
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°4 <b>Cargada el 22/03/2024</b></strong></p>
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </li>
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°5 <b>Cargada el 22/03/2024</b></strong></p>
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </li>
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°6 <b>Cargada el 22/03/2024</b></strong></p>
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </li>
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°7 <b>Cargada el 22/03/2024</b></strong></p>
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </li>
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°8 <b>Cargada el 22/03/2024</b></strong></p>
+                    <a href="#" class="btedit"><button class="editar">Ver</button></a>
+                </li>
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°9 <b> Sin cargar</b></strong></p>
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </li>
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°10 <b> Sin cargar</b></strong></p>
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </li>
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°11 <b>Sin cargar</b></strong></p>
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </li>
+                <li class="bitacoras-cargadas">
+                    <p><strong>Bitacora N°12 <b>Sin cargar</b></strong></p>
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </li>
+            </ul> -->
+
+
+    <!-- <footer>
+        © SENA - Todos los derechos reservados
+    </footer> -->
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+</body>
+<script src="../../js/main.js"></script>
+</html>
