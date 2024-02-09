@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Perfil</title>
+
+     <!--MAIN CSS-->
+     <link rel="stylesheet" href="css/style.css">
+     <!-- Bootstrap CSS CDN -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous" type="text/css">
+     <!-- Our Custom CSS -->
+     <link rel="stylesheet" href="style.css">
+     <!-- <link rel="stylesheet" href="style2.css"> -->
+     <!-- Scrollbar Custom CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" type="text/css">
+ 
+     <!-- Font Awesome JS -->
+     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+ 
+        <!-- ---Iconos de bootstrap---- -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+</head>
+<body>
+
+
+    <div id="confirmacionCierreSesion" class="modal">
+        <div class="modal-content">
+            <p>¿Estás seguro de que deseas cerrar sesión?</p>
+            <button id="confirmarCierreSesion">Sí, cerrar sesión</button>
+            <button id="cancelarCierreSesion">Cancelar</button>
+        </div>
+    </div>
+
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Administrador</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+
+                <!-- <p class="inicio"><a href="./index.html">Inicio</a></p>
+                <p class="Profile"><a href="">Perfil</a></p> -->
+
+                <li> 
+                    <a href="./index.html">
+                        <i class="bi bi-house-door-fill"></i> Inicio
+                    </a>
+                </li>
+        
+                <li> 
+                    <a href="./visitas.html">
+                        <i class="bi bi-eye-fill"></i> Visitas
+                    </a>
+                </li>
+
+                <li> 
+                    <a href="./perfil.html">
+                        <i class="bi bi-person-fill"></i> Perfil
+                    </a>
+                </li>
+
+                
+
+                
+                
+
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" 
+                        class="dropdown-toggle" id="Documentos"> <i class="bi bi-people-fill"></i> Gestión de usuarios
+                    </a>
+
+                    <ul class="collapse list-unstyled" id="homeSubmenu">               <!-- *******opciones de dropdown************ -->
+                        <li>
+                            <a href="#">Crear usuarios</a>
+                        </li>
+                        <li>
+                            <a href="#">Editar usuarios</a>
+                        </li>
+                        <li>
+                            <a href="#">Eliminar usuarios
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">Asignar roles y usuarios
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">Exportar usuarios
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+                
+                <li>
+                    <a href="#">
+                        <i class="bi bi-file-earmark-arrow-up-fill"></i> Documentos
+                    </a>
+                </li>
+                <li>
+                    <a href="./fichas.html">
+                        <i class="bi bi-backpack-fill"></i> Fichas
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="#" id="cerrarSesionButton">
+                        <i class="bi bi-box-arrow-in-right"></i> Cerrar sesión
+                    </a>
+                </li>
+
+            </ul>
+
+            
+        </nav>
+
+        <!-- Page Content  -->
+
+        
+        <div id="content">
+            
+            <header>
+
+                  <nav class="nav1">
+                    <div class="nav-logo">
+                        <button type="button" id="sidebarCollapse">
+                            <i class="fas fa-align-left"></i>
+                            <span>Menú</span>
+                          </button>
+                        
+                    </div>
+                    <ul class="nav-links">
+                        
+                        <h2 class="seep">S.E.E.P</h2>
+                    </ul>
+
+                    <i class="bi bi-bell-fill" id="campana"></i> 
+                    <img src="./img/logo-sena.png" class="imagen1">
+
+                  </nav>
+                 
+            </header>
+            <!-- contenido por dentro -->
+
+            <div class="container">
+                <main>
+                    <div class="mainP">
+                        <h1>Perfil</h1>
+                        <i class="bi bi-person-bounding-box"></i>
+                        <p class="card-text texo-carta"><strong>Nombres:</strong> Rodolfo Pablo</p>
+                        <p class="card-text texo-carta"><strong>Apellidos:</strong> Cantillo Rendon</p>
+                        <p class="card-text texo-carta"><strong>Correo electrónico:</strong>
+                            correoprueba@misena.edu.co
+                        </p>
+                        <p class="card-text texo-carta"><strong>Teléfono:</strong> Software S.A.S</p>
+                        <p class="card-text texo-carta"><strong>Dirección:</strong> Sena Santa Isabel</p>
+                        <p class="card-text texo-carta"><strong>Último inicio de sesión:</strong> 10/11/2023</p>
+                    </div>
+                    <div class="secondP">
+                    <h1>Académico</h1>
+                        <p class="card-text texo-carta"><strong>Programa de formación:</strong> 
+                            Análisis y desarrolo de software</p>
+                        <p class="card-text texo-carta"><strong>Ficha de caracterización:</strong> 
+                            2653755</p>
+                        <p class="card-text texo-carta"><strong>Jornada:</strong> Diurna</p>
+                        <p class="card-text texo-carta"><strong>Nivel de formación:</strong> 
+                            Tecnológico</p>
+                        <p class="card-text texo-carta"><strong>Empresa en práctica:</strong> 
+                            Software S.A.S</p>
+                        <p class="card-text texo-carta"><strong>Fecha fin de étapa práctica:</strong> 
+                            31/12/2024</p>
+                    </div>
+                </main>
+            </div>
+    
+
+
+
+        </div>
+
+
+
+
+
+
+
+            <footer>
+                © SENA - Todos los derechos reservados
+            </footer>
+
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+</body>
+
+<script src="js/main.js"></script>
+
+</html>
