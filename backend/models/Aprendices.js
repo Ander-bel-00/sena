@@ -117,10 +117,15 @@ const Aprendiz = sequelize.define('Aprendices', {
         type: DataTypes.DATE,
         allowNull: false,
     },
+    rol_usuario: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     contrasena: {
         type: DataTypes.STRING,
         allowNull: false,
-    }
+    },
+
 },{
     sequelize,
     modelName: 'Aprendices'

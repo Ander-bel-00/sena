@@ -1,10 +1,10 @@
 const express = require('express');
 const router = require('./routes');
 const routes  = require('./routes');
-const passport = require('passport');
-const session = require('express-session');
+
 
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 const cors = require('cors');
 const { sequelize, testConnection } = require('./config/database');
@@ -13,7 +13,7 @@ const { sequelize, testConnection } = require('./config/database');
 const morgan = require('morgan');
 
 const app = express();
-require('./config/passport');
+
 
 // Testear la conexíon a la base de datos.
 testConnection();
@@ -23,6 +23,7 @@ app.use(morgan("dev"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 
 
