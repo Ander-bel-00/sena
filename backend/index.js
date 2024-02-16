@@ -28,7 +28,12 @@ app.use(cookieParser());
 
 
 // Habilitar cors.
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    // Establecer las cookies al frontend.
+    credentials: true
+}));
+
 
 app.use('/', routes());
 

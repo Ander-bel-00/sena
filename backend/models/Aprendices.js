@@ -124,7 +124,15 @@ const Aprendiz = sequelize.define('Aprendices', {
     contrasena: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
+        validate: {
+            // Función de validación personalizada para la contraseña
+            validarContrasena(value) {
+                if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}/.test(value)) {
+                    throw new Error('La contraseña debe tener al menos 8 caracteres, incluir al menos una mayúscula, una minúscula, un carácter especial y cinco números.');
+                }
+            },
+        }
+    }
 
 },{
     sequelize,

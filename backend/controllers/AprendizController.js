@@ -1,14 +1,18 @@
 const Aprendices = require('../models/Aprendices');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const createAccessToken = require('../libs/jwt');
 
-// Registrar nuevo aprendiz a la Base de datos y generar token JWT
 exports.nuevoAprendiz = async (req, res, next) => {
     try {
+        // Verificar si la contraseña cumple con los requisitos
+        const contrasena = req.body.contrasena;
+        if (!esContrasenaValida(contrasena)) {
+            return res.status(400).json({ mensaje: 'La contraseña debe contener al menos una letra minuscula, una mayuscula, un caracter especial y 5 números' });
+        }
+
         // Encriptar la contraseña antes de guardarla en la base de datos
         const hashedPassword = await bcrypt.hash(req.body.contrasena, 10);
-
-        // Reemplazar la contraseña original por la contraseña encriptada
         req.body.contrasena = hashedPassword;
 
         // Crear el aprendiz en la base de datos
@@ -16,11 +20,10 @@ exports.nuevoAprendiz = async (req, res, next) => {
         const aprendiz = await Aprendices.create(req.body);
 
         // Generar token JWT
-        const token = jwt.sign(
-            { id: aprendiz.id_aprendiz, numero_documento: aprendiz.numero_documento },
-            'secret_token_secret', // Cadena para el secret token.
-            { expiresIn: '1h' } // Tiempo de expiración del token.
-        );
+        const token = await createAccessToken({ id: aprendiz.id_aprendiz, numero_documento: aprendiz.numero_documento });
+
+        // Si todo sale bien guardar el token generado en una cookie ('nombre_cookie', 'valor').
+        res.cookie("token", token);
 
         // Enviar respuesta con token
         res.json({ mensaje: 'El aprendiz ha sido registrado exitosamente', token, aprendiz });
@@ -30,6 +33,37 @@ exports.nuevoAprendiz = async (req, res, next) => {
         next();
     }
 };
+
+function esContrasenaValida(contrasena) {
+    // Longitud mínima de 8 caracteres
+    if (contrasena.length < 8) {
+        return false;
+    }
+
+    // Al menos una letra mayúscula
+    if (!/[A-Z]/.test(contrasena)) {
+        return false;
+    }
+
+    // Al menos una letra minúscula
+    if (!/[a-z]/.test(contrasena)) {
+        return false;
+    }
+
+    // Al menos un número
+    if (!/\d/.test(contrasena)) {
+        return false;
+    }
+
+    // Al menos un caracter especial.
+    if (!/[$&+,:;=?@#|'<>.^*()%!-]/.test(contrasena)) {
+        return false;
+    }
+
+    // Si pasa todas las verificaciones, la contraseña es válida
+    return true;
+}
+
 
 // Obtener los datos de todos los aprendices almacenados en la base de datos.
 exports.mostrarAprendices = async (req, res, next) => {
