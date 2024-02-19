@@ -78,7 +78,7 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
         <Fragment>
             <header className='flex justify-between'>
                 <img src={logoSena} alt="logo-sena" id="logo-sena" className='logo-sena w-16 ml-2 my-1'/>
-                <h2 className=' text-black text-4xl seepTitle'>S.E.E.P</h2>
+                <h2 className='text-4xl seepTitle'>S.E.E.P</h2>
             </header>
 
             <div className="flex h-[calc(100vh-100px)] items-center justify-center">
