@@ -1,4 +1,3 @@
-// App.js
 import React, { Fragment, useEffect, useState } from "react";
 import handleContentMovement from "./main.js";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";

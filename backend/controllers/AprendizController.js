@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const createAccessToken = require('../libs/jwt');
 
+
 exports.nuevoAprendiz = async (req, res, next) => {
     try {
         // Verificar si la contraseña cumple con los requisitos

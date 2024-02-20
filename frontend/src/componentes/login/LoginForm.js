@@ -19,7 +19,7 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const navigate = useNavigate(); // Utilizar useNavigate para la navegación
+    const navigate = useNavigate();
 
     const onSubmit = async e => {
         e.preventDefault();
@@ -68,7 +68,7 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
                     break;
             }
         }
-    }, [isAuthenticated, navigate, rol_usuario]);
+    }, [isAuthenticated]);
 
     if (isAuthenticated) {
         return <Navigate to="/" replace />;

@@ -15,6 +15,8 @@ const morgan = require('morgan');
 const app = express();
 
 
+
+
 // Testear la conexíon a la base de datos.
 testConnection();
 
@@ -33,6 +35,15 @@ app.use(cors({
     // Establecer las cookies al frontend.
     credentials: true
 }));
+
+// Para evitar el almacenamiento en caché en el navegador
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    next();
+});
+  
 
 
 app.use('/', routes());
