@@ -58,57 +58,19 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            isAuthenticated ? (
-              <Navigate to={`/${userRole}`} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route
-          path="/login"
-          element={<LoginForm isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />}
-        />
-        <Route
-          path="/aprendiz"
-          element={
-            isAuthenticated && userRole === 'aprendiz' ? (
-              <Fragment>
-                <Header showNav={showNav} setShowNav={setShowNav}/>
-                <NavbarAprendiz showNav={showNav} handleLogout={handleLogout} />
-                <main className="container content">
-                  <Aprendices />
-                </main>
-              </Fragment>
-            ) : (
-              <Navigate to="/" replace />
-            )
-          }
-        />
-        <Route
-          path="/instructores"
-          element={
-            isAuthenticated && userRole === 'instructor' ? (
-              <Instructor />
-            ) : (
-              <Navigate to="/" replace />
-            )
-          }
-        />
-        <Route
-          path="/administradores"
-          element={
-            isAuthenticated && userRole === 'administrador' ? (
-              <Administrador />
-            ) : (
-              <Navigate to="/" replace />
-            )
-          }
-        />
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<LoginForm isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />} />
+        <Route path="/aprendiz" element={<Fragment>
+          <Header showNav={showNav} setShowNav={setShowNav}/>
+          <NavbarAprendiz showNav={showNav} handleLogout={handleLogout} />
+          <main className="container content">
+            <Aprendices />
+          </main>
+        </Fragment>} />
+        <Route path="/instructores" element={<Instructor />} />
+        <Route path="/administradores" element={<Administrador />} />
       </Routes>
+
     </BrowserRouter>
   );
 }
