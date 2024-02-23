@@ -3,9 +3,9 @@ const handleContentMovement = (showNav) => {
 
   if (content) {
       if (showNav) {
-          content.style.marginLeft = '240px'; 
+          content.style.marginLeft = '298px'; 
       } else {
-          content.style.marginLeft = '0';
+          content.style.marginLeft = '';
       }
   }
 };

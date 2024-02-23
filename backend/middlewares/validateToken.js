@@ -1,20 +1,36 @@
 const jwt = require('jsonwebtoken');
-const TOKEN_S = require('../config/config');
 
-const authRequired = (req, res, next) => {
+module.exports = (req, res, next) => {
+    // Obtener el token de la cabecera de autorización
+    const authHeader = req.headers.authorization;
 
-    const { token } = req.cookies;
+    if (!authHeader) {
+        // Si no hay token en la cabecera de autorización, devolver un error de autenticación
+        return res.status(401).json({ message: 'No se proporcionó un token de autorización' });
+    }
 
-    if (!token) return res.status(401).json({ message: 'No token, authorization denied' });
+    // Separar el token del prefijo "Bearer"
+    const token = authHeader.split(' ')[1];
 
-    jwt.verify(token, TOKEN_S, (err, user) => {
-        if (err) return res.status(498).json({ mensaje: 'invalid token' });
+    try {
+        // Verificar y decodificar el token
+        const decodedToken = jwt.verify(token, 'SECRETKEY');
 
-        req.user = user;
+        // Obtener el token generado en el inicio de sesión
+        const generatedToken = req.cookies.token;
 
-        next();
-    });
-    
-}
-
-module.exports = authRequired;
+        // Comparar el token enviado con el token generado
+        if (token === generatedToken) {
+            // Si los tokens coinciden, agregar el usuario al objeto de solicitud para su uso posterior
+            req.usuario = decodedToken;
+            // Continuar con el siguiente middleware
+            next();
+        } else {
+            // Si los tokens no coinciden, devolver un error de autenticación
+            return res.status(401).json({ message: 'Token inválido' });
+        }
+    } catch (error) {
+        // Si hay algún error en la verificación del token, devolver un error de autenticación
+        return res.status(401).json({ message: 'Token inválido' });
+    }
+};

@@ -1,13 +1,11 @@
 const Aprendiz = require('../models/Aprendices');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const createAccessToken = require('../libs/jwt');
-const TOKEN_S = require('../config/config');
 
 // Función para iniciar sesión
 exports.iniciarSesion = async (req, res, next) => {
     try {
-        const { numero_documento, contrasena, rol_usuario } = req.body;
+        const { rol_usuario, numero_documento, contrasena } = req.body;
 
         // Verificar si el número de documento y la contraseña están vacíos
         if (!numero_documento) {
@@ -41,21 +39,35 @@ exports.iniciarSesion = async (req, res, next) => {
             return res.status(401).json({ message: 'Credenciales inválidas' });
         }
 
-        // Generar token JWT con el id, número de documento y rol del usuario
-        const token = await createAccessToken(
-            { id: usuario.id_aprendiz, numero_documento: usuario.numero_documento },
-        );
-        
-        // Configurar la cookie con el token
-        res.cookie('token', token, {
-            httpOnly: true, // La cookie solo será accesible a través del protocolo HTTP
-            secure: true, // La cookie solo se enviará a través de conexiones HTTPS en producción
-            sameSite: 'strict' // La cookie solo se enviará en solicitudes del mismo sitio
+       // Generar token JWT con el id, número de documento y rol del usuario
+       const token = jwt.sign({
+        id: usuario.id_aprendiz,
+        rol_usuario: usuario.rol_usuario,
+        numero_documento: usuario.numero_documento,
+        nombres: usuario.nombres,
+        apellidos: usuario.apellidos,
+        programa_formacion: usuario.programa_formacion,
+        numero_ficha: usuario.numero_ficha, 
+        },
+        'SECRETKEY', {
+            expiresIn: '1h'
         });
-
+        res.cookie('token', token);
         // Enviar respuesta con token
-        res.json({ message: `Inicio de sesión exitoso como ${usuario.rol_usuario}`, token });
-    } catch (error) {
+        res.json({ 
+            message: `Inicio de sesión exitoso como ${usuario.rol_usuario}`,
+            token,
+            usuario: {
+                id: usuario.id_aprendiz,
+                rol_usuario: usuario.rol_usuario,
+                numero_documento: usuario.numero_documento,
+                nombres: usuario.nombres,
+                apellidos: usuario.apellidos,
+                programa_formacion: usuario.programa_formacion,
+                numero_ficha: usuario.numero_ficha,
+            }
+        });
+        } catch (error) {
         console.error('Error al iniciar sesión', error);
         res.status(500).json({ message: 'Hubo un error al procesar la solicitud', error });
         next();
@@ -80,7 +92,6 @@ async function obtenerUsuarioPorNumeroDocumento(numero_documento, rol_usuario) {
     }
     return usuario;
 }
-
 exports.logout = (req, res) => {
     res.cookie("token", "", {
         expires: new Date(0),
@@ -90,20 +101,25 @@ exports.logout = (req, res) => {
 }
 
 exports.verifyToken = async (req, res, next) => {
-    const { token } = req.cookies;
+    try {
+        // Verificar y decodificar el token
+        const decodedToken = jwt.verify(token, 'SECRETKEY');
 
-    if (!token) return res.status(401).json({ message: 'Unauthorized' });
+        // Obtener el token generado en el inicio de sesión
+        const generatedToken = req.cookies.token;
 
-    jwt.verify(token, TOKEN_S, async (err, usuario) => {
-        if (err) return res.status(401).json({ message: 'Unauthorized' });
-
-        const userFound = await Aprendiz.findByPk(usuario.numero_documento);
-
-        if (!userFound) return res.status(403).json({ message: "Unauthorized" });
-
-        return res.json({
-            id: userFound.id_aprendiz,
-            numero_documento: userFound.numero_documento,
-        });
-    });
+        // Comparar el token enviado con el token generado
+        if (token === generatedToken) {
+            // Si los tokens coinciden, agregar el usuario al objeto de solicitud para su uso posterior
+            req.usuario = decodedToken;
+            // Continuar con el siguiente middleware
+            next();
+        } else {
+            // Si los tokens no coinciden, devolver un error de autenticación
+            return res.status(401).json({ message: 'Token inválido' });
+        }
+    } catch (error) {
+        // Si hay algún error en la verificación del token, devolver un error de autenticación
+        return res.status(401).json({ message: 'Token inválido' });
+    }
 }

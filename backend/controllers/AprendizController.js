@@ -69,15 +69,29 @@ function esContrasenaValida(contrasena) {
 // Obtener los datos de todos los aprendices almacenados en la base de datos.
 exports.mostrarAprendices = async (req, res, next) => {
     try {
-        // Obtener los aprendices de la base de datos.
+        // Obtener el usuario del objeto de solicitud
+        const { rol_usuario, numero_documento } = req.usuario;
+
+        // Verificar si el usuario es un aprendiz
+        if (rol_usuario === 'aprendiz') {
+            // Si el usuario es un aprendiz, mostrar solo su información
+            const aprendiz = await Aprendices.findOne({
+                where: {
+                    numero_documento: numero_documento
+                }
+            });
+            // Devolver la información del aprendiz en un JSON
+            return res.json(aprendiz);
+        }
+
+        // Si el usuario no es un aprendiz, obtener todos los aprendices
         const aprendices = await Aprendices.findAll({});
-        // Devolver todos los aprendices en un json.
+        // Devolver todos los aprendices en un JSON
         res.json(aprendices);
     } catch (err) {
-        // En caso de error envía un mensaje y los detalles del error al usuario.
+        // En caso de error, enviar un mensaje y los detalles del error al usuario
         console.error(err);
         res.status(500).json({ mensaje: 'error en la solicitud', error: err });
-        
         next();
     }
 };

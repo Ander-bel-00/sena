@@ -82,7 +82,7 @@ ul li a:active{
 
 .card{
     top: 60px;
-    right: 39px;
+    right: 90px;
     width: 21rem;
     height: auto;
     -webkit-box-shadow: inset 6px 5px 2px -3px rgba(0,0,0,0.18); 
@@ -92,8 +92,6 @@ ul li a:active{
 
 .carta{
     border: 1px solid #857d7d;
-    margin-left: 20px;
-    
 }
 
 .perfil{
@@ -113,4 +111,10 @@ ul li a:active{
     text-align: center;
 }
 
+.carta2{
+    display: flex;
+    position: relative;
+    left: 380px;
+    top: -215px;
+}
 

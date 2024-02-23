@@ -4,38 +4,20 @@ import { IoHomeSharp } from "react-icons/io5";
 
 import { FaUser } from "react-icons/fa";
 
-const NavbarAprendiz = ({showNav}) => {
+import { IoMdEye } from "react-icons/io";
+import { Link } from "react-router-dom";
+import { BiSolidLogOut } from "react-icons/bi";
+import { IoDocuments } from "react-icons/io5";
+
+const NavbarAprendiz = ({showNav, handleLogout}) => {
     return (
         <div className={showNav ? 'sidenav active' : 'sidenav'}>
             <ul className="list-group">
-                <li><a href="#"><IoHomeSharp /> Inicio</a></li>
-                <li><a href="#"><FaUser /> Perfil</a></li>
-                <li className="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" 
-                        className="dropdown-toggle" id="Documentos"><i className="bi bi-file-earmark-arrow-up-fill"></i> Documentos</a>
-                    <ul className="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#"><i className="bi bi-cloud-arrow-up"></i> Cargar bitácoras</a>
-                        </li>
-                        <li>
-                            <a href="#"><i className="bi bi-upload"></i> Cargar formulários</a>
-                        </li>
-                        <li>
-                            <a href="#"><i className="bi bi-pen"></i> Registrar o visualizar firma
-                                digital
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" id="descargarBitacorasBtn">
-                                <i className="bi bi-file-earmark-arrow-down"></i> Descargar formato de bitácoras
-                            </a>
-                        </li>                        
-                        <li>
-                            <a href="#"><i className="bi bi-download"></i> Descargar formato de formulario
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <li><a href="#"><IoHomeSharp className="inline-block"/> Inicio</a></li>
+                <li><a href="#"><FaUser className="inline-block"/> Perfil</a></li>
+                <li><Link to="/documentos"><IoDocuments className="inline-block"/> Documentos</Link></li>
+                <li><Link to="/login" onClick={handleLogout}><BiSolidLogOut className="inline-block"/> 
+                Cerrar sesión</Link></li>
             </ul>
         </div>
     )
