@@ -1,7 +1,6 @@
 const Aprendices = require('../models/Aprendices');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const createAccessToken = require('../libs/jwt');
 
 
 exports.nuevoAprendiz = async (req, res, next) => {
@@ -20,11 +19,7 @@ exports.nuevoAprendiz = async (req, res, next) => {
         await Aprendices.sync({ force: false });
         const aprendiz = await Aprendices.create(req.body);
 
-        // Generar token JWT
-        const token = await createAccessToken({ id: aprendiz.id_aprendiz, numero_documento: aprendiz.numero_documento });
 
-        // Si todo sale bien guardar el token generado en una cookie ('nombre_cookie', 'valor').
-        res.cookie("token", token);
 
         // Enviar respuesta con token
         res.json({ mensaje: 'El aprendiz ha sido registrado exitosamente', token, aprendiz });
