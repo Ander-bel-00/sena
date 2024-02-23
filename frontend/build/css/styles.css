@@ -1,0 +1,120 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+.Header-general {
+    padding: 30px;
+    background: #f1eeee;
+    height: 90px;
+}
+
+.tSeep{
+    margin-top: -50px;
+    color: #39a900;
+}
+
+.sidenav{
+    width: 240px;
+    height: 90vh;
+    position: absolute;
+    padding: 0 30px;
+    left: -100%;
+    transition: all 0.1s;
+    background: #f1eeee;
+}
+.sidenav.active{
+    left: 0;
+}
+
+ul{
+    padding: 0;
+}
+
+ul li{
+    list-style: none;
+    margin: 10px 0;
+}
+
+ul li a{
+    display: block;
+    color: #39a900;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px 8px;
+    border-radius: 6px;
+}
+  
+ul li a:hover,
+ul li a:active{
+    background: #fff;
+}
+
+.menu-burguer{
+    font-size: 28px;
+    color: #39a900;
+}
+
+.menu-burguer:hover{
+    cursor: pointer;
+}
+
+.text-menu{
+
+    padding: 0px 6px;
+    bottom: 10px;
+    color: #39a900;
+}
+
+.text-menu:hover{
+    cursor: pointer;
+}
+
+.content{
+    display: flex;
+    position: relative;
+    left: 5%;
+    border-radius: 22px;
+}
+
+.card{
+    top: 60px;
+    right: 90px;
+    width: 21rem;
+    height: auto;
+    -webkit-box-shadow: inset 6px 5px 2px -3px rgba(0,0,0,0.18); 
+    box-shadow: inset 6px 5px 2px -3px rgba(0,0,0,0.18);
+    
+}
+
+.carta{
+    border: 1px solid #857d7d;
+}
+
+.perfil{
+    border: 2px solid #000;
+}
+
+.card-text{
+    color: #000000;
+}
+
+.cuerpo-carta{
+    padding-top: 0px;
+}
+
+.bi-person-circle{
+    font-size: 38px;
+    text-align: center;
+}
+
+.carta2{
+    display: flex;
+    position: relative;
+    left: 380px;
+    top: -215px;
+}
+
