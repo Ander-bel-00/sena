@@ -1,6 +1,5 @@
 const express = require('express');
-const router = require('./routes');
-const routes = require('./routes');
+const router = require('./routes'); // Importa tus rutas desde el archivo adecuado
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -29,7 +28,8 @@ if (process.env.NODE_ENV !== 'production') {
     app.use(morgan("dev"));
 }
 
-app.use('/', routes());
+// Usa el middleware de tus rutas aquí
+app.use('/', router);
 
 const port = process.env.PORT || 5000;
 
