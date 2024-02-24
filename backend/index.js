@@ -1,18 +1,33 @@
 const express = require('express');
-const router = require('./routes'); // Importa tus rutas desde el archivo adecuado
+const router = require('./routes');
+const routes  = require('./routes');
+
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+
 const cors = require('cors');
 const { sequelize, testConnection } = require('./config/database');
+
+// Saber las solicitudes HTTP que se envían al server.
+const morgan = require('morgan');
+
 const app = express();
 
-// Testear la conexión a la base de datos.
+
+
+
+// Testear la conexíon a la base de datos.
 testConnection();
 
-// Middleware común a ambos entornos
+// Middleware
+app.use(morgan("dev"));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+
 
 // Habilitar cors.
 app.use(cors({
@@ -21,19 +36,15 @@ app.use(cors({
     credentials: true
 }));
 
-// Verificar si estamos en un entorno de desarrollo
-if (process.env.NODE_ENV !== 'production') {
-    // Saber las solicitudes HTTP que se envían al server.
-    const morgan = require('morgan');
-    app.use(morgan("dev"));
-}
 
-// Usa el middleware de tus rutas aquí
-app.use('/', router);
+
+
+app.use('/', routes());
+
 
 const port = process.env.PORT || 5000;
 
-// Escuchar en el puerto especificado
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+// Listening on port 5000
+app.listen(port);
+
+console.log(`Server running on port ${port}`);
