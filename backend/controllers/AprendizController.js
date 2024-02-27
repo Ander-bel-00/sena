@@ -1,6 +1,6 @@
 const Aprendices = require('../models/Aprendices');
+const Fichas = require('../models/Fichas');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
 
 exports.nuevoAprendiz = async (req, res, next) => {
@@ -15,14 +15,47 @@ exports.nuevoAprendiz = async (req, res, next) => {
         const hashedPassword = await bcrypt.hash(req.body.contrasena, 10);
         req.body.contrasena = hashedPassword;
 
-        // Crear el aprendiz en la base de datos
+        // Buscar la ficha correspondiente al número de ficha proporcionado
+        const ficha = await Fichas.findOne({
+            where: {
+                numero_ficha: req.body.numero_ficha
+            }
+        });
+
+        // Si no se encuentra la ficha, retornar un error
+        if (!ficha) {
+            return res.status(404).json({ mensaje: 'No se encontró la ficha correspondiente al número proporcionado' });
+        }
+
         await Aprendices.sync({ force: false });
-        const aprendiz = await Aprendices.create(req.body);
 
+        // Crear el aprendiz con los datos de la ficha
+        const aprendizData = {
+            ...req.body,
+            // Incluye los campos de la ficha en los datos del aprendiz
+            programa_formacion: ficha.programa_formacion,
+            nivel_formacion: ficha.nivel_formacion,
+            titulo_obtenido: ficha.titulo_obtenido,
+            fecha_fin_lectiva: ficha.fecha_fin_lectiva
+        };
 
+        // Verificar si el aprendiz existe antes de crearlo.
+        const aprendizExistente = await Aprendices.findOne({
+            where: {
+                numero_documento: req.body.numero_documento
+            }
+        });
 
-        // Enviar respuesta con token
-        res.json({ mensaje: 'El aprendiz ha sido registrado exitosamente', aprendiz });
+        // Si el aprendiz existe me envia un mensaje de error, de lo contrario me crea el aprendiz.
+        if (aprendizExistente) {
+            res.status(500).json({ mensaje: 'El aprendiz ya se encuentra registrado'});
+        }else{
+            // Crea el aprendiz en la base de datos
+            const aprendiz = await Aprendices.create(aprendizData);
+
+            // Enviar mesnaje de respuesta con los datos de el aprendiz creado.
+            res.json({ mensaje: 'El aprendiz ha sido registrado exitosamente', aprendiz });
+        }
     } catch (error) {
         console.error('Error al crear un nuevo aprendiz', error);
         res.status(500).json({ mensaje: 'Hubo un error al procesar la solicitud', error });
@@ -174,5 +207,4 @@ exports.eliminarAprendiz = async (req,res,) => {
 
     // Envía mensaje al usuario si el aprendiz se ha eliminado correctamente.
     res.status(200).json({ mensaje: 'El aprendiz ha sido eliminado correctamente'});
-    
 }; 

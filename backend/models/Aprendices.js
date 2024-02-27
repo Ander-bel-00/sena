@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
+const Fichas = require('../models/Fichas');
 
 
 // Crear el modelo aprendiz con el que se creará la tabla con los campos necesarios.
@@ -14,8 +15,8 @@ const Aprendiz = sequelize.define('Aprendices', {
         primaryKey: true,
         validate: {
             len: {
-                args: [10,10],
-                msg: 'El número de documento debe ser de 10 dígitos'
+                args: [7,10],
+                msg: 'El número de documento debe ser de 7 a 10 dígitos'
             }
         }
     },
@@ -97,16 +98,16 @@ const Aprendiz = sequelize.define('Aprendices', {
         type: DataTypes.STRING,
         allowNull: true,
     },
+    numero_ficha: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
     programa_formacion: {
         type: DataTypes.STRING,
         allowNull: false,
     },
     nivel_formacion: {
         type: DataTypes.STRING,
-        allowNull: false,
-    },
-    numero_ficha: {
-        type: DataTypes.INTEGER,
         allowNull: false,
     },
     titulo_obtenido: {

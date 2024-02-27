@@ -34,7 +34,7 @@ function App() {
       }
     };
     checkToken();
-  }, []); 
+  }, []);
 
   useEffect(() => {
     handleContentMovement(showNav);

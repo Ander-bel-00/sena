@@ -23,13 +23,79 @@ const Instructor = sequelize.define('Instructores', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    nombres: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    apellidos: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    correo_electronico: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    numero_celular1: {
+        type: DataTypes.STRING,  
+        allowNull: false,
+        validate: {
+            len: {
+                args: [10,10],
+                msg: 'El número de celular debe tener 10 dígitos'
+            }
+        }
+    },
+    numero_celular2: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+            len: {
+                args: [10,10],
+                msg: 'El número de celular debe tener 10 dígitos'
+            }
+        }
+    },
+    ficha_asignada: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    programa_formacion: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    nivel_formacion: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    titulo_obtenido: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    fecha_fin_lectiva: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    rol_usuario: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    contrasena: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            // Función de validación personalizada para la contraseña
+            validarContrasena(value) {
+                if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}/.test(value)) {
+                    throw new Error('La contraseña debe tener al menos 8 caracteres, incluir al menos una mayúscula, una minúscula, un carácter especial y cinco números.');
+                }
+            },
+        }
+    },
 
 },{
     sequelize,
     modelName: 'Instructores'
 });
-
-
 
 
 // Exportar el modelo para permitir su uso.
