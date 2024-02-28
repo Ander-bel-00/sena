@@ -1,4 +1,5 @@
 const Aprendiz = require('../models/Aprendices');
+const Instructores = require('../models/Instructor');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -12,7 +13,7 @@ exports.iniciarSesion = async (req, res, next) => {
             return res.status(400).json({ message: 'El número de documento es requerido' });
         }
         
-        if ( numero_documento.length < 8 ) {
+        if ( numero_documento.length < 7 ) {
             return res.status(400).json({ message: 'El numero de documento debe contener al menos 8 dígitos' });
         }
 
@@ -50,7 +51,7 @@ exports.iniciarSesion = async (req, res, next) => {
         numero_ficha: usuario.numero_ficha,
         },
         'SECRETKEY', {
-            expiresIn: '1h'
+            expiresIn: '4h'
         });
         res.cookie('token', token);
         // Enviar respuesta con token
@@ -85,7 +86,7 @@ async function obtenerUsuarioPorNumeroDocumento(numero_documento, rol_usuario) {
             // Lógica para obtener admin
             break;
         case 'instructor':
-            // Lógica para obtener instructor
+            usuario = await Instructores.findOne({ where: { numero_documento } });
             break;
         default:
             usuario = null;

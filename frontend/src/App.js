@@ -10,6 +10,7 @@ import Header from "./componentes/layouts/Header";
 import clienteAxios from './api/axios';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
+import ListaAprendices from "./componentes/instructores/listaAprendices/ListaAprendices.js";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -89,10 +90,27 @@ function App() {
           }
         />
         <Route
-          path="/instructores"
+          path="/instructor"
           element={
             isAuthenticated && userRole === 'instructor' ? (
-              <Instructor />
+              <Fragment>
+                <Header showNav={showNav} setShowNav={setShowNav}/>
+                <NavbarAprendiz showNav={showNav} handleLogout={handleLogout} />
+                <main className="container content">
+                <Instructor />
+                </main>
+              </Fragment>
+              
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+        <Route 
+          path="/aprendicesFicha/:numero_ficha"
+          element={
+            isAuthenticated && userRole === 'instructor' ? (
+              <ListaAprendices />
             ) : (
               <Navigate to="/" replace />
             )

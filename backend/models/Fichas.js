@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
+const Instructor = require('../models/Instructor');
+const InstructorFicha = require('./InstructorFicha');
 
 // Crear modelo de fichas para crear la tabla en la base de datos.
 
@@ -7,11 +9,11 @@ const Fichas = sequelize.define('Fichas', {
     id_ficha: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
     },
     numero_ficha: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        primaryKey: true,
     },
     programa_formacion: {
         type: DataTypes.STRING,
@@ -35,5 +37,6 @@ const Fichas = sequelize.define('Fichas', {
     sequelize,
     modelName: 'Fichas'
 });
+
 
 module.exports = Fichas;

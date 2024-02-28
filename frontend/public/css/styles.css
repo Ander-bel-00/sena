@@ -85,13 +85,11 @@ ul li a:active{
     right: 90px;
     width: 21rem;
     height: auto;
-    -webkit-box-shadow: inset 6px 5px 2px -3px rgba(0,0,0,0.18); 
-    box-shadow: inset 6px 5px 2px -3px rgba(0,0,0,0.18);
     
 }
 
 .carta{
-    border: 1px solid #857d7d;
+    border: 4px solid #857d7d;
 }
 
 .perfil{
@@ -115,6 +113,73 @@ ul li a:active{
     display: flex;
     position: relative;
     left: 380px;
-    top: -215px;
+    top: -240px;
+}
+.fichas-content{
+    height: auto;
+    position: relative;
+    right: 80px;
+    background-color: #f1eeee;
 }
 
+.col-md-6.col-lg-3.mb-4:nth-child(1) .fichas {
+    margin-left: 90px;
+    position: relative;
+    top: 15px;
+}
+
+.col-md-6.col-lg-3.mb-4:nth-child(2) .fichas {
+    margin-left: 120px;
+    margin-top: -45px;
+}
+
+.col-md-6.col-lg-3.mb-4:nth-child(3) .fichas {
+    margin-left: 150px;
+    margin-top: -45px;
+}
+
+.fichasAsignedTitle{
+    font-weight: bold;
+    color: #000;
+    position: relative;
+    right: 90px;
+}
+
+.logSenaFichas{
+    left: 270px;
+    top: -40px;
+}
+
+.lista-aprendices {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 600px;
+    background-color: #f1EEEE;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+}
+
+.aprendices-fichas {
+    border-bottom: 2px solid #000;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.verFichas{
+    color: #39a900;
+    text-decoration: none;
+}
+
+.verFichas:hover{
+    background-color: #39a900;
+    color: #fff;
+    padding: 8px;
+}
+
+.btnVerFicha{
+    position: relative;
+    top: -9px;
+}

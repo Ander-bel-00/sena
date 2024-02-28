@@ -26,7 +26,7 @@ module.exports = function () {
     // Reistrar Fichas.
     router.post('/fichas-add', FichasController.nuevaFicha);
     // Mostrar todas las Fichas registradas en la base de datos.
-    router.get('/fichas-getAll', FichasController.mostrarFichas);
+    router.get('/fichas-getAll', authRequired,FichasController.mostrarFichas);
     // Mostrar una Ficha por su número de ficha.
     router.get('/fichas-get/:numero_ficha', FichasController.MostrarPorNumeroFicha);
     // Mostrar todos los aprendices asociados a una ficha.
@@ -34,16 +34,17 @@ module.exports = function () {
     // Actualizar Ficha por su número de ficha.
     router.put('/fichas-update/:numero_ficha', FichasController.actualizarFicha);
     // Eliminar una Ficha por su número de ficha.
-    router.delete('/fichas-delete/:numero_ficha', FichasController.eliminarFicha);
+    router.delete('/fichas-delete/:numero_ficha', authRequired,FichasController.eliminarFicha);
 
     router.post('/aprendices-add', AprendizController.nuevoAprendiz);
     router.get('/aprendices', authRequired,AprendizController.mostrarAprendices);
-    router.get('/aprendices/:numero_documento', AprendizController.mostrarAprendizByDocument);
-    router.put('/aprendices/:numero_documento', AprendizController.actualizarAprendiz);
-    router.delete('/aprendices/:numero_documento', AprendizController.eliminarAprendiz);
+    router.get('/aprendices/:numero_documento', authRequired,AprendizController.mostrarAprendizByDocument);
+    router.put('/aprendices/:numero_documento', authRequired,AprendizController.actualizarAprendiz);
+    router.delete('/aprendices/:numero_documento', authRequired,AprendizController.eliminarAprendiz);
 
 
     // Rutas para el instructor
     router.post('/instructores-add', InstructorController.nuevoInstructor);
+    router.get('/instructor/:numero_documento/fichas-asignadas', InstructorController.obtenerFichasAsignadas);
     return router;
 };

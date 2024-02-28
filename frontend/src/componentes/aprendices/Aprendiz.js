@@ -42,19 +42,19 @@ function Aprendiz() {
                 </div>
             </div>
             <div className="card carta2 my-2" style={{width: "20rem"}}>
-              <div class="card-header">
+              <div className="card-header">
                 Bitácoras
               </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"><p class="bitacoras"><strong>Bitácora N° 6</strong> 
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item"><p className="bitacoras"><strong>Bitácora N° 6</strong> 
                   Subida el<br /> 22/03/2024</p></li>
-                <li class="list-group-item"><p class="bitacoras"><strong>Bitácora N° 7</strong> 
+                <li className="list-group-item"><p className="bitacoras"><strong>Bitácora N° 7</strong> 
                   Subida el<br /> 22/03/2024</p></li>
-                <li class="list-group-item"><p class="bitacoras"><strong>Bitácora N° 8</strong> 
+                <li className="list-group-item"><p className="bitacoras"><strong>Bitácora N° 8</strong> 
                   Subida el<br /> 22/03/2024</p>
                   </li>
-                  <li class="list-group-item h-8"><p className="bitacoras ">
-                      <a href="./public/verBitacoras/index.html" className="btedit relative bottom-6"><button class="editar">Ver bitácoras cargadas</button></a></p>
+                  <li className="list-group-item h-8"><p className="bitacoras ">
+                      <a href="./public/verBitacoras/index.html" className="btedit relative bottom-6"><button className="editar">Ver bitácoras cargadas</button></a></p>
                   </li>
               </ul>
             </div>

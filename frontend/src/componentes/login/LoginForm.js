@@ -63,9 +63,11 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
                 onChange={onChange}
                 className="w-80 bg-white text-black px-4 py-2 rounded-md my-4 border ml-6"
               >
-                <option value="administrador">Administrador</option>
-                <option value="aprendiz">Aprendiz</option>
+                <option>Selecciona un rol...</option>
                 <option value="instructor">Instructor</option>
+                <option value="aprendiz">Aprendiz</option>
+                <option value="administrador" hidden>Administrador</option>
+                
               </select>
             </p>
             <div className="input-container">

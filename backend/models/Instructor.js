@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
+const Fichas = require('../models/Fichas');
+const InstructorFicha = require('./InstructorFicha');
 
 
 // Crear el modelo aprendiz con el que se creará la tabla con los campos necesarios.
@@ -55,25 +57,16 @@ const Instructor = sequelize.define('Instructores', {
             }
         }
     },
-    ficha_asignada: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    programa_formacion: {
+    fichas_asignadas: {
         type: DataTypes.STRING,
-        allowNull: false,
-    },
-    nivel_formacion: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    titulo_obtenido: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    fecha_fin_lectiva: {
-        type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
+        get() {
+            const value = this.getDataValue('fichas_asignadas');
+            return value ? value.split(',') : [];
+        },
+        set(val) {
+            this.setDataValue('fichas_asignadas', val.join(','));
+        }
     },
     rol_usuario: {
         type: DataTypes.STRING,
@@ -98,5 +91,4 @@ const Instructor = sequelize.define('Instructores', {
 });
 
 
-// Exportar el modelo para permitir su uso.
 module.exports = Instructor;

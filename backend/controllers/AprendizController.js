@@ -45,7 +45,7 @@ exports.nuevoAprendiz = async (req, res, next) => {
                 numero_documento: req.body.numero_documento
             }
         });
-
+        
         // Si el aprendiz existe me envia un mensaje de error, de lo contrario me crea el aprendiz.
         if (aprendizExistente) {
             res.status(500).json({ mensaje: 'El aprendiz ya se encuentra registrado'});
