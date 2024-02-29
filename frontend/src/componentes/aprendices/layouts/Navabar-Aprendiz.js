@@ -15,7 +15,7 @@ const NavbarAprendiz = ({showNav, handleLogout}) => {
             <ul className="list-group">
                 <li><a href="#"><IoHomeSharp className="inline-block"/> Inicio</a></li>
                 <li><a href="#"><FaUser className="inline-block"/> Perfil</a></li>
-                <li><Link to="/documentos"><IoDocuments className="inline-block"/> Documentos</Link></li>
+                <li><Link to="#"><IoDocuments className="inline-block"/> Documentos</Link></li>
                 <li><Link to="/login" onClick={handleLogout}><BiSolidLogOut className="inline-block"/> 
                 Cerrar sesión</Link></li>
             </ul>

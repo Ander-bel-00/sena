@@ -119,7 +119,12 @@ ul li a:active{
     height: auto;
     position: relative;
     right: 80px;
-    background-color: #f1eeee;
+    border-top: 2px solid #f1eeee;
+}
+
+.fichasAll{
+    position: relative;
+    left: 100px;
 }
 
 .col-md-6.col-lg-3.mb-4:nth-child(1) .fichas {
@@ -137,6 +142,13 @@ ul li a:active{
     margin-left: 150px;
     margin-top: -45px;
 }
+
+.col-md-6.col-lg-3.mb-4:nth-child(4) .fichas {
+    position: relative;
+    top: 370px;
+    right: 62rem;
+}
+
 
 .fichasAsignedTitle{
     font-weight: bold;
@@ -157,7 +169,7 @@ ul li a:active{
     max-width: 600px;
     background-color: #f1EEEE;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-
+    padding: 6px;
 }
 
 .aprendices-fichas {
@@ -166,6 +178,7 @@ ul li a:active{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #fff;
 }
 
 .verFichas{
@@ -182,4 +195,25 @@ ul li a:active{
 .btnVerFicha{
     position: relative;
     top: -9px;
+}
+
+.selctFicha{
+    position: relative;
+    right: 93px;
+}
+
+.Regresar{
+    color: #39a900;
+    text-decoration: none;
+}
+
+.Regresar:hover{
+    background-color: #39a900;
+    color: #fff;
+    padding: 8px;
+}
+
+.agendarVisita:hover{
+    background-color: #39a900;
+    color: #fff;
 }

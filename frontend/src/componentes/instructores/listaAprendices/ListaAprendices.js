@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import clienteAxios from '../../../api/axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { IoArrowBackSharp } from "react-icons/io5";
 
 function ListaAprendices() {
     const [aprendices, setAprendices] = useState([]);
@@ -23,11 +24,15 @@ function ListaAprendices() {
         <Fragment>
             <div>
                 <h1 className='text-center'>Aprendices de la Ficha {numero_ficha}</h1>
+                <button className='relative left-10'><Link to={'/instructor'} className='Regresar'><IoArrowBackSharp 
+                className='inline-block'/> Regresar</Link></button>
                 <ul className='lista-aprendices'>
                     {Array.isArray(aprendices) && aprendices.length > 0 ? (
                         aprendices.map(aprendiz => (
                             <li key={aprendiz.id_aprendiz} className='aprendices-fichas '>
                                 {aprendiz.nombres} {aprendiz.apellidos}
+                                <button><Link to={`/visitas-add/${aprendiz.id_aprendiz}`}
+                                className='agendarVisita'>Agendar visita</Link></button>
                             </li>
                         ))
                     ) : (

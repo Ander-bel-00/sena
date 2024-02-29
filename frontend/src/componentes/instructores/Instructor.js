@@ -18,7 +18,12 @@ function Instructor() {
 
         // Obtener las fichas asignadas al instructor
         const responseFichas = await clienteAxios.get(`/instructor/${response.data.usuario.numero_documento}/fichas-asignadas`);
-        setFichasAsignadas(responseFichas.data.fichasAsignadas);
+        // Ordenar Fichas desde la primera creada a la más reciente.
+        const fichasOrdenadas = responseFichas.data.fichasAsignadas.sort((a, b) => {
+          // Convertir las fechas de creación a objetos Date y compararlas
+          return new Date(a.createdAt) - new Date(b.createdAt);
+        });
+        setFichasAsignadas(fichasOrdenadas);
       } catch (error) {
         console.error('Error al obtener la información del usuario:', error);
       }
@@ -42,7 +47,7 @@ function Instructor() {
             <div className="row my-2 fichas-content rounded-md">
               {fichasAsignadas.length > 0 ? (
                 fichasAsignadas.map(ficha => (
-                  <div key={ficha.numero_ficha} className="col-md-6 col-lg-3 mb-4">
+                  <div key={ficha.numero_ficha} className="col-md-6 col-lg-3 mb-4 fichasAll">
                     <div className="card fichas">
                       <div className="card-body">
                         <h5 className="card-title">Ficha {ficha.numero_ficha}</h5>

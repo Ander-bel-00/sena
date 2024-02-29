@@ -11,11 +11,19 @@ import clienteAxios from './api/axios';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import ListaAprendices from "./componentes/instructores/listaAprendices/ListaAprendices.js";
+import Calendario from "./componentes/calendario/Calendario.js";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const [showNav, setShowNav] = useState(false);
+
+  const [events, setEvents] = useState([]); // Estado que almacena la lista de eventos
+  const [showModal, setShowModal] = useState(false);  // Controla la visibilidad dek modal
+  const [selectedDate, setSelectedDate] = useState(null); // almacena fechas seleccionadas
+  const [eventTitle, setEventTitle] = useState('');   //almacena el titulo 
+  const [selectEvent, setSelectEvent] = useState(null);  //evento seleccionado
+  const [selectedTime, setSelectedTime] = useState(null);  //maneja las horas seleccionadas
 
 
   useEffect(() => {
@@ -111,6 +119,29 @@ function App() {
           element={
             isAuthenticated && userRole === 'instructor' ? (
               <ListaAprendices />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+        <Route 
+          path="/visitas-add/:id_aprendiz"
+          element={
+            isAuthenticated && userRole === 'instructor' ? (
+              <Calendario 
+              events={events}
+              setEvents={setEvents}
+              showModal={showModal}
+              setShowModal={setShowModal}
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+              eventTitle={eventTitle}
+              setEventTitle={setEventTitle}
+              selectEvent={selectEvent}
+              setSelectEvent={setSelectEvent}
+              selectedTime={selectedTime}
+              setSelectedTime={setSelectedTime}
+              />
             ) : (
               <Navigate to="/" replace />
             )
