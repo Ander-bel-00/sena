@@ -10,7 +10,11 @@ function ListaAprendices() {
     const consultarApi = async () => {
         try {
             const consultarAprendices = await clienteAxios.get(`/fichas-getAprendices/${numero_ficha}`);
-            setAprendices(consultarAprendices.data.aprendices); // Actualiza el estado con el array de aprendices
+            // Ordenar los aprendices por orden alfabético de apellidos.
+            const aprendicesOrdenados = consultarAprendices.data.aprendices.sort((a, b) => {
+                return a.apellidos.localeCompare(b.apellidos);
+            });
+            setAprendices(aprendicesOrdenados); // Actualiza el estado con el array de aprendices ordenados
         } catch (error) {
             console.error('Error al obtener los aprendices:', error);
         }
