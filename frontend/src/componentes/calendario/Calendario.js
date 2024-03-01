@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import LogoComponent from "./LogoComponent";
-import BasicTimeClock from './BasicTimeClock';
+import BasicTimePicker from './BasicTimeClock';
 import { IoArrowBackSharp } from "react-icons/io5";
 import moment from 'moment';
 import 'moment/locale/es';
 import { Link, useParams } from 'react-router-dom';
+import clienteAxios from '../../api/axios';
 
 const messages = {
   allDay: 'Todo el día',
@@ -28,70 +29,76 @@ const messages = {
 const localizer = momentLocalizer(moment)
 
 function Calendario({events, setEvents, showModal, setShowModal, selectedDate, setSelectedDate, eventTitle, setEventTitle, selectEvent, setSelectEvent, selectedTime, setSelectedTime}) {
-  moment.locale('es');  
-  const handleSelectSlot = (slotinfo) => {
-        setShowModal(true);   //muestra el modal
-        setSelectedDate(slotinfo.start);   // Establece la fecha seleccionada como el inicio del slot
-        setSelectEvent(null);
-        setSelectedTime(slotinfo.start.getHours() + ':' + slotinfo.start.getMinutes());   //busca la hora
+  moment.locale('es');
+  const { numero_ficha, rol_usuario, id_aprendiz } = useParams();
+
+
+   // Función para abrir el modal
+   const openModal = (date) => {
+    setShowModal(true);
+    setSelectedDate(date);
+    setEventTitle('');
+    setSelectEvent(null);
+    // Puedes inicializar otros valores aquí si es necesario
+  };
+
+  // Función para cerrar el modal
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedDate(null);
+    setEventTitle('');
+    setSelectEvent(null);
+  };
+
+    const saveEvent = async () => {
+      if (!eventTitle) {
+        console.error('El tipo de visita no puede estar vacío');
+        return;
+      }
+
+      // Obtén el valor del input de tipo time
+      const horaInput = document.querySelector('input[name="hora"]');
+      const selectedTime = horaInput.value;
+
+      try {
+        const response = await clienteAxios.post(`/nuevoEvento/${id_aprendiz}`, {
+          tipo_visita: eventTitle,
+          fecha: selectedDate,
+          hora: selectedTime,
+          // Otros datos que necesites enviar
+        });
+
+        setEvents([...events, response.data]);
+        closeModal();
+      } catch (error) {
+        console.error('Error al guardar el evento:', error);
+        // Maneja el error según sea necesario
+      }
     };
 
-    const { numero_ficha, rol_usuario } = useParams();
-    
-    
-    
-    
-    // Maneja la seleccion de un evento existente.
-    
-      const handleSelectedEvent = (event) => {
-        setShowModal(true);  //Muestra el modal
-        setSelectEvent(event);
-        setEventTitle(event.title);   // Establece el título del evento en el estado
-      };
-    
-    
-    
-      const saveEvent = () => {
-        if (eventTitle && selectedDate) {  //se valida si hay un titulo y fecha seleccionada
-          if (selectEvent) {  //si hay un evento seleccionado
-            const updatedEvent = { ...selectEvent, title: eventTitle };  //// Actualiza el título del evento seleccionado
-    
-            const updatedEvents = events.map((event) =>
-              event === selectEvent ? updatedEvent : event
-            );  // Actualiza la lista de eventos con el evento modificado
-            setEvents(updatedEvents);
-    
-    
-          } else {   // Si no hay un evento seleccionado (creación)
-            const newEvent = {
-              title: eventTitle,
-              start: selectedDate,
-              end: moment(selectedDate)
-                .add(1, "hours")
-                .toDate(),
-            };  // Crea un nuevo evento con título, fecha de inicio y fecha de finalización
-            setEvents([...events, newEvent]); // Agrega el nuevo evento a la lista de eventos
-          }
-          setShowModal(false);
-          setEventTitle("");  // Reinicia el título del evento
-          setSelectEvent(null);
+    // Agrega useEffect para cargar eventos al montar el componente
+    useEffect(() => {
+      const cargarEventos = async () => {
+        try {
+          const response = await clienteAxios.get('/visitas-getAll', {
+            headers: {
+              'Cache-Control': 'no-cache',
+            },
+          });
+          setEvents(response.data);
+        } catch (error) {
+          console.error('Error al cargar eventos:', error);
         }
       };
     
-    
-      const deleteEvents = () => {
-        if (selectEvent) {
-          const updatedEvents = events.filter((event, index) => index !== events.indexOf(selectEvent));
-          setEvents(updatedEvents);
-          setShowModal(false);
-          setEventTitle('');
-          setSelectEvent(null);
-        }
-      };
+      cargarEventos();
+    }, []);
+
+    console.log('Eventos:', events);
+
+
+  
       
-      
-    
-    
       return (
         <div style={{height:'500px'}}>
 
@@ -113,16 +120,19 @@ function Calendario({events, setEvents, showModal, setShowModal, selectedDate, s
          <Calendar
             culture='es'
             localizer={localizer}
-            events={events.map(event => ({
-              ...event,
-              title: `${event.title} - ${moment(event.start).format('LT')}`
-            }))}
+            
             startAccessor="start"
             endAccessor="end"
             style={{ margin: '50px' }}
             selectable={true}
-            onSelectSlot={handleSelectSlot}
-            onSelectEvent={handleSelectedEvent}
+            onSelectSlot={(slotInfo) => openModal(slotInfo.start)}
+            events={events.map(event => ({
+              ...event,
+              start: new Date(event.fecha),
+              end: new Date(event.fecha),  // Puedes ajustar esto según sea necesario
+              title: `${event.tipo_visita} - ${moment(event.fecha).format('LT')}`
+            }))}
+            // onSelectEvent={handleSelectedEvent}
             messages={messages} // Aquí pasamos los mensajes definidos arriba
           />
 
@@ -174,24 +184,31 @@ function Calendario({events, setEvents, showModal, setShowModal, selectedDate, s
           }}></button>
   
           </div>
-  
+          
+          {/*Inputs para el modal de agendamiento de visita*/}
           <div class="modal-body" >
-            <label style={{ fontWeight: 'bold' }}>Nombre del evento:</label>
-            <input
-            type="text" 
-            className="form-control"
-            id="eventTitle"
-            value={eventTitle}
-            onChange={(e) =>setEventTitle(e.target.value)}
-  
-            />
-  
+            <label style={{ fontWeight: 'bold' }}>Tipo de visita: </label>
+            <select
+                name="tipo_visita"
+                // value={tipo_visita}
+                // onChange={onChange}
+
+                id="eventTitle"
+                value={eventTitle}
+                onChange={(e) =>setEventTitle(e.target.value)}
+                className="w-80 bg-white text-black px-4 py-2 rounded-md my-4 border ml-6"
+              >
+                <option>Selecciona un número de visita...</option>
+                <option value="visitaN°1">Primer visita</option>
+                <option value="visitaN°2">Segunda visita</option>
+                <option value="visitaN°3">Tercera visita</option>
+                
+              </select>
   
             {/* Input de la hora */}
   
-          <label style={{ fontWeight: 'bold' }}>Hora:</label>
-          
-            <BasicTimeClock />
+            <label style={{ fontWeight: 'bold' }}>Hora:</label>
+            <input type='time' name='hora' />
   
   
           </div>
@@ -200,14 +217,15 @@ function Calendario({events, setEvents, showModal, setShowModal, selectedDate, s
                     <button
                       type="button"
                       className="btn btn-danger me-2"
-                      onClick={deleteEvents}
+                      // onClick={deleteEvents}
                     >
                       Eliminar
                     </button>
                   )}
            
-            <button type="button" onClick={saveEvent} className="btn btn-primary" style={{ backgroundColor: '#39A900', 
-                color: '#ffffff' }} >Guardar</button>
+           <button type="button" className="btn btn-primary" style={{ backgroundColor: '#39A900', color: '#ffffff' }} onClick={saveEvent}>
+            Guardar
+          </button>
   
           </div>
         </div>
