@@ -11,7 +11,7 @@ const VisitasController = require('../controllers/VisitasController');
 
 
 module.exports = function () {
-    // Eutas para el login.
+    // Rutas para el login.
     router.post('/login', authController.iniciarSesion); // Nuevo endpoint de inicio de sesión
     router.post('/logout', authController.logout);
 
@@ -20,7 +20,7 @@ module.exports = function () {
     });
 
 
-    // Ruta para obtener la información del usuario autenticado
+    // Ruta para obtener la información del usuario autenticado.
     router.get('/usuario', authRequired, (req, res) => {
         // La información del usuario está disponible en req.usuario, que fue establecida por el middleware de autenticación
         res.json({ usuario: req.usuario });
@@ -46,18 +46,16 @@ module.exports = function () {
     router.put('/aprendices/:numero_documento', authRequired,AprendizController.actualizarAprendiz);
     router.delete('/aprendices/:numero_documento', authRequired,AprendizController.eliminarAprendiz);
 
-    // Visitas
-    router.post('/nuevoEvento/:id_aprendiz', VisitasController.crearEvento);
+    // Rutas para el instructor.
+    router.post('/instructores-add', InstructorController.nuevoInstructor);
+    router.get('/instructor/:numero_documento/fichas-asignadas', InstructorController.obtenerFichasAsignadas);
+
+    // Rutas para las Visitas.
+    router.post('/nuevaVisita/:id_aprendiz', VisitasController.crearEvento);
     router.get('/visitas-getAll', VisitasController.obtenerEventos);
     router.get('/visitas-aprendiz/:id_aprendiz', VisitasController.obtenerEventosAprendiz);
     router.put('/visitas-update/:id_visita', VisitasController.actualizarEventos);
     router.delete('/visitas-delete/:id_visita', VisitasController.eliminarEvento);
 
-
-
-
-    // Rutas para el instructor
-    router.post('/instructores-add', InstructorController.nuevoInstructor);
-    router.get('/instructor/:numero_documento/fichas-asignadas', InstructorController.obtenerFichasAsignadas);
     return router;
 };

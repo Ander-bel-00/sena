@@ -61,7 +61,7 @@ function Calendario({events, setEvents, showModal, setShowModal, selectedDate, s
       const selectedTime = horaInput.value;
 
       try {
-        const response = await clienteAxios.post(`/nuevoEvento/${id_aprendiz}`, {
+        const response = await clienteAxios.post(`/nuevaVisita/${id_aprendiz}`, {
           tipo_visita: eventTitle,
           fecha: selectedDate,
           hora: selectedTime,

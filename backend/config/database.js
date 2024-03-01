@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 
 
-const sequelize = new Sequelize("seep", "root", "", {
+const sequelize = new Sequelize("seep", "root", "root", {
   host: 'localhost',
   dialect: 'mysql',
   port: 3306
