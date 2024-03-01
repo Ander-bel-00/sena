@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import clienteAxios from '../../api/axios';
 import Cookies from 'js-cookie';
 import logoSena from './sena-verde.png';

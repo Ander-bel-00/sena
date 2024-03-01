@@ -4,7 +4,9 @@ import logoImg from './img/logo.png';  // Asegúrate de proporcionar la ruta cor
 
 const LogoComponent = () => {
   return (
-    <img src={logoImg} alt="Logo" style={{ maxWidth: '150px', marginLeft: '600px', marginTop :'5px' }} />
+    <img src={logoImg} alt="Logo" style={{ maxWidth: '150px', marginLeft: '600px', marginTop :'5px' }} 
+    
+    className='relative left-20'/>
   );
 };
 

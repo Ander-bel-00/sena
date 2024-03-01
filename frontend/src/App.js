@@ -26,24 +26,35 @@ function App() {
   const [selectedTime, setSelectedTime] = useState(null);  //maneja las horas seleccionadas
 
 
+
   useEffect(() => {
     const checkToken = async () => {
-      try {
-        const token = Cookies.get('token');
-        if (token) {
-          clienteAxios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const response = await clienteAxios.get('/verify-token');
-          if (response.status === 200) {
-            setIsAuthenticated(true);
-            setUserRole(response.data.usuario.rol_usuario);
-          }
+        try {
+            const token = Cookies.get('token');
+            if (token) {
+                clienteAxios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                const response = await clienteAxios.get('/verify-token');
+                if (response.status === 200) {
+                    setIsAuthenticated(true);
+                    setUserRole(response.data.usuario.rol_usuario);
+                    
+                    // Obtener la URL almacenada
+                    const lastPath = localStorage.getItem('lastPath');
+                    if (lastPath) {
+                        // Redirigir al usuario a la última URL visitada
+                        <Navigate to={lastPath} />
+                        // Limpiar la URL almacenada después de redirigir
+                        localStorage.removeItem('lastPath');
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Error al verificar el token:', error);
         }
-      } catch (error) {
-        console.error('Error al verificar el token:', error);
-      }
     };
     checkToken();
-  }, []);
+}, []);
+
 
   useEffect(() => {
     handleContentMovement(showNav);
@@ -115,17 +126,17 @@ function App() {
           }
         />
         <Route 
-          path="/aprendicesFicha/:numero_ficha"
+          path="/:rol_usuario/aprendicesFicha/:numero_ficha"
           element={
             isAuthenticated && userRole === 'instructor' ? (
-              <ListaAprendices />
+              <ListaAprendices isAuthenticated={isAuthenticated}/>
             ) : (
               <Navigate to="/" replace />
             )
           }
         />
         <Route 
-          path="/visitas-add/:id_aprendiz"
+          path="/:rol_usuario/visitas-add/:numero_ficha/:id_aprendiz"
           element={
             isAuthenticated && userRole === 'instructor' ? (
               <Calendario 

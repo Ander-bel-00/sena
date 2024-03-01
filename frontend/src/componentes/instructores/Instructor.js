@@ -44,6 +44,7 @@ function Instructor() {
         {usuario && usuario.rol_usuario ? (
           <Fragment>
             <h2 className='fichasAsignedTitle mt-11 text-center'>Agendamiento de Visitas</h2>
+            <h5 className='text-center text-gray-500 selctFicha'>Selecciona una ficha</h5>
             <div className="row my-2 fichas-content rounded-md">
               {fichasAsignadas.length > 0 ? (
                 fichasAsignadas.map(ficha => (
@@ -58,7 +59,7 @@ function Instructor() {
                         <p className="card-text"><strong>Fecha fin lectiva: </strong>{formatearFecha(ficha.fecha_fin_lectiva)}</p>
                       </div>
                       <button className='btnVerFicha'>
-                        <Link to={`/aprendicesFicha/${ficha.numero_ficha}`} className='verFichas'>
+                        <Link to={`/${usuario.rol_usuario}/aprendicesFicha/${ficha.numero_ficha}`} className='verFichas'>
                           Ver Ficha</Link>
                       </button>
                     </div>

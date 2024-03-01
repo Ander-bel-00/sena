@@ -3,20 +3,41 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import LogoComponent from "./LogoComponent";
 import BasicTimeClock from './BasicTimeClock';
+import { IoArrowBackSharp } from "react-icons/io5";
+import moment from 'moment';
+import 'moment/locale/es';
+import { Link, useParams } from 'react-router-dom';
 
-import moment from 'moment'
+const messages = {
+  allDay: 'Todo el día',
+  previous: 'Anterior',
+  next: 'Siguiente',
+  today: 'Hoy',
+  month: 'Mes',
+  week: 'Semana',
+  day: 'Día',
+  agenda: 'Agenda',
+  date: 'Fecha',
+  time: 'Hora',
+  event: 'Evento',
+  dayFormat: (date, culture, localizer) =>
+    localizer.format(date, 'dddd', culture),
+};
+
 
 const localizer = momentLocalizer(moment)
 
 function Calendario({events, setEvents, showModal, setShowModal, selectedDate, setSelectedDate, eventTitle, setEventTitle, selectEvent, setSelectEvent, selectedTime, setSelectedTime}) {
-    const handleSelectSlot = (slotinfo) => {
+  moment.locale('es');  
+  const handleSelectSlot = (slotinfo) => {
         setShowModal(true);   //muestra el modal
         setSelectedDate(slotinfo.start);   // Establece la fecha seleccionada como el inicio del slot
         setSelectEvent(null);
         setSelectedTime(slotinfo.start.getHours() + ':' + slotinfo.start.getMinutes());   //busca la hora
-      };
+    };
+
+    const { numero_ficha, rol_usuario } = useParams();
     
-      
     
     
     
@@ -74,6 +95,9 @@ function Calendario({events, setEvents, showModal, setShowModal, selectedDate, s
       return (
         <div style={{height:'500px'}}>
 
+        <button className='relative left-10 top-14'><Link to={`/${rol_usuario}/aprendicesFicha/${numero_ficha}`} className='Regresar'><IoArrowBackSharp 
+        className='inline-block'/> Regresar</Link></button>
+
         {/* Logo del sena */}
         {/*npm install @mui/lab
         npm install @mui/material @emotion/react @emotion/styled
@@ -87,18 +111,21 @@ function Calendario({events, setEvents, showModal, setShowModal, selectedDate, s
   
          
          <Calendar
-    localizer={localizer}
-    events={events.map(event => ({
-      ...event,
-      title: `${event.title} - ${moment(event.start).format('LT')}` // Agrega la hora al título del evento
-    }))}
-    startAccessor="start"
-    endAccessor="end"
-    style={{ margin: '50px' }}
-    selectable={true}
-    onSelectSlot={handleSelectSlot}
-    onSelectEvent={handleSelectedEvent}
-  />
+            culture='es'
+            localizer={localizer}
+            events={events.map(event => ({
+              ...event,
+              title: `${event.title} - ${moment(event.start).format('LT')}`
+            }))}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ margin: '50px' }}
+            selectable={true}
+            onSelectSlot={handleSelectSlot}
+            onSelectEvent={handleSelectedEvent}
+            messages={messages} // Aquí pasamos los mensajes definidos arriba
+          />
+
   
   
   
