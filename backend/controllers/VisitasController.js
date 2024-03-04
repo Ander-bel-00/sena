@@ -1,36 +1,40 @@
 const Visitas = require('../models/Visita');
 const Aprendices = require('../models/Aprendices');
+const moment = require('moment');
+
 
 exports.crearEvento = async (req, res) => {
-    const id_aprendiz = req.params.id_aprendiz; //obtener id del aprendiz desde url.
+    const id_aprendiz = req.params.id_aprendiz;
+    const { tipo_visita, fecha, hora } = req.body; // Obtener tipo_visita, fecha y hora del cuerpo de la solicitud
+  
     try {
-        // Se buscará el aprendiz en la BD con el id basado en URL.
-        const aprendices = await Aprendices.findOne({
-            where: {id_aprendiz: id_aprendiz}
-        })
-        // si el aprendiz existe se creará la vista
-        
-        if(aprendices){
-            //Se toma lo enviado desde el cuerpo del formmulario y en el campo aprendiz tendrá el valor del id aprendiz
-            const calendarData = {
-                // copia todo lo que contiene el cuerpo
-                ...req.body,
-                // se añade automaticamente con el id obtenido
-                aprendiz: id_aprendiz,
-                documento_aprendiz: aprendices.numero_documento,
-                nombres_aprendiz: aprendices.nombres,
-                apellidos_aprendiz: aprendices.apellidos,
-                numero_ficha_aprendiz: aprendices.numero_ficha
-            }
-            await Visitas.sync({ force: false});
-            const nuevoEvento = await Visitas.create(calendarData); // Crea nuevo evento
-            res.json(nuevoEvento); // Manda respuesta en formato JSON
-        } else(res.status(404).json({mensaje:"no se encontro el aprendiz"}))
+      const aprendices = await Aprendices.findOne({
+        where: { id_aprendiz: id_aprendiz }
+      });
+  
+      if (aprendices) {
+        await Visitas.sync({ force: false });
+        const nuevoEvento = await Visitas.create({
+          tipo_visita,
+          fecha,
+          hora, // Almacenar la hora recibida sin formatear
+          aprendiz: id_aprendiz,
+          documento_aprendiz: aprendices.numero_documento,
+          nombres_aprendiz: aprendices.nombres,
+          apellidos_aprendiz: aprendices.apellidos,
+          numero_ficha_aprendiz: aprendices.numero_ficha,
+        });
+  
+        res.json(nuevoEvento);
+      } else {
+        res.status(404).json({ mensaje: "No se encontró el aprendiz" });
+      }
     } catch (error) {
       console.error('Error creando el evento:', error);
       res.status(500).json({ error: 'Error interno del servidor' });
     }
   };
+  
 
 // Obtener todos los eventos del calendario
 exports.obtenerEventos = async ( req, res) => {

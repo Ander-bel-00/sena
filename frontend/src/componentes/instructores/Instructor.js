@@ -47,24 +47,26 @@ function Instructor() {
             <h5 className='text-center text-gray-500 selctFicha'>Selecciona una ficha</h5>
             <div className="row my-2 fichas-content rounded-md">
               {fichasAsignadas.length > 0 ? (
-                fichasAsignadas.map(ficha => (
-                  <div key={ficha.numero_ficha} className="col-md-6 col-lg-3 mb-4 fichasAll">
-                    <div className="card fichas">
-                      <div className="card-body">
-                        <h5 className="card-title">Ficha {ficha.numero_ficha}</h5>
-                        <img src={logoSena} className='w-9 logSenaFichas relative'/>
-                        <p className="card-text"><strong>Programa de formación: </strong>{ficha.programa_formacion}</p>
-                        <p className="card-text"><strong>Nivel de formación: </strong>{ficha.nivel_formacion}</p>
-                        <p className="card-text"><strong>Título obtenido: </strong>{ficha.titulo_obtenido}</p>
-                        <p className="card-text"><strong>Fecha fin lectiva: </strong>{formatearFecha(ficha.fecha_fin_lectiva)}</p>
+                <div className="fichas-grid">
+                  {fichasAsignadas.map(ficha => (
+                    <div key={ficha.numero_ficha} className="ficha-card">
+                      <div className="card fichas">
+                        <div className="card-body">
+                          <h5 className="card-title">Ficha {ficha.numero_ficha}</h5>
+                          <img src={logoSena} className='w-9 logSenaFichas relative'/>
+                          <p className="card-text"><strong>Programa de formación: </strong>{ficha.programa_formacion}</p>
+                          <p className="card-text"><strong>Nivel de formación: </strong>{ficha.nivel_formacion}</p>
+                          <p className="card-text"><strong>Título obtenido: </strong>{ficha.titulo_obtenido}</p>
+                          <p className="card-text"><strong>Fecha fin lectiva: </strong>{formatearFecha(ficha.fecha_fin_lectiva)}</p>
+                        </div>
+                        <button className='btnVerFicha'>
+                          <Link to={`/${usuario.rol_usuario}/aprendicesFicha/${ficha.numero_ficha}`} className='verFichas'>
+                            Ver Ficha</Link>
+                        </button>
                       </div>
-                      <button className='btnVerFicha'>
-                        <Link to={`/${usuario.rol_usuario}/aprendicesFicha/${ficha.numero_ficha}`} className='verFichas'>
-                          Ver Ficha</Link>
-                      </button>
                     </div>
-                  </div>
-                ))
+                  ))}
+                </div>
               ) : (
                 <p>No hay fichas asignadas</p>
               )}

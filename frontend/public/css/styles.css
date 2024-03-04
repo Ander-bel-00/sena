@@ -8,70 +8,76 @@ body {
 .Header-general {
     padding: 30px;
     background: #f1eeee;
-    height: 90px;
+    height: auto;
 }
 
 .tSeep{
-    margin-top: -50px;
+    position: relative;
+    left: 30px;
     color: #39a900;
 }
 
-.sidenav{
+/* Ajuste de altura del menú de navegación */
+.sidenav {
     width: 240px;
-    height: 90vh;
-    position: absolute;
-    padding: 0 30px;
-    left: -100%;
-    transition: all 0.1s;
+    height: 100vh; /* Establece la altura al 100% de la altura de la ventana */
+    position: fixed; /* Cambia la posición a fija para que el menú se mantenga visible al desplazar la página */
+    top: 0; /* Alinea el menú en la parte superior */
+    left: 0; /* Alinea el menú en la parte izquierda */
+    padding: 30px; /* Añade relleno al menú */
     background: #f1eeee;
-}
-.sidenav.active{
-    left: 0;
-}
-
-ul{
-    padding: 0;
+    overflow-y: auto; /* Añade desplazamiento vertical si el contenido es más grande que el menú */
+    z-index: 1000; /* Ajusta el índice z para que el menú aparezca encima del contenido */
 }
 
-ul li{
+/* Estilos adicionales para la lista de enlaces */
+ul {
+    padding: 10px;
+    margin: 0;
     list-style: none;
-    margin: 10px 0;
+    position: relative;
+    right: 20px;
+    top: 90px;
+}
+.userWelcome{
+    color: #39a900;
 }
 
-ul li a{
+ul li a {
     display: block;
     color: #39a900;
     text-decoration: none;
-    font-size: 16px;
-    display: block;
-    padding: 10px 8px;
+    font-size: 20px;
+    padding: 15px 14px;
     border-radius: 6px;
+    transition: background-color 0.3s;
 }
-  
+
 ul li a:hover,
-ul li a:active{
+ul li a:active {
     background: #fff;
 }
-
 .menu-burguer{
     font-size: 28px;
+    position: relative;
+    left: 15%;
     color: #39a900;
 }
 
-.menu-burguer:hover{
+/* .menu-burguer:hover{
     cursor: pointer;
-}
+} */
 
 .text-menu{
-
+    position: relative;
     padding: 0px 6px;
-    bottom: 10px;
+    left: 15%;
     color: #39a900;
 }
 
-.text-menu:hover{
+/* .text-menu:hover{
     cursor: pointer;
-}
+} */
 
 .content{
     display: flex;
@@ -116,71 +122,33 @@ ul li a:active{
     top: -240px;
 }
 .fichas-content{
-    height: auto;
     position: relative;
-    right: 80px;
-    border-top: 2px solid #f1eeee;
+    left: 180px;
 }
-
-.fichasAll{
+/* Estilos para las fichas */
+.fichas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas por fila */
+    gap: 20px; /* Espacio entre las fichas */
     position: relative;
-    left: 100px;
+    left: 80px;
 }
-
-.col-md-6.col-lg-3.mb-4:nth-child(1) .fichas {
-    margin-left: 90px;
-    position: relative;
-    top: 15px;
+  
+.ficha-card {
+    width: 100%; /* Asegura que cada ficha ocupe el ancho completo del contenedor */
 }
-
-.col-md-6.col-lg-3.mb-4:nth-child(2) .fichas {
-    margin-left: 120px;
-    margin-top: -45px;
-}
-
-.col-md-6.col-lg-3.mb-4:nth-child(3) .fichas {
-    margin-left: 150px;
-    margin-top: -45px;
-}
-
-.col-md-6.col-lg-3.mb-4:nth-child(4) .fichas {
-    position: relative;
-    top: 370px;
-    right: 62rem;
-}
-
 
 .fichasAsignedTitle{
     font-weight: bold;
     color: #000;
     position: relative;
-    right: 90px;
+    left: 140px;
 }
 
 .logSenaFichas{
     left: 270px;
     top: -40px;
 }
-
-.lista-aprendices {
-    list-style: none;
-    padding: 0;
-    margin: 20px auto;
-    max-width: 600px;
-    background-color: #f1EEEE;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    padding: 6px;
-}
-
-.aprendices-fichas {
-    border-bottom: 2px solid #000;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-}
-
 .verFichas{
     color: #39a900;
     text-decoration: none;
@@ -199,7 +167,7 @@ ul li a:active{
 
 .selctFicha{
     position: relative;
-    right: 93px;
+    left: 130px;
 }
 
 .Regresar{
@@ -213,9 +181,4 @@ ul li a:active{
     color: #fff;
     padding: 8px;
     
-}
-
-.agendarVisita:hover{
-    background-color: #39a900;
-    color: #fff;
 }

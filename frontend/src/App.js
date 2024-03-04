@@ -56,9 +56,9 @@ function App() {
 }, []);
 
 
-  useEffect(() => {
-    handleContentMovement(showNav);
-  }, [showNav]);
+  // useEffect(() => {
+  //   handleContentMovement(showNav);
+  // }, [showNav]);
 
   const handleLogout = async () => {
     try {

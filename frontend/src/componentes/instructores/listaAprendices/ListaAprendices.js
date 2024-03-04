@@ -3,6 +3,7 @@ import clienteAxios from '../../../api/axios';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { IoArrowBackSharp } from "react-icons/io5";
 import { Navigate } from 'react-big-calendar';
+import './css/ListaAprendices.css';
 
 function ListaAprendices() {
     const [aprendices, setAprendices] = useState([]);
