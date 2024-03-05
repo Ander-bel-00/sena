@@ -1,0 +1,184 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+.Header-general {
+    padding: 30px;
+    background: #f1eeee;
+    height: auto;
+}
+
+.tSeep{
+    position: relative;
+    left: 30px;
+    color: #39a900;
+}
+
+/* Ajuste de altura del menú de navegación */
+.sidenav {
+    width: 240px;
+    height: 100vh; /* Establece la altura al 100% de la altura de la ventana */
+    position: fixed; /* Cambia la posición a fija para que el menú se mantenga visible al desplazar la página */
+    top: 0; /* Alinea el menú en la parte superior */
+    left: 0; /* Alinea el menú en la parte izquierda */
+    padding: 30px; /* Añade relleno al menú */
+    background: #f1eeee;
+    overflow-y: auto; /* Añade desplazamiento vertical si el contenido es más grande que el menú */
+    z-index: 1000; /* Ajusta el índice z para que el menú aparezca encima del contenido */
+}
+
+/* Estilos adicionales para la lista de enlaces */
+ul {
+    padding: 10px;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    right: 20px;
+    top: 90px;
+}
+.userWelcome{
+    color: #39a900;
+}
+
+ul li a {
+    display: block;
+    color: #39a900;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 15px 14px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+ul li a:hover,
+ul li a:active {
+    background: #fff;
+}
+.menu-burguer{
+    font-size: 28px;
+    position: relative;
+    left: 15%;
+    color: #39a900;
+}
+
+/* .menu-burguer:hover{
+    cursor: pointer;
+} */
+
+.text-menu{
+    position: relative;
+    padding: 0px 6px;
+    left: 15%;
+    color: #39a900;
+}
+
+/* .text-menu:hover{
+    cursor: pointer;
+} */
+
+.content{
+    display: flex;
+    position: relative;
+    left: 5%;
+    border-radius: 22px;
+}
+
+.card{
+    top: 60px;
+    right: 90px;
+    width: 21rem;
+    height: auto;
+    
+}
+
+.carta{
+    border: 4px solid #857d7d;
+}
+
+.perfil{
+    border: 2px solid #000;
+}
+
+.card-text{
+    color: #000000;
+}
+
+.cuerpo-carta{
+    padding-top: 0px;
+}
+
+.bi-person-circle{
+    font-size: 38px;
+    text-align: center;
+}
+
+.carta2{
+    display: flex;
+    position: relative;
+    left: 380px;
+    top: -240px;
+}
+.fichas-content{
+    position: relative;
+    left: 180px;
+}
+/* Estilos para las fichas */
+.fichas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas por fila */
+    gap: 20px; /* Espacio entre las fichas */
+    position: relative;
+    left: 80px;
+}
+  
+.ficha-card {
+    width: 100%; /* Asegura que cada ficha ocupe el ancho completo del contenedor */
+}
+
+.fichasAsignedTitle{
+    font-weight: bold;
+    color: #000;
+    position: relative;
+    left: 140px;
+}
+
+.logSenaFichas{
+    left: 270px;
+    top: -40px;
+}
+.verFichas{
+    color: #39a900;
+    text-decoration: none;
+}
+
+.verFichas:hover{
+    background-color: #39a900;
+    color: #fff;
+    padding: 8px;
+}
+
+.btnVerFicha{
+    position: relative;
+    top: -9px;
+}
+
+.selctFicha{
+    position: relative;
+    left: 130px;
+}
+
+.Regresar{
+    color: #39a900;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.Regresar:hover{
+    background-color: #39a900;
+    color: #fff;
+    padding: 8px;
+    
+}
