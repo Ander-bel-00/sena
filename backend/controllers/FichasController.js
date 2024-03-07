@@ -1,13 +1,15 @@
 const Fichas = require('../models/Fichas');
 const Aprendices = require('../models/Aprendices');
+const Instructores = require('../models/Instructor');
+const { Op } = require('sequelize');
+
 
 // Controlador para crear fichas en la base de datos.
 exports.nuevaFicha = async (req, res, next) => {
     try {
         // Crea la tabla fichas en la base de datos si no existe.
-        await Fichas.sync({force: false});
+        await Fichas.sync({ force: false });
 
-        
         const fichaExistente = await Fichas.findOne({
             where: {
                 numero_ficha: req.body.numero_ficha
@@ -15,16 +17,30 @@ exports.nuevaFicha = async (req, res, next) => {
         });
 
         if (fichaExistente) {
-            res.status(500).json({ mensaje: 'La ficha ya se encuentra registrada'});
-        }else {
+            res.status(500).json({ mensaje: 'La ficha ya se encuentra registrada' });
+        } else {
             // Crea la ficha con los datos proporcionados desde el cuerpo del formulario.
-            const fichas = await Fichas.create(req.body);
+            const ficha = await Fichas.create(req.body);
+
+            // Actualizar el campo fichas_asignadas del instructor que está creando la ficha
+            const instructor = await Instructores.findOne({
+                where: {
+                    id_instructor: req.body.id_instructor
+                }
+            });
+
+            if (instructor) {
+                let nuevasFichasAsignadas = instructor.fichas_asignadas || '';
+                nuevasFichasAsignadas += (nuevasFichasAsignadas ? ',' : '') + req.body.numero_ficha;
+                await instructor.update({ fichas_asignadas: nuevasFichasAsignadas });
+            }
 
             // Envíar un mensaje con los datos de la ficha que se ha creado.
-            res.status(201).json({ mensaje: 'La ficha se ha registrado exitosamente', fichas });
+            res.status(201).json({ mensaje: 'La ficha se ha registrado exitosamente', ficha });
         }
     } catch (error) {
-        res.status(500).json({ mensaje: 'Hubo un error en la solicitud', error});
+        console.error(error);
+        res.status(500).json({ mensaje: 'Hubo un error en la solicitud', error });
     }
 };
 
@@ -143,10 +159,12 @@ exports.actualizarFicha = async (req, res, next) => {
 }
 
 
-// Eliminar ficha por sú numero de ficha.
+// Eliminar ficha por su numero de ficha.
 exports.eliminarFicha = async (req, res, next) => {
     try {
         const numeroFicha = req.params.numero_ficha;
+
+        // Buscar la ficha que se va a eliminar
         const ficha = await Fichas.findOne({
             where: {
                 numero_ficha: numeroFicha
@@ -154,21 +172,35 @@ exports.eliminarFicha = async (req, res, next) => {
         });
 
         if (!ficha) {
-            
             return res.status(404).json({ mensaje: 'No se ha podido encontrar esa ficha' });
-            
-        }else{
-            const eliminarFicha = Fichas.destroy({
+        } else {
+            // Eliminar la ficha de la base de datos
+            await ficha.destroy();
+
+            // Actualizar el campo fichas_asignadas en la tabla de instructores
+            const instructores = await Instructores.findAll({
                 where: {
-                    numero_ficha: numeroFicha
+                    fichas_asignadas: {
+                        [Op.like]: `%${numeroFicha}%` // Buscar instructores que tengan asignada la ficha que se está eliminando
+                    }
                 }
             });
-            res.status(200).json({ mensaje: 'La ficha se ha eliminado correctamente'});
+
+            // Actualizar el campo fichas_asignadas en cada instructor encontrado
+            for (const instructor of instructores) {
+                let nuevasFichasAsignadas = instructor.fichas_asignadas;
+                if (Array.isArray(nuevasFichasAsignadas)) {
+                    nuevasFichasAsignadas = nuevasFichasAsignadas.filter(f => f !== numeroFicha).join(',');
+                } else {
+                    nuevasFichasAsignadas = nuevasFichasAsignadas.split(',').filter(f => f !== numeroFicha).join(',');
+                }
+                await instructor.update({ fichas_asignadas: nuevasFichasAsignadas });
+            }
+
+            res.status(200).json({ mensaje: 'La ficha se ha eliminado correctamente' });
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({ mensaje: 'Hubo un error al procesar la solicitud', error});
+        res.status(500).json({ mensaje: 'Hubo un error al procesar la solicitud', error });
     }
 };
-
-

@@ -1,11 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import clienteAxios from '../../api/axios';
-import logoSena from './sena-verde.png';
+import logoSena from './img/sena-verde.png';
+import './css/Instructores.css';
 import { Link } from 'react-router-dom';
 
 function Instructor() {
   const [usuario, setUsuario] = useState(null);
   const [fichasAsignadas, setFichasAsignadas] = useState([]);
+  const [busqueda, setBusqueda] = useState('');
 
   useEffect(() => {
     const obtenerUsuario = async () => {
@@ -20,7 +22,7 @@ function Instructor() {
         const responseFichas = await clienteAxios.get(`/instructor/${response.data.usuario.numero_documento}/fichas-asignadas`);
         // Ordenar Fichas desde la primera creada a la más reciente.
         const fichasOrdenadas = responseFichas.data.fichasAsignadas.sort((a, b) => {
-          // Convertir las fechas de creación a objetos Date y compararlas
+          // Convertir las fechas de creación a objetos Date y compararlas.
           return new Date(a.createdAt) - new Date(b.createdAt);
         });
         setFichasAsignadas(fichasOrdenadas);
@@ -38,17 +40,40 @@ function Instructor() {
     return fecha.toISOString().split('T')[0];
   };
 
+  // Función para manejar cambios en el campo de búsqueda
+  const handleChangeBusqueda = (event) => {
+    setBusqueda(event.target.value);
+  };
+
+  // Filtrar las fichas según el número de ficha ingresado en el campo de búsqueda
+  const fichasFiltradas = fichasAsignadas.filter(ficha =>
+    ficha.numero_ficha.toString().includes(busqueda)
+  );
+
   return (
     <Fragment>
-      <div>
+      <div className='titles'>
+      <h2 className='fichasAsignedTitle mt-11 text-center'>Agendamiento de visitas</h2>
+      <h5 className='text-center text-gray-500 selctFicha'>Selecciona una ficha</h5>
+      </div>
+      <div className='instru-content'>
         {usuario && usuario.rol_usuario ? (
+          
           <Fragment>
-            <h2 className='fichasAsignedTitle mt-11 text-center'>Agendamiento de Visitas</h2>
-            <h5 className='text-center text-gray-500 selctFicha'>Selecciona una ficha</h5>
+            
             <div className="row my-2 fichas-content rounded-md">
-              {fichasAsignadas.length > 0 ? (
+              <div className='searchContent'>
+                <input
+                  type='search'
+                  placeholder='Buscar Fichas...'
+                  className='relative buscarFichas'
+                  value={busqueda}
+                  onChange={handleChangeBusqueda}
+                />
+              </div>
+              {fichasFiltradas.length > 0 ? (
                 <div className="fichas-grid">
-                  {fichasAsignadas.map(ficha => (
+                  {fichasFiltradas.map(ficha => (
                     <div key={ficha.numero_ficha} className="ficha-card">
                       <div className="card fichas">
                         <div className="card-body">
@@ -68,7 +93,9 @@ function Instructor() {
                   ))}
                 </div>
               ) : (
-                <p>No hay fichas asignadas</p>
+                <div className='noFichas'> 
+                  <p>No hay fichas asignadas</p>
+                </div>
               )}
             </div>
           </Fragment>

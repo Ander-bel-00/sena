@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 const Fichas = require('../models/Fichas');
-const InstructorFicha = require('./InstructorFicha');
+
 
 
 // Crear el modelo aprendiz con el que se creará la tabla con los campos necesarios.
@@ -65,9 +65,15 @@ const Instructor = sequelize.define('Instructores', {
             return value ? value.split(',') : [];
         },
         set(val) {
-            this.setDataValue('fichas_asignadas', val.join(','));
+            if (Array.isArray(val)) {
+                this.setDataValue('fichas_asignadas', val.join(','));
+            } else if (typeof val === 'string') {
+                this.setDataValue('fichas_asignadas', val);
+            } else {
+                this.setDataValue('fichas_asignadas', '');
+            }
         }
-    },
+    },    
     rol_usuario: {
         type: DataTypes.STRING,
         allowNull: false,

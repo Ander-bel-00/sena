@@ -37,7 +37,7 @@ module.exports = function () {
     // Actualizar Ficha por su número de ficha.
     router.put('/fichas-update/:numero_ficha', FichasController.actualizarFicha);
     // Eliminar una Ficha por su número de ficha.
-    router.delete('/fichas-delete/:numero_ficha', authRequired,FichasController.eliminarFicha);
+    router.delete('/fichas-delete/:numero_ficha', FichasController.eliminarFicha);
 
     // Aprendices
     router.post('/aprendices-add', AprendizController.nuevoAprendiz);
@@ -49,6 +49,11 @@ module.exports = function () {
     // Rutas para el instructor.
     router.post('/instructores-add', InstructorController.nuevoInstructor);
     router.get('/instructor/:numero_documento/fichas-asignadas', InstructorController.obtenerFichasAsignadas);
+    router.get('/instructores/get-All', InstructorController.obtenerInstructores);
+    router.get('/instructores/get-Instructor/:id_instructor', InstructorController.obtenerInstructorById);
+    router.put('/instructores/update/:id_instructor', InstructorController.actualizarInstructor);
+    router.delete('/instructores/delete/:id_instructor', InstructorController.eliminarInstructor);
+
 
     // Rutas para las Visitas.
     router.post('/nuevaVisita/:id_aprendiz', VisitasController.crearEvento);

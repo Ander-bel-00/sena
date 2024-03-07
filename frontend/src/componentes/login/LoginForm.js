@@ -2,8 +2,8 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import clienteAxios from '../../api/axios';
 import Cookies from 'js-cookie';
-import logoSena from './sena-verde.png';
-import './login.styles.css';
+import logoSena from './img/sena-verde.png';
+import './css/login.styles.css';
 
 const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
   const [formData, setFormData] = useState({
@@ -66,7 +66,7 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
                 <option>Selecciona un rol...</option>
                 <option value="instructor">Instructor</option>
                 <option value="aprendiz">Aprendiz</option>
-                <option value="administrador" hidden>Administrador</option>
+                <option value="administrador">Administrador</option>
                 
               </select>
             </p>

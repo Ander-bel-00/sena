@@ -1,0 +1,38 @@
+.tabla {
+    display: block; /* Cambiar display a block */
+    border-collapse: collapse;
+    width: 100%;
+}
+.tabla th, .tabla td {
+    border: 1px solid black;
+    padding: 25px;
+    text-align: center;
+}
+
+@media screen and (max-width: 1508.89px) {
+    .tabla {
+        display: block; /* Cambiar display a block */
+        border-collapse: collapse;
+        width: 100%;
+    }
+    .tabla th, .tabla td {
+        border: 1px solid black;
+        padding: 25px;
+        text-align: center;
+    }
+    .info-aprendiz{
+        top: 60px;
+        left: 190px;
+        width: 21rem;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 1413.33px) {
+    .info-aprendiz{
+        top: 60px;
+        left: 190px;
+        width: 21rem;
+        height: auto;
+    }
+}

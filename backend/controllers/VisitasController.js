@@ -15,14 +15,14 @@ exports.crearEvento = async (req, res) => {
       if (aprendices) {
         await Visitas.sync({ force: false });
         const nuevoEvento = await Visitas.create({
-          tipo_visita,
-          fecha,
-          hora, // Almacenar la hora recibida sin formatear
-          aprendiz: id_aprendiz,
-          documento_aprendiz: aprendices.numero_documento,
-          nombres_aprendiz: aprendices.nombres,
-          apellidos_aprendiz: aprendices.apellidos,
-          numero_ficha_aprendiz: aprendices.numero_ficha,
+            tipo_visita: tipo_visita.toLowerCase(), // Convertir a minúsculas
+            fecha,
+            hora,
+            aprendiz: id_aprendiz,
+            documento_aprendiz: aprendices.numero_documento,
+            nombres_aprendiz: aprendices.nombres,
+            apellidos_aprendiz: aprendices.apellidos,
+            numero_ficha_aprendiz: aprendices.numero_ficha,
         });
   
         res.json(nuevoEvento);

@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 const Instructor = require('../models/Instructor');
-const InstructorFicha = require('./InstructorFicha');
+
 
 // Crear modelo de fichas para crear la tabla en la base de datos.
 

@@ -39,7 +39,7 @@ function ListaAprendices() {
                             <li key={aprendiz.id_aprendiz} className='aprendices-fichas '>
                                 {aprendiz.nombres} {aprendiz.apellidos}
                                 <button><Link to={`/${rol_usuario}/visitas-add/${numero_ficha}/${aprendiz.id_aprendiz}`}
-                                className='agendarVisita'>Agendar visita</Link></button>
+                                className='agendarVisita'>Ver o agendar visitas</Link></button>
                             </li>
                         ))
                     ) : (

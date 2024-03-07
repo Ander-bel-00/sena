@@ -42,7 +42,7 @@ exports.iniciarSesion = async (req, res, next) => {
 
        // Generar token JWT con el id, número de documento y rol del usuario
        const token = jwt.sign({
-        id: usuario.id_aprendiz,
+        id_aprendiz: usuario.id_aprendiz,
         id_instructor: usuario.id_instructor,
         rol_usuario: usuario.rol_usuario,
         numero_documento: usuario.numero_documento,
@@ -60,7 +60,7 @@ exports.iniciarSesion = async (req, res, next) => {
             message: `Inicio de sesión exitoso como ${usuario.rol_usuario}`,
             token,
             usuario: {
-                id: usuario.id_aprendiz,
+                id_aprendiz: usuario.id_aprendiz,
                 id_instructor: usuario.id_instructor,
                 rol_usuario: usuario.rol_usuario,
                 numero_documento: usuario.numero_documento,

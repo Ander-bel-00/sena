@@ -1,6 +1,5 @@
 const Instructores = require('../models/Instructor');
 const Fichas = require('../models/Fichas');
-const InstructorFicha = require('../models/InstructorFicha');
 const bcrypt = require('bcryptjs');
 
 exports.nuevoInstructor = async (req, res, next) => {
@@ -30,11 +29,10 @@ exports.nuevoInstructor = async (req, res, next) => {
 
         await Instructores.sync({ force: false});
 
-        // Crear el instructor con los datos de las fichas asignadas
         const instructorData = {
             ...req.body,
-            // Incluir los IDs de las fichas asignadas en el campo 'fichas_asignadas'
-            fichas_asignadas: fichas.map(ficha => ficha.numero_ficha)
+            // Convertir el array de números de ficha en una cadena separada por comas
+            fichas_asignadas: fichas.map(ficha => ficha.numero_ficha).join(',')
         };
 
         // Verificar si el instructor existe antes de crearlo
@@ -129,3 +127,88 @@ exports.obtenerFichasAsignadas = async (req, res, next) => {
     }
 };
 
+exports.obtenerInstructores = async (req, res, next) => {
+    try {
+        const instructores = await Instructores.findAll();
+        if (instructores) {
+            // Mostrar todos los instructores registrados.
+            res.status(200).json(instructores);
+        }else{
+            // Mensaje en caso de no encontrar ni un instructor en la BD.
+            res.status(404).json({ mensaje: 'No hay Instructores registrados'});
+        }
+    } catch (error) {
+        // Mostrar mensaje si hubo error interno en el servidor.
+        console.error(error);
+        res.status(500).json(error);
+    }
+};
+
+// Obtener un Instructor por el ID.
+exports.obtenerInstructorById = async (req, res, next) => {
+    try {
+        const idInstructor = req.params.id_instructor;
+        if (idInstructor) {
+            const instructor = await Instructores.findOne({
+                where: {
+                    id_instructor: idInstructor
+                }
+            });
+
+            res.status(200).json(instructor);
+        }else{
+            res.status(404).json({ mensaje: 'No se encuentra el instructor'});
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ mensaje: 'Hubo error interno en el servidor'});
+    }
+};
+
+// Actualizar datos de un Instructor.
+exports.actualizarInstructor = async (req, res, next) => {
+    try {
+        const idInstructor = req.params.id_instructor;
+        const instructor = await Instructores.findOne({
+            where: {
+                id_instructor: idInstructor
+            }
+        });
+        if (!instructor) {
+            return res.status(404).json({ mensaje: 'Instructor no encontrado' });
+        }
+
+        // Verificar si fichas_asignadas es un array, si no lo es, convertirlo en uno
+        const fichasAsignadas = Array.isArray(req.body.fichas_asignadas) ? req.body.fichas_asignadas : [req.body.fichas_asignadas];
+
+        // Actualizar el instructor con el nuevo valor de fichas_asignadas
+        const instructorActualizado = await instructor.update({ fichas_asignadas: fichasAsignadas });
+
+        res.status(200).json({ mensaje: 'Instructor actualizado exitosamente', instructorActualizado });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ mensaje: 'Hubo error interno en el servidor' });
+    }
+};
+
+
+exports.eliminarInstructor = async (req, res, next) => {
+    try {
+        const idInstructor = req.params.id_instructor;
+
+        if (idInstructor) {
+            const instructor = await Instructores.findOne({
+                where: {
+                    id_instructor: idInstructor
+                }
+            });
+
+            const eliminarInstructor = instructor.destroy();
+
+            res.status(200).json({ mensaje: 'El instructor ha sido eliminado correctamente'});
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ mensaje: 'Hubo error interno en el servidor'});
+    }
+};

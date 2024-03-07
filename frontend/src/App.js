@@ -12,6 +12,9 @@ import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 import ListaAprendices from "./componentes/instructores/listaAprendices/ListaAprendices.js";
 import Calendario from "./componentes/calendario/Calendario.js";
+import NavbarInstructor from "./componentes/instructores/layouts/NavbarInstructor.js";
+import NuevaFicha from "./componentes/fichas/NuevaFicha.js";
+import NuevoAprendiz from "./componentes/aprendices/nuevoAprendiz/NuevoAprendiz.js";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -109,17 +112,37 @@ function App() {
           }
         />
         <Route
+          path="/:rol_usuario/:id_instructor/aprendiz-add"
+          element={
+            isAuthenticated && userRole === 'instructor' ? (
+              <NuevoAprendiz />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+        <Route
           path="/instructor"
           element={
             isAuthenticated && userRole === 'instructor' ? (
               <Fragment>
                 <Header showNav={showNav} setShowNav={setShowNav}/>
-                <NavbarAprendiz showNav={showNav} handleLogout={handleLogout} />
+                <NavbarInstructor showNav={showNav} handleLogout={handleLogout} />
                 <main className="container content">
                 <Instructor />
                 </main>
               </Fragment>
               
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+        <Route 
+          path="/:rol_usuario/:id_instructor/nuevaFicha"
+          element={
+            isAuthenticated && userRole === 'instructor' ? (
+              <NuevaFicha />
             ) : (
               <Navigate to="/" replace />
             )

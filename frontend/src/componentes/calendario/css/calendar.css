@@ -11,6 +11,11 @@
     width: 60vw;
     top: 10px;
   }
+  .calendar-container .rbc-event{
+    position: relative;
+    background-color: #39a900;
+    color: #fff;
+  }
 }
 
 @media screen and (max-width: 1413.33px) {
@@ -22,5 +27,7 @@
   .calendar-container .rbc-event{
     position: relative;
     top: -5px;
+    background-color: #39a900;
+    color: #fff;
   }
 }
