@@ -30,3 +30,32 @@ body{
     bottom: 0;
     width: 100%;
 }
+
+@media screen and (max-width: 780px) {
+    .seepTitle{
+        color: #39a900;
+        font-weight: 600;
+    }
+    .form-container{
+        position: relative;
+        box-shadow: none;
+        top: -40px;
+        border: 1px solid #808080;
+        box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.9);
+        width: 90%;
+    }
+    .form-options{
+        position: relative;
+        right: 20px;
+    }
+    .options{
+        width: 250px;
+    }
+    .loginButton{
+        background-color: #39a900;
+        color: #fff;
+        position: relative;
+        right: 14%;
+    }
+
+}

@@ -57,27 +57,6 @@ ul li a:hover,
 ul li a:active {
     background: #fff;
 }
-.menu-burguer{
-    font-size: 28px;
-    position: relative;
-    left: 15%;
-    color: #39a900;
-}
-
-/* .menu-burguer:hover{
-    cursor: pointer;
-} */
-
-.text-menu{
-    position: relative;
-    padding: 0px 6px;
-    left: 15%;
-    color: #39a900;
-}
-
-/* .text-menu:hover{
-    cursor: pointer;
-} */
 
 .content{
     display: flex;
@@ -133,6 +112,24 @@ ul li a:active {
     padding: 8px;
     
 }
+.menu-burguer{
+    display: none;
+    font-size: 28px;
+    position: relative;
+    left: 15%;
+    color: #39a900;
+}
+
+.text-menu{
+    display: none;
+    position: relative;
+    padding: 0px 6px;
+    left: 15%;
+    color: #39a900;
+}
+.close-btn{
+    display: none;
+}
 
 
 @media screen and (max-width: 1280px) {
@@ -176,4 +173,55 @@ ul li a:active {
         background: #fff;
     }
     
+}
+
+@media screen and (max-width: 780px) {
+    /* Estilos para el menú hamburguesa */
+    .sidenav {
+        width: 230px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 30px;
+        background: #f1eeee;
+        overflow-y: auto;
+        z-index: 1000;
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(-100%);
+    }
+
+    .sidenav.active {
+        transform: translateX(0);
+    }
+    .menu-burguer{
+        display: inline-block;
+        font-size: 28px;
+        position: relative;
+        left: 15%;
+        color: #39a900;
+    }
+    
+    .menu-burguer:hover{
+        cursor: pointer;
+    }
+    
+    .text-menu{
+        position: relative;
+        padding: 0px 6px;
+        left: 15%;
+        color: #39a900;
+    }
+    
+    .text-menu:hover{
+        cursor: pointer;
+    }
+
+    .close-btn{
+        display: block;
+        position: relative;
+        left: 180px;
+        top: -10px;
+        padding: 6px;
+    }
 }

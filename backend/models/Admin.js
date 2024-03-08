@@ -12,7 +12,7 @@ const Admin = sequelize.define('Admin', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    // Otros campos específicos del administrador
+    
 });
 
 module.exports = Admin;

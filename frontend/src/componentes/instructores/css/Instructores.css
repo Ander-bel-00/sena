@@ -169,6 +169,72 @@
     }
 }
 
+/* Pantallas pequeñas */
+@media screen and (max-width: 1358px) {
+    .content{
+        display: flex;
+        position: relative;
+        left: 40px;
+        border-radius: 22px;
+    }
+    .instru-content{
+        position: relative;
+        right: 250px;
+    }
+    .fichas-content{
+        position: relative;
+        left: -20px;
+    }
+    .ficha-card {
+        width: 80%; /* Asegura que cada ficha ocupe el ancho completo del contenedor */
+        position: relative;
+        left: 99px;
+        padding-bottom: 30px;
+        top: -5px;
+    }
+    /* Estilos para las fichas */
+    .fichas-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Tres columnas por fila */
+        gap: 10px; /* Espacio entre las fichas */
+        position: relative;
+        left: 5px;
+    }
+    .searchContent{
+        position: relative;
+        left: 10px;
+        top: 15px;
+    }
+    .buscarFichas{
+        left: 10px;
+        padding: 4px;
+        border-bottom: 2px solid #808080;
+        top: 0%;
+    }
+    .noFichas{
+        position: relative;
+        left: 20px;
+        top: 70px;
+        font-weight: bold;
+    }
+    .titles{
+        position: relative;
+        bottom: 10px;
+        left: 30%;
+    }
+    .fichasAsignedTitle{
+        font-weight: bold;
+        color: #000;
+        position: relative;
+        left: 80px;
+        white-space: nowrap;
+    }
+    .selctFicha{
+        position: relative;
+        left: 60px;
+    }
+}
+
 /* Pantallas más pequeñas */
 @media screen and (max-width: 1280px) {
     .content{
@@ -227,5 +293,56 @@
         position: relative;
         left: 160px;
         white-space: nowrap;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    /* Estilos para el menú hamburguesa */
+    .sidenav {
+        width: 230px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 30px;
+        background: #f1eeee;
+        overflow-y: auto;
+        z-index: 1000;
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(-100%);
+    }
+
+    .sidenav.active {
+        transform: translateX(0);
+    }
+    .menu-burguer{
+        display: inline-block;
+        font-size: 28px;
+        position: relative;
+        left: 15%;
+        color: #39a900;
+    }
+    
+    .menu-burguer:hover{
+        cursor: pointer;
+    }
+    
+    .text-menu{
+        position: relative;
+        padding: 0px 6px;
+        left: 15%;
+        color: #39a900;
+    }
+    
+    .text-menu:hover{
+        cursor: pointer;
+    }
+
+    .close-btn{
+        display: block;
+        position: relative;
+        left: 180px;
+        top: -10px;
+        padding: 6px;
     }
 }

@@ -9,8 +9,8 @@ const Header = ({showNav, setShowNav}) => {
     return(
         <header className="Header-general">
             <div onClick={toogleNav}>
-                <HiMenuAlt1 className='menu-burguer inline-block' style={{display: 'none'}}/>
-                <span className="text-menu" style={{display: 'none'}}>Menú</span>
+                <HiMenuAlt1 className='menu-burguer'/>
+                <span className="text-menu">Menú</span>
             </div>
             <h1 className="text-center tSeep">S.E.E.P</h1>
            

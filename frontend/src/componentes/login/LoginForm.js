@@ -51,17 +51,18 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
         <h2 className="text-4xl seepTitle">S.E.E.P</h2>
       </header>
 
-      <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+      <div className="flex h-[calc(100vh-100px)] items-center justify-center login-content">
         <div className="bg-white max-w-md w-full p-10 rounded-md form-container mb-4">
           <h1 className="text-center text-2xl font-bold my-4">Iniciar sesión</h1>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} className='form-options'>
             <p className="selectRol">
               Selecciona tu rol:
               <select
                 name="rol_usuario"
                 value={rol_usuario}
                 onChange={onChange}
-                className="w-80 bg-white text-black px-4 py-2 rounded-md my-4 border ml-6"
+                className="w-80 bg-white text-black px-4 py-2 rounded-md my-4 border ml-6 
+                options"
               >
                 <option>Selecciona un rol...</option>
                 <option value="instructor">Instructor</option>
@@ -77,7 +78,8 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
                 name="numero_documento"
                 value={numero_documento}
                 onChange={onChange}
-                className="flex items-center justify-center w-80 bg-white text-black px-4 py-2 rounded-md my-2 border ml-6"
+                className="flex items-center justify-center w-80 bg-white text-black px-4 
+                py-2 rounded-md my-2 border ml-6 options"
               />
             </div>
             <div className="input-container">
@@ -87,7 +89,8 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
                 name="contrasena"
                 value={contrasena}
                 onChange={onChange}
-                className="w-80 bg-white text-black px-4 py-2 rounded-md my-2 border ml-6"
+                className="w-80 bg-white text-black px-4 py-2 rounded-md my-2 border ml-6
+                options"
               />
             </div>
             {errors.map((error, i) => (

@@ -15,6 +15,8 @@ import Calendario from "./componentes/calendario/Calendario.js";
 import NavbarInstructor from "./componentes/instructores/layouts/NavbarInstructor.js";
 import NuevaFicha from "./componentes/fichas/NuevaFicha.js";
 import NuevoAprendiz from "./componentes/aprendices/nuevoAprendiz/NuevoAprendiz.js";
+import Documents from "./componentes/Documents/Documents.js";
+import InstructorDocuments from "./componentes/Documents/InstructorDocuments.js";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -101,7 +103,7 @@ function App() {
             isAuthenticated && userRole === 'aprendiz' ? (
               <Fragment>
                 <Header showNav={showNav} setShowNav={setShowNav}/>
-                <NavbarAprendiz showNav={showNav} handleLogout={handleLogout} />
+                <NavbarAprendiz showNav={showNav} handleLogout={handleLogout} setShowNav={setShowNav}/>
                 <main className="container content">
                   <Aprendices />
                 </main>
@@ -127,7 +129,7 @@ function App() {
             isAuthenticated && userRole === 'instructor' ? (
               <Fragment>
                 <Header showNav={showNav} setShowNav={setShowNav}/>
-                <NavbarInstructor showNav={showNav} handleLogout={handleLogout} />
+                <NavbarInstructor showNav={showNav} handleLogout={handleLogout} setShowNav={setShowNav}/>
                 <main className="container content">
                 <Instructor />
                 </main>
@@ -137,6 +139,28 @@ function App() {
               <Navigate to="/" replace />
             )
           }
+        />
+        <Route 
+        path="/:rol_usuario/:id_aprendiz/documents-aprendiz"
+        element={
+          isAuthenticated && userRole === 'aprendiz' ? (
+            <Documents/>
+          ) : (
+            <Navigate to="/" replace />
+          )
+        }
+        
+        />
+        <Route 
+        path="/:rol_usuario/:id_instructor/documents-instructor"
+        element={
+          isAuthenticated && userRole === 'instructor' ? (
+            <InstructorDocuments />
+          ) : (
+            <Navigate to="/" replace />
+          )
+        }
+        
         />
         <Route 
           path="/:rol_usuario/:id_instructor/nuevaFicha"

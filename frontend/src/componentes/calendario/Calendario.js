@@ -150,7 +150,7 @@ function Calendario() {
                   <option value="Segunda Visita">Segunda visita</option>
                   <option value="Tercera visita">Tercera visita</option>
                 </select>
-                <label style={{ fontWeight: 'bold' }}>Hora:</label>
+                <label style={{ fontWeight: 'bold' }} className='flex'>Hora:</label>
                 <input
                   type="time"
                   value={selectedTime}

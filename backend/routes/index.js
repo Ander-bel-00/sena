@@ -6,6 +6,7 @@ const authController = require('../controllers/authController');
 const authRequired = require('../middlewares/validateToken');
 const FichasController = require('../controllers/FichasController');
 const VisitasController = require('../controllers/VisitasController');
+const DocumentsController = require('../controllers/DocumentsController');
 
 
 
@@ -61,6 +62,15 @@ module.exports = function () {
     router.get('/visitas-aprendiz/:id_aprendiz', VisitasController.obtenerEventosAprendiz);
     router.put('/visitas-update/:id_visita', VisitasController.actualizarEventos);
     router.delete('/visitas-delete/:id_visita', VisitasController.eliminarEvento);
+
+
+    // Rutas para los Documentos.
+    router.post('/documentos-upload/:id_aprendiz', DocumentsController.cargarDocumento);
+    router.get('/documentos-aprendiz/:id_aprendiz', DocumentsController.obtenerDocumentosPorAprendiz);
+    // Ruta para descargar un documento por su nombre de archivo
+    router.get('/documentos-download/:nombreArchivo', DocumentsController.descargarDocumento);
+    // Ruta para eliminar un documento por su ID
+    router.delete('/documentos-delete/:id', DocumentsController.eliminarDocumento);
 
     return router;
 };
