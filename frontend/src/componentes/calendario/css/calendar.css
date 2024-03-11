@@ -5,6 +5,17 @@
   height: 95vh; /* Establece la altura del calendario */
 }
 
+.calendar-container .rbc-event{
+
+  background-color: #39a900;
+  color: #fff;
+}
+
+.modal-title {
+  text-align: center; /* Centra el texto en todos los dispositivos */
+}
+
+
 @media screen and (max-width: 1508.89px) {
   .calendar-container {
     height: 94vh; /* Ajusta la altura en pantallas más pequeñas */
@@ -31,3 +42,51 @@
     color: #fff;
   }
 }
+
+@media screen and (max-width: 1358px) {
+  .calendar-container {
+    height: 97vh; /* Ajusta la altura en pantallas aún más pequeñas */
+    width: 70vw;
+    top: -10px;
+  }
+  .calendar-container .rbc-event{
+    position: relative;
+    top: -5px;
+    background-color: #39a900;
+    color: #fff;
+  }
+
+  .modal-title {
+    text-align: left; /* Ajusta la alineación a la izquierda en dispositivos móviles */
+    position: relative;
+    right: 10px;
+  }
+}
+
+
+@media screen and (max-width: 780px) {
+  .calendar-container {
+    height: 90vh; /* Ajusta la altura en pantallas aún más pequeñas */
+    width: 100vw;
+    top: -10px;
+}
+  .calendar-container .rbc-event{
+    position: relative;
+    top: -5px;
+    background-color: #39a900;
+    color: #fff;
+  }
+
+  .back {
+    display: none;
+  }
+
+  .modal-title {
+    text-align: left; /* Ajusta la alineación a la izquierda en dispositivos móviles */
+    position: relative;
+    right: 45px;
+  }
+}
+
+
+

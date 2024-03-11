@@ -65,7 +65,7 @@ function Aprendiz() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6 col-lg-6 my-4">
+              <div className="col-md-6 col-lg-6 my-4 visitas-cont">
                 <h2>Tus visitas programadas</h2>
                 <table className="tabla">
                   <thead>

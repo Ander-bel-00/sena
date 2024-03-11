@@ -37,7 +37,7 @@ const NavbarAprendiz = ({ showNav, handleLogout, setShowNav }) => {
                     <button className="close-btn" onClick={handleCloseMenu}>X</button>
                     <h3 className="text-xl userWelcome">¡Bienvenido {usuario.nombres}!</h3>
                     <ul className="list-group menu-content">
-                        <li className="menu-options"><a href="#"><IoHomeSharp className="inline-block"/> Inicio</a></li>
+                        <li className="menu-options"><a href="/"><IoHomeSharp className="inline-block"/> Inicio</a></li>
                         <li className="menu-options"><a href="#"><FaUser className="inline-block"/> Perfil</a></li>
                         <li className="menu-options"><Link to={`/${usuario.rol_usuario}/${usuario.id_aprendiz}/documents-aprendiz`}><IoDocuments className="inline-block"/> Documentos</Link></li>
                         <li className="menu-options"><Link to="/login" onClick={handleLogout}><BiSolidLogOut className="inline-block"/> Cerrar sesión</Link></li>

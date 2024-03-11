@@ -46,7 +46,203 @@
     position: relative;
     left: 130px;
 }
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
 
+.Header-general {
+    padding: 30px;
+    background: #f1eeee;
+    height: auto;
+}
+
+.tSeep{
+    position: relative;
+    left: 30px;
+    color: #39a900;
+}
+
+/* Ajuste de altura del menú de navegación */
+.sidenav {
+    width: 230px;
+    height: 100vh; /* Establece la altura al 100% de la altura de la ventana */
+    position: fixed; /* Cambia la posición a fija para que el menú se mantenga visible al desplazar la página */
+    top: 0; /* Alinea el menú en la parte superior */
+    left: 0; /* Alinea el menú en la parte izquierda */
+    padding: 30px; /* Añade relleno al menú */
+    background: #f1eeee;
+    overflow-y: auto; /* Añade desplazamiento vertical si el contenido es más grande que el menú */
+    z-index: 1000; /* Ajusta el índice z para que el menú aparezca encima del contenido */
+}
+
+/* Estilos adicionales para la lista de enlaces */
+ul {
+    padding: 10px;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    right: 20px;
+    top: 40px;
+}
+.userWelcome{
+    color: #39a900;
+}
+
+ul li a {
+    display: block;
+    color: #39a900;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 15px 14px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+ul li a:hover,
+ul li a:active {
+    background: #fff;
+}
+
+.content{
+    display: flex;
+    position: relative;
+    left: 5%;
+    border-radius: 22px;
+}
+.Regresar{
+    color: #39a900;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.Regresar:hover{
+    background-color: #39a900;
+    color: #fff;
+    padding: 8px;
+    
+}
+.menu-burguer{
+    display: none;
+    font-size: 28px;
+    position: relative;
+    left: 15%;
+    color: #39a900;
+}
+
+.text-menu{
+    display: none;
+    position: relative;
+    padding: 0px 6px;
+    left: 15%;
+    color: #39a900;
+}
+.close-btn{
+    display: none;
+}
+
+
+@media screen and (max-width: 1280px) {
+    /* Ajuste de altura del menú de navegación */
+    .sidenav {
+        width: 180px;
+        height: 100vh; /* Establece la altura al 100% de la altura de la ventana */
+        position: fixed; /* Cambia la posición a fija para que el menú se mantenga visible al desplazar la página */
+        top: 0; /* Alinea el menú en la parte superior */
+        left: 0; /* Alinea el menú en la parte izquierda */
+        padding: 30px; /* Añade relleno al menú */
+        background: #f1eeee;
+        overflow-y: auto; /* Añade desplazamiento vertical si el contenido es más grande que el menú */
+        z-index: 1000; /* Ajusta el índice z para que el menú aparezca encima del contenido */
+    }
+    /* Estilos adicionales para la lista de enlaces */
+    ul {
+        padding: 3px;
+        margin: 0;
+        list-style: none;
+        position: relative;
+        right: 20px;
+        top: 40px;
+    }
+    .userWelcome{
+        color: #39a900;
+    }
+
+    ul li a {
+        display: block;
+        color: #39a900;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 15px 14px;
+        border-radius: 6px;
+        transition: background-color 0.3s;
+    }
+
+    ul li a:hover,
+    ul li a:active {
+        background: #fff;
+    }
+    .content{
+        display: flex;
+        position: relative;
+        left: 10px;
+        border-radius: 22px;
+    }
+    .instru-content{
+        position: relative;
+        right: 250px;
+    }
+    .fichas-content{
+        position: relative;
+        left: -20px;
+    }
+    .ficha-card {
+        width: 80%; /* Asegura que cada ficha ocupe el ancho completo del contenedor */
+        position: relative;
+        left: 99px;
+        padding-bottom: 30px;
+    }
+    /* Estilos para las fichas */
+    .fichas-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Tres columnas por fila */
+        gap: 10px; /* Espacio entre las fichas */
+        position: relative;
+        left: 5px;
+    }
+    .searchContent{
+        position: relative;
+        left: 10px;
+        top: 15px;
+    }
+    .buscarFichas{
+        left: 10px;
+        padding: 4px;
+        border-bottom: 2px solid #808080;
+        top: 0%;
+    }
+    .noFichas{
+        position: relative;
+        left: 20px;
+        top: 70px;
+        font-weight: bold;
+    }
+    .titles{
+        position: relative;
+        bottom: 10px;
+        left: 30%;
+    }
+    .fichasAsignedTitle{
+        font-weight: bold;
+        color: #000;
+        position: relative;
+        left: 160px;
+        white-space: nowrap;
+    }
+    
+}
 
 /* Para pantallas medianas */
 @media screen and (max-width: 1508.89px) {
@@ -296,6 +492,7 @@
     }
 }
 
+/* Para celulares */
 @media screen and (max-width: 780px) {
     /* Estilos para el menú hamburguesa */
     .sidenav {
@@ -317,9 +514,9 @@
     }
     .menu-burguer{
         display: inline-block;
-        font-size: 28px;
+        font-size: 35px;
         position: relative;
-        left: 15%;
+        left: -28px;
         color: #39a900;
     }
     
@@ -327,22 +524,113 @@
         cursor: pointer;
     }
     
-    .text-menu{
-        position: relative;
-        padding: 0px 6px;
-        left: 15%;
-        color: #39a900;
-    }
-    
-    .text-menu:hover{
-        cursor: pointer;
-    }
-
     .close-btn{
         display: block;
         position: relative;
-        left: 180px;
-        top: -10px;
-        padding: 6px;
+        left: 170px;
+        top: -25px;
+        padding: 9px;
+        font-size: 20px;
     }
+
+    .tSeep{
+        position: relative;
+        left: 110px;
+        top: -35px;
+        width: 99px;
+        color: #39a900;
+    }
+
+    .info-aprendiz{
+        top: 60px;
+        left: 10px;
+        width: 21rem;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .tabla {
+        display: block;
+        border-collapse: collapse;
+        width: 100%;
+        position: relative;
+        left: 5px;
+    }
+    .tabla th, .tabla td {
+        border: 1px solid black;
+        padding: 25px;
+        text-align: center;
+    }
+
+    .visitas-cont{
+        position: relative;
+        top: 40px;
+    }
+    .container{
+        position: relative;
+        left: -6px;
+    }
+    .instruMain {
+        position: relative;
+        left: -220px;
+    }
+
+    .instru-content{
+        position: relative;
+        left: -150px;
+        width: 2000px;
+    }
+
+    .fichas-content{
+        position: relative;
+        left: 90px;
+    }
+
+    .fichas-grid {
+        grid-template-columns: repeat(1, 1fr); /* Cambiar a una sola columna */
+        position: relative;
+        left: 34px;
+        top: 20px;
+    }
+
+    .ficha-card {
+        width: 50%; /* Asegurar que cada ficha ocupe el ancho completo */
+        margin-bottom: 20px; /* Agregar margen inferior para separar las fichas */
+        position: relative;
+        left: 70px;
+    }
+
+    .fichasAsignedTitle {
+        left: 0; /* Alinear el título a la izquierda */
+    }
+
+    .fichasAsignedTitle {
+        left: 0; /* Alinear el título a la izquierda */
+    }
+
+    .fichasAsignedTitle{
+        font-weight: bold;
+        color: #000;
+        position: relative;
+        left: 400px;
+        white-space: nowrap;
+    }
+
+    .selctFicha{
+        position: relative;
+        left: 400px;
+    }
+    .titles{
+        position: relative;
+        bottom: 10px;
+        left: -140px;
+    }
+    
+    .buscarFichas{
+        left: 0px;
+        padding: 8px;
+        border-bottom: 2px solid #808080;
+        top: 0%;
+    }
+    
 }

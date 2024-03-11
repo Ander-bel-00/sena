@@ -130,7 +130,7 @@ function App() {
               <Fragment>
                 <Header showNav={showNav} setShowNav={setShowNav}/>
                 <NavbarInstructor showNav={showNav} handleLogout={handleLogout} setShowNav={setShowNav}/>
-                <main className="container content">
+                <main className="container content instruMain">
                 <Instructor />
                 </main>
               </Fragment>
