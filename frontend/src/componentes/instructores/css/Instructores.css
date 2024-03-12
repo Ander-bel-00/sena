@@ -55,14 +55,14 @@ body {
 
 .Header-general {
     padding: 30px;
-    background: #f1eeee;
+    background: #00324D;
     height: auto;
 }
 
 .tSeep{
     position: relative;
     left: 30px;
-    color: #39a900;
+    color: #fff;
 }
 
 /* Ajuste de altura del menú de navegación */
@@ -73,7 +73,7 @@ body {
     top: 0; /* Alinea el menú en la parte superior */
     left: 0; /* Alinea el menú en la parte izquierda */
     padding: 30px; /* Añade relleno al menú */
-    background: #f1eeee;
+    background: #00324D;
     overflow-y: auto; /* Añade desplazamiento vertical si el contenido es más grande que el menú */
     z-index: 1000; /* Ajusta el índice z para que el menú aparezca encima del contenido */
 }
@@ -88,12 +88,12 @@ ul {
     top: 40px;
 }
 .userWelcome{
-    color: #39a900;
+    color: #fff;
 }
 
 ul li a {
     display: block;
-    color: #39a900;
+    color: #fff;
     text-decoration: none;
     font-size: 20px;
     padding: 15px 14px;
@@ -104,6 +104,7 @@ ul li a {
 ul li a:hover,
 ul li a:active {
     background: #fff;
+    color: #39a900;
 }
 
 .content{
@@ -129,16 +130,9 @@ ul li a:active {
     font-size: 28px;
     position: relative;
     left: 15%;
-    color: #39a900;
+    color: #fff;
 }
 
-.text-menu{
-    display: none;
-    position: relative;
-    padding: 0px 6px;
-    left: 15%;
-    color: #39a900;
-}
 .close-btn{
     display: none;
 }
@@ -153,7 +147,7 @@ ul li a:active {
         top: 0; /* Alinea el menú en la parte superior */
         left: 0; /* Alinea el menú en la parte izquierda */
         padding: 30px; /* Añade relleno al menú */
-        background: #f1eeee;
+        background: #00324D;
         overflow-y: auto; /* Añade desplazamiento vertical si el contenido es más grande que el menú */
         z-index: 1000; /* Ajusta el índice z para que el menú aparezca encima del contenido */
     }
@@ -166,13 +160,9 @@ ul li a:active {
         right: 20px;
         top: 40px;
     }
-    .userWelcome{
-        color: #39a900;
-    }
-
     ul li a {
         display: block;
-        color: #39a900;
+        color: #fff;
         text-decoration: none;
         font-size: 16px;
         padding: 15px 14px;
@@ -183,6 +173,7 @@ ul li a:active {
     ul li a:hover,
     ul li a:active {
         background: #fff;
+        color: #39a900;
     }
     .content{
         display: flex;
@@ -502,7 +493,7 @@ ul li a:active {
         top: 0;
         left: 0;
         padding: 30px;
-        background: #f1eeee;
+        background: #00324D;
         overflow-y: auto;
         z-index: 1000;
         transition: transform 0.3s ease-in-out;
@@ -517,7 +508,7 @@ ul li a:active {
         font-size: 35px;
         position: relative;
         left: -28px;
-        color: #39a900;
+        color: #fff;
     }
     
     .menu-burguer:hover{
@@ -531,6 +522,7 @@ ul li a:active {
         top: -25px;
         padding: 9px;
         font-size: 20px;
+        color: #fff;
     }
 
     .tSeep{
@@ -538,7 +530,7 @@ ul li a:active {
         left: 110px;
         top: -35px;
         width: 99px;
-        color: #39a900;
+        color: #fff;
     }
 
     .info-aprendiz{

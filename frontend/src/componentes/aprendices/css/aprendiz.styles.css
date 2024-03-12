@@ -35,7 +35,7 @@ body {
     top: 0; /* Alinea el menú en la parte superior */
     left: 0; /* Alinea el menú en la parte izquierda */
     padding: 30px; /* Añade relleno al menú */
-    background: #f1eeee;
+    background: #00324D;
     overflow-y: auto; /* Añade desplazamiento vertical si el contenido es más grande que el menú */
     z-index: 1000; /* Ajusta el índice z para que el menú aparezca encima del contenido */
 }
@@ -50,12 +50,12 @@ ul {
     top: 40px;
 }
 .userWelcome{
-    color: #39a900;
+    color: #fff;
 }
 
 ul li a {
     display: block;
-    color: #39a900;
+    color: #fff;
     text-decoration: none;
     font-size: 20px;
     padding: 15px 14px;
@@ -66,6 +66,7 @@ ul li a {
 ul li a:hover,
 ul li a:active {
     background: #fff;
+    color: #39a900;
 }
 
 .content{
@@ -127,7 +128,7 @@ ul li a:active {
     font-size: 28px;
     position: relative;
     left: 15%;
-    color: #39a900;
+    color: #fff;
 }
 .close-btn{
     display: none;
@@ -143,7 +144,7 @@ ul li a:active {
         top: 0; /* Alinea el menú en la parte superior */
         left: 0; /* Alinea el menú en la parte izquierda */
         padding: 30px; /* Añade relleno al menú */
-        background: #f1eeee;
+        background: #00324D;
         overflow-y: auto; /* Añade desplazamiento vertical si el contenido es más grande que el menú */
         z-index: 1000; /* Ajusta el índice z para que el menú aparezca encima del contenido */
     }
@@ -156,10 +157,6 @@ ul li a:active {
         right: 20px;
         top: 40px;
     }
-    .userWelcome{
-        color: #39a900;
-    }
-
     ul li a {
         display: block;
         color: #39a900;
@@ -196,10 +193,30 @@ ul li a:active {
     }
 }
 
+
 @media screen and (max-width: 1413.33px) {
     .info-aprendiz{
         top: 60px;
         left: 190px;
+        width: 21rem;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 1358px) {
+    .tabla {
+        display: block;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    .tabla th, .tabla td {
+        border: 1px solid black;
+        padding: 25px;
+        text-align: center;
+    }
+    .info-aprendiz{
+        top: 60px;
+        left: 90px;
         width: 21rem;
         height: auto;
     }
@@ -216,7 +233,7 @@ ul li a:active {
         top: 0;
         left: 0;
         padding: 30px;
-        background: #f1eeee;
+        background: #00324D;
         overflow-y: auto;
         z-index: 1000;
         transition: transform 0.3s ease-in-out;
@@ -231,23 +248,13 @@ ul li a:active {
         font-size: 28px;
         position: relative;
         left: -30px;
-        color: #39a900;
+        color: #fff;
     }
     
     .menu-burguer:hover{
         cursor: pointer;
     }
     
-    .text-menu{
-        position: relative;
-        padding: 0px 6px;
-        left: 15%;
-        color: #39a900;
-    }
-    
-    .text-menu:hover{
-        cursor: pointer;
-    }
 
     .close-btn{
         display: block;
@@ -256,13 +263,14 @@ ul li a:active {
         top: -25px;
         padding: 9px;
         font-size: 20px;
+        color: #fff;
     }
 
     .tSeep{
         position: relative;
         left: -5px;
         top: -18px;
-        color: #39a900;
+        color: #fff;
     }
 
     .info-aprendiz{

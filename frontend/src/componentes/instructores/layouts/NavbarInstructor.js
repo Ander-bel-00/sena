@@ -10,6 +10,7 @@ import { BiSolidLogOut } from "react-icons/bi";
 import { IoDocuments } from "react-icons/io5";
 import { HiUserAdd } from "react-icons/hi";
 import { TiUserAdd } from "react-icons/ti";
+import { FaFileExcel } from "react-icons/fa";
 import clienteAxios from "../../../api/axios";
 
 const NavbarInstructor = ({showNav, handleLogout, setShowNav}) => {
@@ -43,11 +44,12 @@ const NavbarInstructor = ({showNav, handleLogout, setShowNav}) => {
                     <h3 className="text-xl userWelcome">¡Bienvenido {usuario.nombres}!</h3>
                     <ul className="list-group menu-content">
                         <li className="menu-options"><a href="/"><IoHomeSharp className="inline-block"/> Inicio</a></li>
-                        <li className="menu-options"><a href="#"><FaUser className="inline-block"/> Perfil</a></li>
-                        <li className="menu-options"><Link to={`/${usuario.rol_usuario}/${usuario.id_instructor}/documents-instructor`}><IoDocuments className="inline-block"/> Documentos</Link></li>
+                        {/* <li className="menu-options"><a href="#"><FaUser className="inline-block"/> Perfil</a></li> */}
+                        <li className="menu-options text-nowrap"><Link to={`/${usuario.rol_usuario}/${usuario.id_instructor}/documents-instructor`}><IoDocuments className="inline-block"/> Documentos</Link></li>
+                        <li className="menu-options text-nowrap"><Link to={`/${usuario.rol_usuario}/${usuario.id_instructor}/bitacoras-instructor`}><FaFileExcel className="inline-block"/> Bitacoras</Link></li>
                         <li className="menu-options"><Link to={`/${usuario.rol_usuario}/${usuario.id_instructor}/nuevaFicha`}><HiUserAdd className="inline-block"/> Registrar Fichas</Link></li>
                         <li className="menu-options"><Link to={`/${usuario.rol_usuario}/${usuario.id_instructor}/aprendiz-add`}><TiUserAdd className="inline-block"/> Registrar Aprendices</Link></li>
-                        <li className="menu-options"><Link to="/login" onClick={handleLogout}><BiSolidLogOut className="inline-block"/>
+                        <li className="menu-options text-nowrap"><Link to="/login" onClick={handleLogout}><BiSolidLogOut className="inline-block mr-1"/>
                         Cerrar sesión</Link></li>
                     </ul>
                 </div>

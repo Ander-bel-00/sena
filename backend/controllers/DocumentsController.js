@@ -1,4 +1,5 @@
 const Documentos = require('../models/Documentos');
+const Aprendices = require('../models/Aprendices');
 const multer = require('multer');
 const fs = require('fs'); // Importar el módulo fs para trabajar con el sistema de archivos
 const path = require('path');
@@ -33,12 +34,29 @@ exports.cargarDocumento = async (req, res) => {
             // Si no hay errores, crea un nuevo documento en la base de datos
             const { tipo_documento } = req.body;
             const archivo = req.file.filename;
-            const id_aprendiz = req.params.id_aprendiz;
 
             await Documentos.sync({ force: false });
 
+            const aprendiz = await Aprendices.findOne({
+                where: {
+                    id_aprendiz: req.params.id_aprendiz
+                }
+            });
+
+            if (!aprendiz) return res.status(404).json({ mensaje: 'El aprendiz no existe' });
+
             // Guarda el documento en la base de datos, incluyendo el ID del usuario que lo cargó
-            const nuevoDocumento = await Documentos.create({ tipo_documento, archivo, id_aprendiz });
+            const nuevoDocumento = await Documentos.create({ 
+                tipo_documento, 
+                archivo, 
+                id_aprendiz: aprendiz.id_aprendiz,
+                numero_documento: aprendiz.numero_documento,
+                nombres: aprendiz.nombres,
+                apellidos: aprendiz.apellidos,
+                numero_ficha: aprendiz.numero_ficha,
+                programa_formacion: aprendiz.programa_formacion,
+            
+            });
 
             // Envía una respuesta de éxito
             res.status(201).json({ message: 'Documento cargado exitosamente', documento: nuevoDocumento });
@@ -65,6 +83,23 @@ exports.obtenerDocumentosPorAprendiz = async (req, res) => {
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
+
+// Obtener todos los documentos registrados en la Base de datos.
+exports.obtenerDocumentos = async (req, res, next) => {
+    try {
+        const documentos = await Documentos.findAll();
+
+        if (documentos.length < 0) return res.status(404).json({ message: 'No hay documentos registrados' });
+
+        res.status(200).json({
+            documentos: documentos
+        });
+    } catch (error) {
+        console.error('Error al obtener los documentos', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
+
 // Ruta para descargar un archivo por su nombre
 exports.descargarDocumento = async (req, res) => {
     try {
@@ -89,10 +124,10 @@ exports.descargarDocumento = async (req, res) => {
 exports.eliminarDocumento = async (req, res, next) => {
     try {
         // Obtener el ID del documento a eliminar
-        const { id } = req.params;
+        const { id_documento } = req.params;
 
         // Buscar el documento en la base de datos por su ID
-        const documento = await Documentos.findByPk(id);
+        const documento = await Documentos.findByPk(id_documento);
 
         // Verificar si el documento existe
         if (!documento) {

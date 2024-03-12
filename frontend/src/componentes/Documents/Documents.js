@@ -77,7 +77,7 @@ function Documents() {
 
     const handleDownload = async (archivo) => {
         try {
-            const response = await axios.get(`http://10.200.80.102:5000/documentos-download/${archivo}`, {
+            const response = await axios.get(`http://192.168.1.43:5000/documentos-download/${archivo}`, {
                 responseType: 'blob',
             });
 

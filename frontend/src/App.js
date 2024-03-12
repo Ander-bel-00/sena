@@ -17,6 +17,8 @@ import NuevaFicha from "./componentes/fichas/NuevaFicha.js";
 import NuevoAprendiz from "./componentes/aprendices/nuevoAprendiz/NuevoAprendiz.js";
 import Documents from "./componentes/Documents/Documents.js";
 import InstructorDocuments from "./componentes/Documents/InstructorDocuments.js";
+import Bitacoras from "./componentes/bitacoras/Bitacoras.js";
+import BitacorasInstructor from "./componentes/bitacoras/BitacorasInstructor.js";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -149,7 +151,16 @@ function App() {
             <Navigate to="/" replace />
           )
         }
-        
+        />
+        <Route 
+          path="/:rol_usuario/:id_aprendiz/bitacoras-aprendiz"
+          element={
+            isAuthenticated && userRole === 'aprendiz' ? (
+              <Bitacoras/>
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
         />
         <Route 
         path="/:rol_usuario/:id_instructor/documents-instructor"
@@ -160,7 +171,16 @@ function App() {
             <Navigate to="/" replace />
           )
         }
-        
+        />
+        <Route 
+          path="/:rol_usuario/:id_instructor/bitacoras-instructor"
+          element={
+            isAuthenticated && userRole === 'instructor' ? (
+              <BitacorasInstructor/>
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
         />
         <Route 
           path="/:rol_usuario/:id_instructor/nuevaFicha"

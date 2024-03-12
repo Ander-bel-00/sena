@@ -7,6 +7,7 @@ const authRequired = require('../middlewares/validateToken');
 const FichasController = require('../controllers/FichasController');
 const VisitasController = require('../controllers/VisitasController');
 const DocumentsController = require('../controllers/DocumentsController');
+const BitacorasController = require('../controllers/BitacorasController');
 
 
 
@@ -67,10 +68,21 @@ module.exports = function () {
     // Rutas para los Documentos.
     router.post('/documentos-upload/:id_aprendiz', DocumentsController.cargarDocumento);
     router.get('/documentos-aprendiz/:id_aprendiz', DocumentsController.obtenerDocumentosPorAprendiz);
+    // Ruta para obtener todos los documentos de la Base de Datos.
+    router.get('/documentos-aprendiz-getAll', DocumentsController.obtenerDocumentos);
     // Ruta para descargar un documento por su nombre de archivo
     router.get('/documentos-download/:nombreArchivo', DocumentsController.descargarDocumento);
     // Ruta para eliminar un documento por su ID
-    router.delete('/documentos-delete/:id', DocumentsController.eliminarDocumento);
+    router.delete('/documentos-delete/:id_documento', DocumentsController.eliminarDocumento);
+
+
+    // Rutas para las Bitácoras.
+    router.post('/bitacoras-upload/:id_aprendiz', BitacorasController.cargarBitacora);
+    router.get('/bitacoras-aprendiz/:id_aprendiz', BitacorasController.obtenerBitacorasPorAprendiz);
+    // Ruta para obtener todas las bitacoras de la Base de Datos.
+    router.get('/bitacoras-aprendiz-getAll', BitacorasController.obtenerBitacoras);
+    router.get('/bitacoras-download/:nombreArchivo', BitacorasController.descargarBitacora);
+    router.delete('/bitacoras-delete/:id_bitacora', BitacorasController.eliminarBitacora);
 
     return router;
 };
