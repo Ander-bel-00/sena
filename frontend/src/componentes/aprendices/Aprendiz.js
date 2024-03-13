@@ -21,7 +21,6 @@ function Aprendiz() {
         const resVisitas = await clienteAxios.get(`/visitas-aprendiz/${response.data.usuario.id_aprendiz}`);
         if (Array.isArray(resVisitas.data.visitas)) {
           setVisitas(resVisitas.data.visitas);
-          console.log(visitas)
         } else {
           console.error('La respuesta de la API no es un array:', resVisitas.data.visitas);
         }

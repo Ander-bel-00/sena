@@ -103,10 +103,9 @@ ul li a {
 
 ul li a:hover,
 ul li a:active {
-    background: #fff;
-    color: #39a900;
+    background: #787a7a4d;
+    color: #fff;
 }
-
 .content{
     display: flex;
     position: relative;
@@ -172,8 +171,8 @@ ul li a:active {
 
     ul li a:hover,
     ul li a:active {
-        background: #fff;
-        color: #39a900;
+        background: #787a7a4d;
+        color: #fff;
     }
     .content{
         display: flex;

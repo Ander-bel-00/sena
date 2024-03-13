@@ -82,6 +82,11 @@ module.exports = function () {
     // Ruta para obtener todas las bitacoras de la Base de Datos.
     router.get('/bitacoras-aprendiz-getAll', BitacorasController.obtenerBitacoras);
     router.get('/bitacoras-download/:nombreArchivo', BitacorasController.descargarBitacora);
+    // Rutas para las Bitácoras.
+    router.post('/enviar-observacion/:idBitacora', BitacorasController.enviarObservacion);
+    // Ruta para actualizar una bitácora existente
+    // router.put('/bitacoras-update/:idBitacora', BitacorasController.actualizarBitacora);
+    router.put('/aprobar-bitacora/:idBitacora', BitacorasController.aprobarBitacora);
     router.delete('/bitacoras-delete/:id_bitacora', BitacorasController.eliminarBitacora);
 
     return router;

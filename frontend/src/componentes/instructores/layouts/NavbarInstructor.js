@@ -45,8 +45,8 @@ const NavbarInstructor = ({showNav, handleLogout, setShowNav}) => {
                     <ul className="list-group menu-content">
                         <li className="menu-options"><a href="/"><IoHomeSharp className="inline-block"/> Inicio</a></li>
                         {/* <li className="menu-options"><a href="#"><FaUser className="inline-block"/> Perfil</a></li> */}
-                        <li className="menu-options text-nowrap"><Link to={`/${usuario.rol_usuario}/${usuario.id_instructor}/documents-instructor`}><IoDocuments className="inline-block"/> Documentos</Link></li>
-                        <li className="menu-options text-nowrap"><Link to={`/${usuario.rol_usuario}/${usuario.id_instructor}/bitacoras-instructor`}><FaFileExcel className="inline-block"/> Bitacoras</Link></li>
+                        <li className="menu-options text-nowrap"><Link to={`/${usuario.rol_usuario}/${usuario.id_instructor}/documents-instructor`}><IoDocuments className="inline-block mr-1"/>Documentos</Link></li>
+                        <li className="menu-options text-nowrap"><Link to={`/${usuario.rol_usuario}/${usuario.id_instructor}/bitacoras-instructor`}><FaFileExcel className="inline-block mr-1"/>Bitacoras</Link></li>
                         <li className="menu-options"><Link to={`/${usuario.rol_usuario}/${usuario.id_instructor}/nuevaFicha`}><HiUserAdd className="inline-block"/> Registrar Fichas</Link></li>
                         <li className="menu-options"><Link to={`/${usuario.rol_usuario}/${usuario.id_instructor}/aprendiz-add`}><TiUserAdd className="inline-block"/> Registrar Aprendices</Link></li>
                         <li className="menu-options text-nowrap"><Link to="/login" onClick={handleLogout}><BiSolidLogOut className="inline-block mr-1"/>

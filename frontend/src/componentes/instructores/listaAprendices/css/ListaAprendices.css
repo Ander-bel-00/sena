@@ -29,15 +29,16 @@
     
 }
 
+.agendarVisita{
+    color: #39a900
+}
+
 .agendarVisita:hover{
     background-color: #39a900;
     color: #fff;
 }
 
 @media screen and (max-width: 780px) {
-    .list-title{
-        
-    }
     .lista-aprendices {
         list-style: none;
         padding: 0;

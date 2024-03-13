@@ -56,7 +56,6 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
           <h1 className="text-center text-2xl font-bold my-4">Iniciar sesión</h1>
           <form onSubmit={onSubmit} className='form-options'>
             <p className="selectRol">
-              Selecciona tu rol:
               <select
                 name="rol_usuario"
                 value={rol_usuario}

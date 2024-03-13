@@ -45,6 +45,13 @@ const Bitacoras = sequelize.define('Bitacoras', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    observaciones: {
+        type: DataTypes.TEXT,
+    },
+    estado: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    }
 },{
     sequelize,
     modelName: 'Bitacoras'

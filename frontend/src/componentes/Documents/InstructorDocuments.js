@@ -24,7 +24,7 @@ function InstructorDocuments() {
 
     const handleDownload = async (archivo) => {
         try {
-            const response = await clienteAxios.get(`http://192.168.1.43:5000/documentos-download/${archivo}`, {
+            const response = await clienteAxios.get(`/documentos-download/${archivo}`, {
                 responseType: 'blob',
             });
 
@@ -66,7 +66,7 @@ function InstructorDocuments() {
 
     return (
         <div>
-            <h2>Documentos del Aprendiz</h2>
+            <h2 className='text-center' style={{color: '#39a900'}}>Documentos de los Aprendices</h2>
             <div>
                 <p className='inline-block pr-4'>Buscar por numero de ficha: 
                   <input 
@@ -90,13 +90,13 @@ function InstructorDocuments() {
             <table className='docsTab'>
                 <thead className='Thead'>
                     <tr className='tr'>
-                        <th className='th'>Tipo de Documento</th>
-                        <th className='th'>Archivo</th>
-                        <th className='th'>Número de Documento</th>
+                        <th className='th'>Tipo de Archivo</th>
+                        <th className='th'>Número De Documento De Identidad</th>
                         <th className='th'>Nombres</th>
                         <th className='th'>Apellidos</th>
                         <th className='th'>Número de Ficha</th>
                         <th className='th'>Programa de Formación</th>
+                        <th className='th'>Archivo</th>
                         <th className='th'>Acciones</th>
                     </tr>
                 </thead>
@@ -104,12 +104,12 @@ function InstructorDocuments() {
                     {documentosFiltrados.map((documento) => (
                         <tr key={documento.id_documento} className='tr'>
                             <td className='td'>{documento.tipo_documento}</td>
-                            <td className='td'>{documento.archivo}</td>
                             <td className='td'>{documento.numero_documento}</td>
                             <td className='td'>{documento.nombres}</td>
                             <td className='td'>{documento.apellidos}</td>
                             <td className='td'>{documento.numero_ficha}</td>
                             <td className='td'>{documento.programa_formacion}</td>
+                            <td className='td'>{documento.archivo}</td>
                             <td className='td'>
                                 <button onClick={() => handleDownload(documento.archivo)} className='btnDownload'>Descargar</button>
                             </td>

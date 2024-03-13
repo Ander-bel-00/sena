@@ -141,6 +141,53 @@ exports.descargarBitacora = async (req, res) => {
     }
 };
 
+// Controlador para enviar observaciones a una bitácora
+exports.enviarObservacion = async (req, res) => {
+    try {
+        const { idBitacora } = req.params;
+        const { observaciones } = req.body;
+
+        // Buscar la bitácora por su ID
+        const bitacora = await Bitacoras.findByPk(idBitacora);
+
+        if (!bitacora) {
+            return res.status(404).json({ mensaje: 'La bitácora no existe' });
+        }
+
+        // Actualizar las observaciones de la bitácora
+        bitacora.observaciones = observaciones;
+        await bitacora.save();
+
+        return res.status(200).json({ mensaje: 'Observaciones enviadas correctamente' });
+    } catch (error) {
+        console.error('Error al enviar observaciones:', error);
+        return res.status(500).json({ mensaje: 'Error interno del servidor' });
+    }
+};
+
+// Controlador para aprobar una bitácora
+exports.aprobarBitacora = async (req, res) => {
+    try {
+        const { idBitacora } = req.params;
+
+        // Buscar la bitácora por su ID
+        const bitacora = await Bitacoras.findByPk(idBitacora);
+
+        if (!bitacora) {
+            return res.status(404).json({ mensaje: 'La bitácora no existe' });
+        }
+
+        // Cambiar el estado de aprobación de la bitácora a true
+        bitacora.estado = true;
+        await bitacora.save();
+
+        return res.status(200).json({ mensaje: 'Bitácora aprobada correctamente' });
+    } catch (error) {
+        console.error('Error al aprobar la bitácora:', error);
+        return res.status(500).json({ mensaje: 'Error interno del servidor' });
+    }
+};
+
 exports.eliminarBitacora = async (req, res, next) => {
     try {
         // Buscar la bitácora por su ID

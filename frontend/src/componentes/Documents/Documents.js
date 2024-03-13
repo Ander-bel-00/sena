@@ -77,7 +77,7 @@ function Documents() {
 
     const handleDownload = async (archivo) => {
         try {
-            const response = await axios.get(`http://192.168.1.43:5000/documentos-download/${archivo}`, {
+            const response = await clienteAxios.get(`/documentos-download/${archivo}`, {
                 responseType: 'blob',
             });
 
@@ -119,6 +119,7 @@ function Documents() {
                                 <th>ID Documento</th>
                                 <th>Tipo de Documento</th>
                                 <th>Archivo</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -126,6 +127,7 @@ function Documents() {
                                 <tr key={doc.id_documento}>
                                     <td>{doc.id_documento}</td>
                                     <td>{doc.tipo_documento}</td>
+                                    <td>{doc.archivo}</td>
                                     <td>
                                         <button onClick={() => handleDownload(doc.archivo)}
                                         className='btnDownload'>Descargar</button>

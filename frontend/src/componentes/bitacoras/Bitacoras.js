@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import clienteAxios from '../../api/axios';
 import { useParams } from 'react-router-dom';
+import './css/BitacorasAprendices.css';
 import Swal from 'sweetalert2';
 
 function Bitacoras() {
@@ -81,7 +82,7 @@ function Bitacoras() {
 
     const handleDownload = async (archivo) => {
         try {
-            const response = await clienteAxios.get(`http://192.168.1.43:5000/bitacoras-download/${archivo}`, {
+            const response = await clienteAxios.get(`/bitacoras-download/${archivo}`, {
                 responseType: 'blob',
             });
 
@@ -123,29 +124,34 @@ function Bitacoras() {
                         <button type='submit'>Cargar Bitácora</button>
                     </form>
                 </div>
-                <div className="table-container">
+                <div>
                     <h2>Bitácoras del Aprendiz</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID Bitácora</th>
-                                <th>Número de bitácora</th>
-                                <th>Archivo</th>
+                    <table className="docsAprendicesTab">
+                    <thead className='Thead2'>
+                        <tr className='trr'>
+                            <th className='thh'>ID Bitácora</th>
+                            <th className='thh'>Número de bitácora</th>
+                            <th className='thh'>Observaciones</th>
+                            <th className='thh'>Estado</th>
+                            <th className='thh'>Archivo</th>
+                            <th className='thh'>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody className='tbody2'>
+                        {documentosAprendiz && documentosAprendiz.map((doc) => (
+                            <tr key={doc.id_bitacora} className='trr'>
+                                <td className='td-aprendiz'>{doc.id_bitacora}</td>
+                                <td className='td-aprendiz'>{doc.numero_de_bitacora}</td>
+                                <td className='td-aprendiz'>{doc.observaciones ? doc.observaciones : 'No hay observaciones'}</td>
+                                <td className='td-aprendiz'>{doc.estado ? 'Aprobada' : 'No aprobada'}</td>
+                                <td className='td-aprendiz'>{doc.archivo}</td>
+                                <td className='td-aprendiz'>
+                                    <button onClick={() => handleDownload(doc.archivo)} 
+                                    className='btnDownload'>Descargar</button>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {documentosAprendiz && documentosAprendiz.map((doc) => (
-                                <tr key={doc.id_bitacora}>
-                                    <td>{doc.id_bitacora}</td>
-                                    <td>{doc.numero_de_bitacora}</td>
-                                    <td>
-                                        <button onClick={() => handleDownload(doc.archivo)}
-                                        className='btnDownload'>Descargar</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-
+                        ))}
+                    </tbody>
                     </table>
                 </div>
             </div>
