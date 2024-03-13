@@ -85,7 +85,7 @@ module.exports = function () {
     // Rutas para las Bitácoras.
     router.post('/enviar-observacion/:idBitacora', BitacorasController.enviarObservacion);
     // Ruta para actualizar una bitácora existente
-    // router.put('/bitacoras-update/:idBitacora', BitacorasController.actualizarBitacora);
+    router.put('/bitacoras-update/:idBitacora', BitacorasController.actualizarBitacora);
     router.put('/aprobar-bitacora/:idBitacora', BitacorasController.aprobarBitacora);
     router.delete('/bitacoras-delete/:id_bitacora', BitacorasController.eliminarBitacora);
 

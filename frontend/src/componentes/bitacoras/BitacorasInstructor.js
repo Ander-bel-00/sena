@@ -114,15 +114,14 @@ function BitacorasInstructor() {
             <table className='docsTab'>
                 <thead className='Thead'>
                     <tr className='tr'>
-                        <th className='th'>Número de bitácora</th>
-                        <th className='th'>Número de Documento</th>
+                        <th className='th'>N° bitácora</th>
+                        <th className='th'>N° Documento</th>
                         <th className='th'>Nombres</th>
                         <th className='th'>Apellidos</th>
-                        <th className='th'>Número de Ficha</th>
+                        <th className='th'>N° Ficha</th>
                         <th className='th'>Programa de Formación</th>
                         <th className='th'>Observaciones</th>
                         <th className='th'>Estado</th>
-                        <th className='th'>Archivo</th>
                         <th className='th'>Acciones</th>
                     </tr>
                 </thead>
@@ -137,7 +136,6 @@ function BitacorasInstructor() {
                             <td className='td-instru'>{bitacora.programa_formacion}</td>
                             <td className='td-instru'>{bitacora.observaciones ? bitacora.observaciones : 'No hay observaciones'}</td>
                             <td className='td-instru'>{bitacora.estado ? 'Aprobada' : 'No aprobada'}</td>
-                            <td className='td-instru'>{bitacora.archivo}</td>
                             <td className='td-instru'>
                                 <div className="textarea-container">
                                     <textarea 

@@ -3,6 +3,7 @@ import clienteAxios from '../../api/axios';
 import { useParams } from 'react-router-dom';
 import './css/BitacorasAprendices.css';
 import Swal from 'sweetalert2';
+import Modal from 'react-modal';
 
 function Bitacoras() {
     const [documento, setDocumento] = useState({
@@ -11,12 +12,13 @@ function Bitacoras() {
     });
     const [documentosAprendiz, setDocumentosAprendiz] = useState([]);
     const { id_aprendiz } = useParams();
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [bitacoraToUpdate, setBitacoraToUpdate] = useState(null);
 
     useEffect(() => {
         const fetchDocumentosAprendiz = async () => {
             try {
                 const response = await clienteAxios.get(`/bitacoras-aprendiz/${id_aprendiz}`);
-                // Ordenar las bitácoras por el número de bitácora antes de establecer el estado
                 const sortedBitacoras = response.data.bitacoras.sort((a, b) => a.numero_de_bitacora - b.numero_de_bitacora);
                 setDocumentosAprendiz(sortedBitacoras);
             } catch (error) {
@@ -54,31 +56,25 @@ function Bitacoras() {
                 }
             });
     
-            // Mostrar alerta de éxito
             Swal.fire({
                 icon: 'success',
                 title: 'Bitácora cargada exitosamente',
                 showConfirmButton: true
             });
     
-            // Actualizar la lista de documentos del aprendiz después de cargar uno nuevo
             const response = await clienteAxios.get(`/bitacoras-aprendiz/${id_aprendiz}`);
-            // Ordenar las bitácoras por el número de bitácora antes de establecer el estado
             const sortedBitacoras = response.data.bitacoras.sort((a, b) => a.numero_de_bitacora - b.numero_de_bitacora);
             setDocumentosAprendiz(sortedBitacoras);
         } catch (error) {
             console.error('Error al cargar la bitácora:', error);
-            // Mostrar alerta de error si falla la carga del documento
             Swal.fire({
                 icon: 'error',
                 title: 'Error al cargar la bitácora',
-                text: error.response.data.mensaje, // Accede al mensaje de error desde la respuesta HTTP
+                text: error.response.data.mensaje,
                 showConfirmButton: true
             });
         }
     };
-    
-    
 
     const handleDownload = async (archivo) => {
         try {
@@ -96,7 +92,52 @@ function Bitacoras() {
             console.error('Error al descargar el archivo:', error);
         }
     };
-  
+
+    const handleActualizar = async (bitacora) => {
+        setModalIsOpen(true);
+        setBitacoraToUpdate(bitacora);
+    };
+
+    const handleCloseModal = () => {
+        setModalIsOpen(false);
+    };
+
+    const handleFileSelected = async (e) => {
+        handleCloseModal();
+
+        const nuevoArchivo = e.target.files[0];
+        if (nuevoArchivo && bitacoraToUpdate) {
+            try {
+                const formData = new FormData();
+                formData.append('archivo', nuevoArchivo);
+    
+                await clienteAxios.put(`/bitacoras-update/${bitacoraToUpdate.id_bitacora}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+    
+                const response = await clienteAxios.get(`/bitacoras-aprendiz/${id_aprendiz}`);
+                const sortedBitacoras = response.data.bitacoras.sort((a, b) => a.numero_de_bitacora - b.numero_de_bitacora);
+                setDocumentosAprendiz(sortedBitacoras);
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bitácora actualizada exitosamente',
+                    showConfirmButton: true
+                });
+            } catch (error) {
+                console.error('Error al actualizar la bitácora:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al actualizar la bitácora',
+                    text: error.response.data.mensaje,
+                    showConfirmButton: true
+                });
+            }
+        }
+    };
+
     return (
         <Fragment>
             <div className='docs-content'>
@@ -106,18 +147,9 @@ function Bitacoras() {
                         <p className='tipoDocumento'>Número de bitácora:
                             <select name="numero_de_bitacora" onChange={handleDocumentoChange} required className=''>
                                 <option value="">Selecciona un número de bitácora</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
+                                {[...Array(12).keys()].map(num => (
+                                    <option key={num + 1} value={num + 1}>{num + 1}</option>
+                                ))}
                             </select>
                         </p>
                         <p>Selecciona un archivo: <input type='file' name="archivo" onChange={handleArchivoChange} required /></p>
@@ -129,25 +161,23 @@ function Bitacoras() {
                     <table className="docsAprendicesTab">
                     <thead className='Thead2'>
                         <tr className='trr'>
-                            <th className='thh'>ID Bitácora</th>
                             <th className='thh'>Número de bitácora</th>
                             <th className='thh'>Observaciones</th>
                             <th className='thh'>Estado</th>
-                            <th className='thh'>Archivo</th>
                             <th className='thh'>Acciones</th>
                         </tr>
                     </thead>
                     <tbody className='tbody2'>
                         {documentosAprendiz && documentosAprendiz.map((doc) => (
                             <tr key={doc.id_bitacora} className='trr'>
-                                <td className='td-aprendiz'>{doc.id_bitacora}</td>
                                 <td className='td-aprendiz'>{doc.numero_de_bitacora}</td>
                                 <td className='td-aprendiz'>{doc.observaciones ? doc.observaciones : 'No hay observaciones'}</td>
                                 <td className='td-aprendiz'>{doc.estado ? 'Aprobada' : 'No aprobada'}</td>
-                                <td className='td-aprendiz'>{doc.archivo}</td>
                                 <td className='td-aprendiz'>
-                                    <button onClick={() => handleDownload(doc.archivo)} 
-                                    className='btnDownload'>Descargar</button>
+                                    {doc.observaciones && (
+                                        <button onClick={() => handleActualizar(doc)} className='btnActualizar'>Actualizar</button>
+                                    )}
+                                    <button onClick={() => handleDownload(doc.archivo)} className='btnDownload'>Descargar</button>
                                 </td>
                             </tr>
                         ))}
@@ -155,6 +185,11 @@ function Bitacoras() {
                     </table>
                 </div>
             </div>
+            <Modal isOpen={modalIsOpen} onRequestClose={handleCloseModal}>
+                <h2>Selecciona un nuevo archivo</h2>
+                <input type='file' name='nuevoArchivo' onChange={handleFileSelected} required />
+                <button onClick={handleCloseModal}>Cancelar</button>
+            </Modal>
         </Fragment>
     );
 }

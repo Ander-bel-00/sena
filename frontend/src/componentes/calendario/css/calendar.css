@@ -63,6 +63,19 @@
   }
 }
 
+@media screen and (max-width: 1272px) {
+  .calendar-container {
+    height: 110vh; /* Ajusta la altura en pantallas aún más pequeñas */
+    width: 70vw;
+    top: -10px;
+  }
+  .calendar-container .rbc-event{
+    position: relative;
+    top: -5px;
+    background-color: #39a900;
+    color: #fff;
+  }
+} 
 
 @media screen and (max-width: 780px) {
   .calendar-container {

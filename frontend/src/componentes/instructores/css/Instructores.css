@@ -482,6 +482,21 @@ ul li a:active {
     }
 }
 
+@media screen and (max-width: 1272px) {
+    .fichasAsignedTitle{
+        font-weight: bold;
+        color: #000;
+        position: relative;
+        left: 100px;
+        white-space: nowrap;
+    }
+
+    .selctFicha{
+        position: relative;
+        left: 90px;
+    }
+}
+
 /* Para celulares */
 @media screen and (max-width: 780px) {
     /* Estilos para el menú hamburguesa */

@@ -33,7 +33,9 @@ exports.cargarDocumento = async (req, res) => {
 
             // Si no hay errores, crea un nuevo documento en la base de datos
             const { tipo_documento } = req.body;
-            const archivo = req.file.filename;
+            const nombreArchivoOriginal = req.file.originalname;
+            const rutaArchivoOriginal = path.join(__dirname, '../uploads/', nombreArchivoOriginal);
+            fs.renameSync(req.file.path, rutaArchivoOriginal);
 
             await Documentos.sync({ force: false });
 
@@ -43,12 +45,16 @@ exports.cargarDocumento = async (req, res) => {
                 }
             });
 
-            if (!aprendiz) return res.status(404).json({ mensaje: 'El aprendiz no existe' });
+            if (!aprendiz) {
+                // Si el aprendiz no existe, elimina el archivo y envía un mensaje de error
+                fs.unlinkSync(rutaArchivoOriginal);
+                return res.status(404).json({ mensaje: 'El aprendiz no existe' });
+            }
 
             // Guarda el documento en la base de datos, incluyendo el ID del usuario que lo cargó
             const nuevoDocumento = await Documentos.create({ 
                 tipo_documento, 
-                archivo, 
+                archivo: nombreArchivoOriginal, // Utiliza el nombre original del archivo
                 id_aprendiz: aprendiz.id_aprendiz,
                 numero_documento: aprendiz.numero_documento,
                 nombres: aprendiz.nombres,
@@ -66,6 +72,7 @@ exports.cargarDocumento = async (req, res) => {
         res.status(500).json({ message: 'Error al cargar el documento', error: error.message });
     }
 };
+
 
 // Controlador para obtener todos los documentos de un aprendiz
 exports.obtenerDocumentosPorAprendiz = async (req, res) => {

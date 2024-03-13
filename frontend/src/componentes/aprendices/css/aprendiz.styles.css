@@ -38,6 +38,7 @@ body {
     background: #00324D;
     overflow-y: auto; /* Añade desplazamiento vertical si el contenido es más grande que el menú */
     z-index: 1000; /* Ajusta el índice z para que el menú aparezca encima del contenido */
+    font-family: se;
 }
 
 /* Estilos adicionales para la lista de enlaces */

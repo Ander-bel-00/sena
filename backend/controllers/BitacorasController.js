@@ -26,7 +26,6 @@ const upload = multer({
     }
 }).single('archivo');
 
-
 exports.cargarBitacora = async (req, res, next) => {
     upload(req, res, async function(err) {
         if (err) {
@@ -59,10 +58,15 @@ exports.cargarBitacora = async (req, res, next) => {
 
             if (!aprendiz) return res.status(404).json({ mensaje: 'El aprendiz no existe' });
 
+            // Utilizar el nombre original del archivo como nombre de archivo en la carpeta de bitácoras
+            const nombreArchivoOriginal = req.file.originalname;
+            const rutaArchivoOriginal = path.join(__dirname, '../bitacoras/', nombreArchivoOriginal);
+            fs.renameSync(req.file.path, rutaArchivoOriginal);
+
             // Si no existe una bitácora existente, procede a crearla y guardar el archivo
             const nuevaBitacora = {
                 numero_de_bitacora: req.body.numero_de_bitacora,
-                archivo: req.file.filename,
+                archivo: nombreArchivoOriginal,
                 id_aprendiz: aprendiz.id_aprendiz,
                 numero_documento: aprendiz.numero_documento,
                 nombres: aprendiz.nombres,
@@ -71,16 +75,19 @@ exports.cargarBitacora = async (req, res, next) => {
                 programa_formacion: aprendiz.programa_formacion,
             };
 
-            // Guardar el archivo solo si no hay una bitácora existente
-            fs.renameSync(req.file.path, path.join(__dirname, '../bitacoras/', req.file.filename));
+            // Establecer las observaciones como vacías después de crear la nueva bitácora
+            nuevaBitacora.observaciones = '';
 
             await Bitacoras.create(nuevaBitacora);
+
             return res.json({ mensaje: 'Bitácora cargada exitosamente', bitacora: nuevaBitacora });
         } catch (error) {
             return res.status(500).json({ mensaje: 'Error al procesar la bitácora', error: error });
         }
     });
-}
+};
+
+
 
 
 // Controlador para obtener todas las bitacoras de un aprendiz
@@ -187,6 +194,60 @@ exports.aprobarBitacora = async (req, res) => {
         return res.status(500).json({ mensaje: 'Error interno del servidor' });
     }
 };
+
+exports.actualizarBitacora = async (req, res) => {
+    try {
+        // Obtener el id de la bitácora desde los parámetros de la solicitud
+        const { idBitacora } = req.params;
+
+        // Buscar la bitácora por su ID
+        const bitacora = await Bitacoras.findByPk(idBitacora);
+
+        // Verificar si la bitácora existe
+        if (!bitacora) {
+            return res.status(404).json({ mensaje: 'La bitácora no existe' });
+        }
+
+        // Verificar si la bitácora tiene observaciones
+        if (!bitacora.observaciones || bitacora.observaciones.trim() === '') {
+            return res.status(400).json({ mensaje: 'La bitácora no tiene observaciones, por lo que no puede ser actualizada' });
+        }
+
+        // Procesar la carga del archivo
+        upload(req, res, async function(err) {
+            if (err) {
+                return res.status(400).json({ mensaje: err.message });
+            }
+
+            // Eliminar el archivo antiguo si existe
+            const filePath = path.join(__dirname, '../bitacoras/', bitacora.archivo);
+            if (fs.existsSync(filePath)) {
+                fs.unlinkSync(filePath);
+            }
+
+            // Utilizar el nombre original del archivo como nombre de archivo en la carpeta de bitácoras
+            const nombreArchivoOriginal = req.file.originalname;
+            const rutaArchivoOriginal = path.join(__dirname, '../bitacoras/', nombreArchivoOriginal);
+            fs.renameSync(req.file.path, rutaArchivoOriginal);
+
+            // Actualizar los datos de la bitácora
+            bitacora.numero_de_bitacora = req.body.numero_de_bitacora || bitacora.numero_de_bitacora;
+            bitacora.archivo = nombreArchivoOriginal; // Utilizar el nombre original del archivo
+            
+            // Establecer las observaciones como vacías después de la actualización
+            bitacora.observaciones = '';
+
+            // Guardar los cambios en la base de datos
+            await bitacora.save();
+
+            return res.status(200).json({ mensaje: 'Bitácora actualizada correctamente', bitacora });
+        });
+    } catch (error) {
+        console.error('Error al actualizar la bitácora:', error);
+        return res.status(500).json({ mensaje: 'Error interno del servidor' });
+    }
+};
+
 
 exports.eliminarBitacora = async (req, res, next) => {
     try {

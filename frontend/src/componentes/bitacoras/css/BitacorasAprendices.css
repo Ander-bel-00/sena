@@ -1,18 +1,18 @@
-/* Estilos generales para la tabla */
-.docsAprendicesTab {
-    width: 100%;
-    border-collapse: collapse;
-}
-  
-.thh, .td-aprendiz {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-  
-.thh {
-    background-color: #f2f2f2;
-}
+  /* Estilos generales para la tabla */
+  .docsAprendicesTab {
+      width: 100%;
+      border-collapse: collapse;
+  }
+    
+  .thh, .td-aprendiz {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+  }
+    
+  .thh {
+      background-color: #f2f2f2;
+  }
 
 
 /* Media query para dispositivos móviles */
@@ -59,9 +59,14 @@
   }
 
   /* Establecer estilos para el contenido en dispositivos móviles */
-  .td-aprendiz:nth-of-type(1):before { content: "ID bitácora:"; }
-  .td-aprendiz:nth-of-type(2):before { content: "Número de bitácora:"; }
-  .td-aprendiz:nth-of-type(3):before { content: "Observaciones:"; }
-  .td-aprendiz:nth-of-type(4):before { content: "Estado:"; }
-  .td-aprendiz:nth-of-type(5):before { content: "Archivo:"; }
+  .td-aprendiz:nth-of-type(1):before { content: "Número de bitácora:"; }
+  .td-aprendiz:nth-of-type(2):before { content: "Observaciones:"; }
+  .td-aprendiz:nth-of-type(3):before { content: "Estado:"; }
+  .td-aprendiz:nth-of-type(4):before { content: "Acciones:"; }
+
+  /* Excluir los input de tipo archivo de la regla que los oculta */
+  input[type="file"] {
+    display: initial; /* Mostrar los input de tipo archivo */
+  }
 }
+

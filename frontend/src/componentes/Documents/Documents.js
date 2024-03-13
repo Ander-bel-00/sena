@@ -116,18 +116,14 @@ function Documents() {
                     <table>
                         <thead>
                             <tr>
-                                <th>ID Documento</th>
                                 <th>Tipo de Documento</th>
-                                <th>Archivo</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {documentosAprendiz.map((doc) => (
                                 <tr key={doc.id_documento}>
-                                    <td>{doc.id_documento}</td>
                                     <td>{doc.tipo_documento}</td>
-                                    <td>{doc.archivo}</td>
                                     <td>
                                         <button onClick={() => handleDownload(doc.archivo)}
                                         className='btnDownload'>Descargar</button>
