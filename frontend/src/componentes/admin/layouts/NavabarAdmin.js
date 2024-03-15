@@ -35,9 +35,8 @@ const NavbarAdmin = ({showNav, handleLogout}) => {
                 <div className={showNav ? 'sidenav active' : 'sidenav'}>
                     <h3 className="text-xl userWelcome">¡Bienvenido {usuario.nombres}!</h3>
                     <ul className="list-group menu-content">
-                        <li className="menu-options"><a href="#"><IoHomeSharp className="inline-block"/> Inicio</a></li>
-                        <li className="menu-options"><a href="#"><FaUser className="inline-block"/> Perfil</a></li>
-                        <li className="menu-options"><Link to="#"><IoDocuments className="inline-block"/> Documentos</Link></li>
+                        <li className="menu-options"><a href="/"><IoHomeSharp className="inline-block"/> Inicio</a></li>
+                        {/* <li className="menu-options"><a href="#"><FaUser className="inline-block"/> Perfil</a></li> */}
                         <li className="menu-options"><Link to="/login" onClick={handleLogout}><BiSolidLogOut className="inline-block"/> 
                         Cerrar sesión</Link></li>
                     </ul>

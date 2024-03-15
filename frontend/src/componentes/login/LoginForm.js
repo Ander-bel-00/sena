@@ -76,7 +76,7 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
                 <option value="" disabled selected>Selecciona un rol...</option>
                 <option value="instructor">Instructor</option>
                 <option value="aprendiz">Aprendiz</option>
-                <option value="administrador">Administrador</option>
+                <option value="admin">Administrador</option>
                 
               </select>
             </p>

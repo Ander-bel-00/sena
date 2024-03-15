@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const AdminController = require('../controllers/AdminController');
 const AprendizController = require('../controllers/AprendizController');
 const InstructorController = require('../controllers/InstructorController');
 const authController = require('../controllers/authController');
@@ -29,8 +30,12 @@ module.exports = function () {
         res.json({ usuario: req.usuario });
     });
 
+    // Administrador
+    router.post('/admin-add', AdminController.nuevoAdmin);
+
     // Reistrar Fichas.
     router.post('/fichas-add', FichasController.nuevaFicha);
+    router.post('/fichas-Admin-new', FichasController.nuevaFichaAdmin);
     // Mostrar todas las Fichas registradas en la base de datos.
     router.get('/fichas-getAll', authRequired,FichasController.mostrarFichas);
     // Mostrar una Ficha por su número de ficha.

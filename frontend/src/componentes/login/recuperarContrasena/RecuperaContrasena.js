@@ -26,7 +26,7 @@ function RecuperaContrasena() {
                 rol_usuario: rolUsuario,
                 numero_documento: numeroDocumento,
                 correo_electronico1: correoElectronico
-            });
+            });                     
             setSuccessMessage(response.data.mensaje);
             setCodigoEnviado(true);
             setShowSolicitarCodigo(false);

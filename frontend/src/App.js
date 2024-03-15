@@ -3,6 +3,7 @@ import handleContentMovement from "./main.js";
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom"; // Importa BrowserRouter
 import LoginForm from "./componentes/login/LoginForm";
 import NavbarAprendiz from "./componentes/aprendices/layouts/Navabar-Aprendiz";
+import NavbarAdmin from "./componentes/admin/layouts/NavabarAdmin.js";
 import Aprendices from "./componentes/aprendices/Aprendiz";
 import Administrador from "./componentes/admin/Administrador";
 import Instructor from "./componentes/instructores/Instructor";
@@ -20,6 +21,9 @@ import InstructorDocuments from "./componentes/Documents/InstructorDocuments.js"
 import Bitacoras from "./componentes/bitacoras/Bitacoras.js";
 import BitacorasInstructor from "./componentes/bitacoras/BitacorasInstructor.js";
 import RecuperaContrasena from "./componentes/login/recuperarContrasena/RecuperaContrasena.js";
+import AprendizForm from "./componentes/formularios/AprendizForm.js";
+import FichasForm from "./componentes/formularios/FichasForm.js";
+import InstructorForm from "./componentes/formularios/InstructorForm.js";
 
 
 function App() {
@@ -139,7 +143,6 @@ function App() {
                 <Instructor />
                 </main>
               </Fragment>
-              
             ) : (
               <Navigate to="/" replace />
             )
@@ -229,15 +232,74 @@ function App() {
           }
         />
         <Route
-          path="/administradores"
+          path="/admin"
           element={
-            isAuthenticated && userRole === 'administrador' ? (
-              <Administrador />
+            isAuthenticated && userRole === 'admin' ? (
+              <Fragment>
+                <Header showNav={showNav} setShowNav={setShowNav}/>
+                <NavbarAdmin showNav={showNav} handleLogout={handleLogout} />
+                <main className="contAdmin">
+                  <Administrador />
+                </main>
+              </Fragment>
             ) : (
               <Navigate to="/" replace />
             )
           }
         />
+        {/* Crear ficha */}
+      <Route
+        path="/crear-ficha"
+        element={
+          isAuthenticated && userRole === 'admin' ? (
+            <div>
+                <Header showNav={showNav} setShowNav={setShowNav}/>
+                <NavbarAdmin showNav={showNav} handleLogout={handleLogout} />
+              <main className="container content">
+                <FichasForm />
+              </main>
+            </div>
+          ) : (
+            <Navigate to="/" replace />
+          )
+        }
+      />
+        {/* Ruta para crear aprendiz desde Admin */}
+        <Route
+          path="/crear-aprendiz"
+          element={
+            isAuthenticated && userRole === 'admin' ? (
+              <div>
+                <Header showNav={showNav} setShowNav={setShowNav}/>
+                <NavbarAdmin showNav={showNav} handleLogout={handleLogout} />
+                <main className="container content">
+                  <AprendizForm />
+                </main>
+              </div>
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+        
+      {/* Instructores */}
+
+      <Route
+      path="/crear-instructor"
+      element={
+          isAuthenticated && userRole === 'admin' ? (
+            <div>
+              <Header />
+              <NavbarAdmin />
+              <main className="contAdmin">
+                <InstructorForm />
+              </main>
+            </div>
+          ) : (
+            <Navigate to="/" replace />
+          )
+        }
+      />
       </Routes>
     </BrowserRouter>
   );

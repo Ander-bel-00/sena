@@ -1,3 +1,4 @@
+const Admin = require('../models/Admin');
 const Aprendiz = require('../models/Aprendices');
 const Instructores = require('../models/Instructor');
 const enviarCorreo = require('../utils/enviarCorreo');
@@ -86,7 +87,7 @@ async function obtenerUsuarioPorNumeroDocumento(numero_documento, rol_usuario) {
             usuario = await Aprendiz.findOne({ where: { numero_documento } });
             break;
         case 'admin':
-            // Lógica para obtener admin
+            usuario = await Admin.findOne({ where: { numero_documento } });
             break;
         case 'instructor':
             usuario = await Instructores.findOne({ where: { numero_documento } });
@@ -206,8 +207,6 @@ exports.verificarCodigo = async (req, res, next) => {
         next();
     }
 };
-
-
 
 // En el controlador de cambio de contraseña
 exports.cambiarContrasena = async (req, res, next) => {

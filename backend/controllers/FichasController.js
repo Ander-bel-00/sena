@@ -44,6 +44,32 @@ exports.nuevaFicha = async (req, res, next) => {
     }
 };
 
+// Controlador para crear fichas en la base de datos.
+exports.nuevaFichaAdmin = async (req, res, next) => {
+    try {
+        // Crea la tabla fichas en la base de datos si no existe.
+        await Fichas.sync({ force: false });
+
+        const fichaExistente = await Fichas.findOne({
+            where: {
+                numero_ficha: req.body.numero_ficha
+            }
+        });
+
+        if (fichaExistente) {
+            res.status(500).json({ mensaje: 'La ficha ya se encuentra registrada' });
+        } else {
+            // Crea la ficha con los datos proporcionados desde el cuerpo del formulario.
+            const ficha = await Fichas.create(req.body);
+            // Envíar un mensaje con los datos de la ficha que se ha creado.
+            res.status(201).json({ mensaje: 'La ficha se ha registrado exitosamente', ficha });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ mensaje: 'Hubo un error en la solicitud', error });
+    }
+};
+
 // Controlador para mostar todas las fichas alamcenadas en la base de datos.
 exports.mostrarFichas = async (req, res, next) => {
     try {

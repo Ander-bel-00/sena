@@ -33,7 +33,7 @@ const Instructor = sequelize.define('Instructores', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    correo_electronico: {
+    correo_electronico1: {
         type: DataTypes.STRING,
         allowNull: false,
     },
