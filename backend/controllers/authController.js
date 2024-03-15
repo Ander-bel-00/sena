@@ -1,5 +1,6 @@
 const Aprendiz = require('../models/Aprendices');
 const Instructores = require('../models/Instructor');
+const enviarCorreo = require('../utils/enviarCorreo');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -126,3 +127,128 @@ exports.verifyToken = async (req, res, next) => {
         return res.status(401).json({ message: 'Token inválido' });
     }
 }
+
+// Objeto para almacenar temporalmente los códigos de verificación de restablecimiento de contraseña
+const codigosVerificacion = {};
+
+// Función para generar un código de verificación único
+function generarCodigoVerificacion() {
+    return Math.floor(100000 + Math.random() * 900000); // Genera un código de 6 dígitos
+}
+
+
+// En el controlador de solicitud de restablecimiento de contraseña
+exports.solicitarRestablecimientoContrasena = async (req, res, next) => {
+    try {
+        const { numero_documento, rol_usuario, correo_electronico1 } = req.body;
+
+        // Verificar si el usuario existe en la base de datos
+        const usuario = await obtenerUsuarioPorNumeroDocumento(numero_documento, rol_usuario);
+
+        if (!usuario) {
+            return res.status(404).json({ mensaje: 'No se encontró ninguna cuenta asociada a este número de documento' });
+        }
+
+        // Verificar si se proporcionó un correo electrónico válido
+        if (!correo_electronico1) {
+            return res.status(400).json({ mensaje: 'El correo electrónico es requerido para restablecer la contraseña' });
+        }
+
+        // Generar y enviar el código de verificación por correo electrónico
+        const codigoVerificacion = generarCodigoVerificacion();
+        await enviarCorreo(correo_electronico1, 'S.E.E.P-Código de Verificación para Restablecimiento de Contraseña', `Su código de verificación es: ${codigoVerificacion}`);
+
+        // Almacenar temporalmente la información del usuario y el código de verificación
+        codigosVerificacion[correo_electronico1] = {
+            codigoVerificacion,
+            usuario,
+        };
+
+        // Guardar el correo electrónico en la sesión
+        if (typeof req.session === 'object' && req.session !== null) {
+            req.session.correoElectronico = correo_electronico1;
+        } else {
+            console.error('Error: req.session no está disponible');
+            // Manejar el caso en que req.session no está disponible
+        }
+
+        res.json({ mensaje: 'Se ha enviado un código de verificación al correo electrónico asociado a este usuario' });
+    } catch (error) {
+        console.error('Error al solicitar la recuperación de contraseña:', error);
+        res.status(500).json({ mensaje: 'Hubo un error al procesar la solicitud de restablecimiento de contraseña', error });
+        next(error); // Pasa el error al siguiente middleware para su gestión
+    }
+};
+
+// En el controlador de autenticación authController
+exports.verificarCodigo = async (req, res, next) => {
+    try {
+        const { codigo_verificacion } = req.body;
+
+        // Recuperar el correo electrónico de la variable de sesión
+        const correo_electronico = req.session.correoElectronico;
+
+        // Verificar si el código de verificación es válido
+        if (!correo_electronico || !codigosVerificacion[correo_electronico]) {
+            return res.status(400).json({ mensaje: 'No se encontró ningún código de verificación asociado a este usuario' });
+        }
+
+        if (codigosVerificacion[correo_electronico].codigoVerificacion !== parseInt(codigo_verificacion)) {
+            return res.status(400).json({ mensaje: 'El código de verificación es incorrecto' });
+        }
+
+        // Si el código de verificación es válido, enviar una respuesta exitosa
+        res.json({ mensaje: 'Código de verificación válido' });
+
+    } catch (error) {
+        console.error('Error al verificar el código de verificación:', error);
+        res.status(500).json({ mensaje: 'Hubo un error al verificar el código de verificación', error });
+        next();
+    }
+};
+
+
+
+// En el controlador de cambio de contraseña
+exports.cambiarContrasena = async (req, res, next) => {
+    try {
+        const { codigo_verificacion, nueva_contrasena } = req.body;
+
+        // Recuperar el correo electrónico de la variable de sesión
+        const correo_electronico = req.session.correoElectronico;
+
+        // Verificar si el código de verificación es válido
+        if (!correo_electronico || !codigosVerificacion[correo_electronico]) {
+            return res.status(400).json({ mensaje: 'No se encontró ningún código de verificación asociado a este usuario' });
+        }
+
+        if (codigosVerificacion[correo_electronico].codigoVerificacion !== parseInt(codigo_verificacion)) {
+            return res.status(400).json({ mensaje: 'El código de verificación es incorrecto' });
+        }
+
+        // Obtener el usuario de la información almacenada temporalmente
+        const usuario = codigosVerificacion[correo_electronico].usuario;
+
+        // Cifrar la nueva contraseña antes de guardarla en la base de datos
+        const nuevaContrasenaCifrada = await bcrypt.hash(nueva_contrasena, 10);
+
+        // Actualizar la contraseña del usuario en la base de datos con la nueva contraseña cifrada
+        usuario.contrasena = nuevaContrasenaCifrada;
+        await usuario.save();
+
+        // Eliminar el código de verificación
+        delete codigosVerificacion[correo_electronico];
+
+        // Envía un correo de confirmación de cambio de contraseña
+        await enviarCorreo(correo_electronico, 'S.E.E.P-Contraseña Cambiada Exitosamente', 'Su contraseña ha sido cambiada exitosamente.');
+
+        // Eliminar el correo electrónico de la variable de sesión
+        delete req.session.correoElectronico;
+
+        res.json({ mensaje: 'Contraseña cambiada exitosamente' });
+    } catch (error) {
+        console.error('Error al cambiar la contraseña:', error);
+        res.status(500).json({ mensaje: 'Hubo un error al cambiar la contraseña', error });
+        next();
+    }
+};

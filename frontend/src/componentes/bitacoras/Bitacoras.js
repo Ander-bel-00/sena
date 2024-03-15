@@ -174,10 +174,14 @@ function Bitacoras() {
                                 <td className='td-aprendiz'>{doc.observaciones ? doc.observaciones : 'No hay observaciones'}</td>
                                 <td className='td-aprendiz'>{doc.estado ? 'Aprobada' : 'No aprobada'}</td>
                                 <td className='td-aprendiz'>
-                                    {doc.observaciones && (
-                                        <button onClick={() => handleActualizar(doc)} className='btnActualizar'>Actualizar</button>
-                                    )}
-                                    <button onClick={() => handleDownload(doc.archivo)} className='btnDownload'>Descargar</button>
+                                    <div className='btn-content'>
+                                        <button onClick={() => handleDownload(doc.archivo)} className='btnDownload'>Descargar</button>
+                                        {doc.observaciones && (
+                                            <button onClick={() => handleActualizar(doc)} 
+                                            className='btnActualizar'>Actualizar Bitácora</button>
+                                        )}
+                                    </div>
+                                    
                                 </td>
                             </tr>
                         ))}

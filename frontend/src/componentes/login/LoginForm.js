@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import clienteAxios from '../../api/axios';
 import Cookies from 'js-cookie';
 import logoSena from './img/sena-verde.png';
@@ -42,6 +42,16 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
       navigate(`/${formData.rol_usuario}`);
     }
   }, [isAuthenticated, formData.rol_usuario]);
+
+  // clear errors after 5 seconds
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
 
 
   return (
@@ -97,6 +107,11 @@ const LoginForm = ({ isAuthenticated, setIsAuthenticated, setUserRole }) => {
                 {error}
               </div>
             ))}
+
+            <div>
+              <Link to="/restablecimiento-contrasena"
+              className='forget'>¿Olvidaste tu contraseña?</Link> {/* Añade el enlace a la página de recuperación de contraseña */}
+            </div>
             <button type="submit" className="loginButton rounded-md p-3 ml-32 mt-4">
               Iniciar Sesión
             </button>

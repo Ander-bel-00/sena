@@ -111,7 +111,7 @@ function InstructorDocuments() {
                             <td className='td'>{documento.programa_formacion}</td>
                             <td className='td'>{documento.archivo}</td>
                             <td className='td'>
-                                <button onClick={() => handleDownload(documento.archivo)} className='btnDownload'>Descargar</button>
+                                <button onClick={() => handleDownload(documento.archivo)} className='btnDownloadInstruc'>Descargar</button>
                             </td>
                         </tr>
                     ))}

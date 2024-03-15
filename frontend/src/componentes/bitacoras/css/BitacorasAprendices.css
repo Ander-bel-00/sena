@@ -1,18 +1,35 @@
-  /* Estilos generales para la tabla */
-  .docsAprendicesTab {
-      width: 100%;
-      border-collapse: collapse;
-  }
+/* Estilos generales para la tabla */
+.docsAprendicesTab {
+  width: 100%;
+  border-collapse: collapse;
+}
     
-  .thh, .td-aprendiz {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-  }
+.thh, .td-aprendiz {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
     
-  .thh {
-      background-color: #f2f2f2;
-  }
+.thh {
+  background-color: #f2f2f2;
+}
+
+.btn-content{
+  margin-top: 30px;
+}
+
+.btnDownload{
+  position: relative;
+  top: -30px;
+  right: 5px;
+  color: #39a900;
+}
+
+.btnActualizar{
+  color: #39a900;
+  position: relative;
+  right: 75px;
+}
 
 
 /* Media query para dispositivos móviles */
@@ -67,6 +84,20 @@
   /* Excluir los input de tipo archivo de la regla que los oculta */
   input[type="file"] {
     display: initial; /* Mostrar los input de tipo archivo */
+  }
+
+  .btnActualizar{
+    color: #39a900;
+    position: relative;
+    left: 0px;
+    top: -15px;
+  }
+
+  .btnDownload{
+    position: relative;
+    top: -30px;
+    left: 0px;
+    color: #39a900;
   }
 }
 

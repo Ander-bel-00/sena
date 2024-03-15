@@ -62,10 +62,10 @@
 .table-container tr:hover {
     background-color: #ddd; /* Gris más oscuro */
 }
-.btnDownload{
+.btnDownloadAprend{
     color: #39a900;
 }
-.btnDownload:hover{
+.btnDownloadAprend:hover{
     text-decoration: underline;
 }
 .upTitle{

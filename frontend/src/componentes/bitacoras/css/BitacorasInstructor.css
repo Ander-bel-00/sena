@@ -2,33 +2,77 @@
 .docsTab {
     width: 100%;
     border-collapse: collapse;
-  }
+}
   
-  .th, .td-instru {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
+.th, .td-instru {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
   
-  .th {
-    background-color: #f2f2f2;
-  }
+.th {
+  background-color: #f2f2f2;
+}
+
+.btnAgregarObservacion {
+  margin-bottom: 10px;
+}
 
   /* Estilos para el textarea de las observaciones */
 .textarea-container {
-    position: relative;
+  position: relative;
+}
+
+.Modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilos para el botón dentro del modal de enviar observación */
+.modal-content .btnEnviar {
+  background-color: #39a900; /* Color de fondo del botón */
+  color: white; /* Color del texto del botón */
+  padding: 10px 20px; /* Espacio interno del botón */
+  border: none; /* Eliminar borde */
+  border-radius: 5px; /* Redondear esquinas */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+  margin-top: 10px; /* Espacio superior */
+}
+
+.modal-content .btnEnviar:hover {
+  background-color: #2e7d32; /* Cambiar color de fondo al pasar sobre el botón */
 }
 
 .textarea-container textarea {
-    width: calc(100% - 20px); /* Restar el ancho de los botones */
-    max-width: 100%; /* Establecer un ancho máximo */
-    resize: vertical; /* Permitir redimensionamiento vertical */
+  width: calc(100% - 20px); /* Restar el ancho de los botones */
+  max-width: 100%; /* Establecer un ancho máximo */
+  resize: vertical; /* Permitir redimensionamiento vertical */
 }
 
 .textarea-container button {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 /* Estilos para el contenedor de los botones */
@@ -51,8 +95,8 @@
   
     .btnEnviarObservacion{
       position: relative;
-      top: 110px;
-      left: -10px;
+      top: 10px;
+      left: -5px;
       text-wrap: nowrap;
       font-size: 15px;
       color: #39a900;
@@ -64,7 +108,7 @@
   
     .btnAprobar{
       position: relative;
-      top: 60px;
+      top: -185px;
       left: -4px;
       margin-top: 90px;
       color: #39a900;
@@ -73,11 +117,15 @@
     .btnAprobar:hover{
       text-decoration: underline;
     }
+
+    .btnAprobar p::after {content: " Bitácora";}
   
     .btnDownloadInstru{
       position: relative;
       color: #39a900;
-      left: -30px;
+      top: -40px;
+      left: -5px;
+      text-wrap: nowrap;
     }
   
     .btnDownloadInstru:hover{
@@ -97,8 +145,8 @@
 
   .btnEnviarObservacion{
     position: relative;
-    top: 110px;
-    left: -10px;
+    top: 10px;
+    left: -5px;
     text-wrap: nowrap;
     font-size: 15px;
     color: #39a900;
@@ -110,7 +158,7 @@
 
   .btnAprobar{
     position: relative;
-    top: 60px;
+    top: -185px;
     left: -4px;
     margin-top: 90px;
     color: #39a900;
@@ -120,10 +168,14 @@
     text-decoration: underline;
   }
 
+  .btnAprobar p::after {content: " Bitácora";}
+
   .btnDownloadInstru{
     position: relative;
     color: #39a900;
+    top: -40px;
     left: -5px;
+    text-wrap: nowrap;
   }
 
   .btnDownloadInstru:hover{
@@ -185,11 +237,10 @@
   .td-instru:nth-of-type(6):before { content: "Programa de Formación:"; }
   .td-instru:nth-of-type(7):before { content: "Observaciones:"; }
   .td-instru:nth-of-type(8):before { content: "Estado:"; }
-  .td-instru:nth-of-type(9):before { content: "Archivo:"; }
-  .td-instru:nth-of-type(10):before { content: "Acciones:"; }
+  .td-instru:nth-of-type(9):before { content: "Acciones:"; }
 
   .button-container {
-    margin-top: 30px; /* Espacio entre el textarea y los botones */
+    margin-top: 80px; /* Espacio entre el textarea y los botones */
   }
 
   .btnEnviarObservacion{
@@ -200,8 +251,9 @@
 
   .btnAprobar{
     position: relative;
-    top: -10px;
-    left: -190px;
+    top: -145px;
+    left: 1px;
+    text-wrap: nowrap;
     margin-top: 90px;
   }
 
@@ -211,6 +263,15 @@
     position: relative;
     color: #39a900;
     left: -190px;
-    top: -100px;
+    top: -55px;
+  }
+
+  .btnEnviarObservacion{
+    position: relative;
+    top: -15px;
+    left: -418px;
+    text-wrap: nowrap;
+    font-size: 15px;
+    color: #39a900;
   }
 }

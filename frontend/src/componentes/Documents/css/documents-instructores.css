@@ -14,6 +14,14 @@
   background-color: #f2f2f2;
 }
 
+.btnDownloadInstruc{
+  color: #39a900;
+}
+
+.btnDownloadInstruc:hover{
+  text-decoration: underline;
+}
+
 /* Media query para dispositivos móviles */
 @media screen and (max-width: 780px) {
   /* Ocultar la tabla encabezados y mostrar celdas como bloques */
@@ -66,4 +74,6 @@
   .td:nth-of-type(6):before { content: "Programa de Formación:"; }
   .td:nth-of-type(7):before { content: "Archivo:"; }
   .td:nth-of-type(8):before { content: "Acciones:"; }
+
+
 }

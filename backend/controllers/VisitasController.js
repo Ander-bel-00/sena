@@ -13,16 +13,28 @@ exports.crearEvento = async (req, res) => {
       });
   
       if (aprendices) {
+        // Verificar si ya existe una visita con el mismo tipo de visita para el aprendiz
+        const existeVisita = await Visitas.findOne({
+          where: {
+            tipo_visita: tipo_visita.toLowerCase(),
+            aprendiz: id_aprendiz
+          }
+        });
+  
+        if (existeVisita) {
+          return res.status(400).json({ error: "Ya existe una visita de este tipo para el aprendiz." });
+        }
+  
         await Visitas.sync({ force: false });
         const nuevoEvento = await Visitas.create({
-            tipo_visita: tipo_visita.toLowerCase(), // Convertir a minúsculas
-            fecha,
-            hora,
-            aprendiz: id_aprendiz,
-            documento_aprendiz: aprendices.numero_documento,
-            nombres_aprendiz: aprendices.nombres,
-            apellidos_aprendiz: aprendices.apellidos,
-            numero_ficha_aprendiz: aprendices.numero_ficha,
+          tipo_visita: tipo_visita.toLowerCase(), // Convertir a minúsculas
+          fecha,
+          hora,
+          aprendiz: id_aprendiz,
+          documento_aprendiz: aprendices.numero_documento,
+          nombres_aprendiz: aprendices.nombres,
+          apellidos_aprendiz: aprendices.apellidos,
+          numero_ficha_aprendiz: aprendices.numero_ficha,
         });
   
         res.json(nuevoEvento);
@@ -33,7 +45,8 @@ exports.crearEvento = async (req, res) => {
       console.error('Error creando el evento:', error);
       res.status(500).json({ error: 'Error interno del servidor' });
     }
-  };
+};
+  
   
 
 // Obtener todos los eventos del calendario

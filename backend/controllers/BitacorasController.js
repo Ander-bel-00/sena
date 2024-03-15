@@ -1,5 +1,6 @@
 const Bitacoras = require('../models/Bitacoras');
 const Aprendices = require('../models/Aprendices');
+const shortid = require('shortid');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
@@ -9,11 +10,12 @@ const storage = multer.diskStorage({
         cb(null, path.join(__dirname, '../bitacoras/'));
     },
     filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        const uniqueFilename = shortid.generate() + '-' + file.originalname;
+        cb(null, uniqueFilename);
     }
 });
 
-const upload = multer({ 
+const upload = multer({
     storage: storage,
     fileFilter: function(req, file, cb) {
         const allowedFileTypes = ['.xls', '.xlsx', '.gsheet'];
@@ -25,6 +27,7 @@ const upload = multer({
         }
     }
 }).single('archivo');
+
 
 exports.cargarBitacora = async (req, res, next) => {
     upload(req, res, async function(err) {
@@ -58,15 +61,10 @@ exports.cargarBitacora = async (req, res, next) => {
 
             if (!aprendiz) return res.status(404).json({ mensaje: 'El aprendiz no existe' });
 
-            // Utilizar el nombre original del archivo como nombre de archivo en la carpeta de bitácoras
-            const nombreArchivoOriginal = req.file.originalname;
-            const rutaArchivoOriginal = path.join(__dirname, '../bitacoras/', nombreArchivoOriginal);
-            fs.renameSync(req.file.path, rutaArchivoOriginal);
-
             // Si no existe una bitácora existente, procede a crearla y guardar el archivo
             const nuevaBitacora = {
                 numero_de_bitacora: req.body.numero_de_bitacora,
-                archivo: nombreArchivoOriginal,
+                archivo: req.file.filename,
                 id_aprendiz: aprendiz.id_aprendiz,
                 numero_documento: aprendiz.numero_documento,
                 nombres: aprendiz.nombres,
@@ -86,9 +84,6 @@ exports.cargarBitacora = async (req, res, next) => {
         }
     });
 };
-
-
-
 
 // Controlador para obtener todas las bitacoras de un aprendiz
 exports.obtenerBitacorasPorAprendiz = async (req, res) => {
@@ -151,11 +146,11 @@ exports.descargarBitacora = async (req, res) => {
 // Controlador para enviar observaciones a una bitácora
 exports.enviarObservacion = async (req, res) => {
     try {
-        const { idBitacora } = req.params;
+        const { id_bitacora } = req.params;
         const { observaciones } = req.body;
 
         // Buscar la bitácora por su ID
-        const bitacora = await Bitacoras.findByPk(idBitacora);
+        const bitacora = await Bitacoras.findByPk(id_bitacora);
 
         if (!bitacora) {
             return res.status(404).json({ mensaje: 'La bitácora no existe' });
@@ -186,6 +181,8 @@ exports.aprobarBitacora = async (req, res) => {
 
         // Cambiar el estado de aprobación de la bitácora a true
         bitacora.estado = true;
+        // Borrar las observaciones asociadas a la bitácora
+        bitacora.observaciones = '';
         await bitacora.save();
 
         return res.status(200).json({ mensaje: 'Bitácora aprobada correctamente' });
@@ -194,6 +191,7 @@ exports.aprobarBitacora = async (req, res) => {
         return res.status(500).json({ mensaje: 'Error interno del servidor' });
     }
 };
+
 
 exports.actualizarBitacora = async (req, res) => {
     try {
@@ -225,14 +223,9 @@ exports.actualizarBitacora = async (req, res) => {
                 fs.unlinkSync(filePath);
             }
 
-            // Utilizar el nombre original del archivo como nombre de archivo en la carpeta de bitácoras
-            const nombreArchivoOriginal = req.file.originalname;
-            const rutaArchivoOriginal = path.join(__dirname, '../bitacoras/', nombreArchivoOriginal);
-            fs.renameSync(req.file.path, rutaArchivoOriginal);
-
             // Actualizar los datos de la bitácora
             bitacora.numero_de_bitacora = req.body.numero_de_bitacora || bitacora.numero_de_bitacora;
-            bitacora.archivo = nombreArchivoOriginal; // Utilizar el nombre original del archivo
+            bitacora.archivo = req.file.filename; // Utilizar el nombre del archivo cargado
             
             // Establecer las observaciones como vacías después de la actualización
             bitacora.observaciones = '';

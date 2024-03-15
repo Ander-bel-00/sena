@@ -1,41 +1,32 @@
 const Documentos = require('../models/Documentos');
 const Aprendices = require('../models/Aprendices');
+const shortid = require('shortid');
 const multer = require('multer');
 const fs = require('fs'); // Importar el módulo fs para trabajar con el sistema de archivos
 const path = require('path');
 
-// Configurar el storage para multer
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../uploads/')); // Utiliza path.join para construir la ruta de destino
+        cb(null, path.join(__dirname, '../uploads/')); 
     },
     filename: function (req, file, cb) {
-        // Define el nombre del archivo cargado
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        const uniqueFilename = shortid.generate() + '-' + file.originalname;
+        cb(null, uniqueFilename);
     }
 });
 
-// Inicializar multer con la configuración de storage
 const upload = multer({ storage: storage }).single('archivo');
 
-// Controlador para cargar un documento
 exports.cargarDocumento = async (req, res) => {
     try {
-        // Usa multer para cargar el archivo
         upload(req, res, async function (err) {
             if (err instanceof multer.MulterError) {
-                // Si hay un error de Multer, envía una respuesta de error
                 return res.status(500).json({ message: 'Error al cargar el archivo', error: err });
             } else if (err) {
-                // Si hay otro tipo de error, envía una respuesta de error
                 return res.status(500).json({ message: 'Error al cargar el archivo', error: err });
             }
 
-            // Si no hay errores, crea un nuevo documento en la base de datos
             const { tipo_documento } = req.body;
-            const nombreArchivoOriginal = req.file.originalname;
-            const rutaArchivoOriginal = path.join(__dirname, '../uploads/', nombreArchivoOriginal);
-            fs.renameSync(req.file.path, rutaArchivoOriginal);
 
             await Documentos.sync({ force: false });
 
@@ -46,15 +37,13 @@ exports.cargarDocumento = async (req, res) => {
             });
 
             if (!aprendiz) {
-                // Si el aprendiz no existe, elimina el archivo y envía un mensaje de error
-                fs.unlinkSync(rutaArchivoOriginal);
+                fs.unlinkSync(req.file.path); // Eliminar el archivo si el aprendiz no existe
                 return res.status(404).json({ mensaje: 'El aprendiz no existe' });
             }
 
-            // Guarda el documento en la base de datos, incluyendo el ID del usuario que lo cargó
             const nuevoDocumento = await Documentos.create({ 
                 tipo_documento, 
-                archivo: nombreArchivoOriginal, // Utiliza el nombre original del archivo
+                archivo: req.file.filename,
                 id_aprendiz: aprendiz.id_aprendiz,
                 numero_documento: aprendiz.numero_documento,
                 nombres: aprendiz.nombres,
@@ -64,11 +53,9 @@ exports.cargarDocumento = async (req, res) => {
             
             });
 
-            // Envía una respuesta de éxito
             res.status(201).json({ message: 'Documento cargado exitosamente', documento: nuevoDocumento });
         });
     } catch (error) {
-        // Si hay un error, envía una respuesta de error
         res.status(500).json({ message: 'Error al cargar el documento', error: error.message });
     }
 };

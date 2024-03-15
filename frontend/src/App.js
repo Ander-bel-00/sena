@@ -19,6 +19,8 @@ import Documents from "./componentes/Documents/Documents.js";
 import InstructorDocuments from "./componentes/Documents/InstructorDocuments.js";
 import Bitacoras from "./componentes/bitacoras/Bitacoras.js";
 import BitacorasInstructor from "./componentes/bitacoras/BitacorasInstructor.js";
+import RecuperaContrasena from "./componentes/login/recuperarContrasena/RecuperaContrasena.js";
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -99,6 +101,7 @@ function App() {
           path="/login"
           element={<LoginForm isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUserRole={setUserRole} />}
         />
+        <Route path="/restablecimiento-contrasena" element={<RecuperaContrasena />} />
         <Route
           path="/aprendiz"
           element={

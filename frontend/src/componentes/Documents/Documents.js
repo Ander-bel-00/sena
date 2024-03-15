@@ -126,7 +126,7 @@ function Documents() {
                                     <td>{doc.tipo_documento}</td>
                                     <td>
                                         <button onClick={() => handleDownload(doc.archivo)}
-                                        className='btnDownload'>Descargar</button>
+                                        className='btnDownloadAprend'>Descargar</button>
                                     </td>
                                 </tr>
                             ))}

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = require('./routes');
+const session = require('express-session');
 const routes  = require('./routes');
 
 
@@ -27,11 +28,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use(session({
+    secret: 'my-secret-key', // Cambia esto por tu propia clave secreta
+    resave: false,
+    saveUninitialized: true
+}));
+
 
 
 // Habilitar cors.
 app.use(cors({
-    origin: 'http://10.200.80.128:3000',
+    origin: 'http://192.168.1.25:3000',
     // Establecer las cookies al frontend.
     credentials: true
 }));

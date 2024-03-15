@@ -10,12 +10,13 @@ const DocumentsController = require('../controllers/DocumentsController');
 const BitacorasController = require('../controllers/BitacorasController');
 
 
-
-
 module.exports = function () {
     // Rutas para el login.
     router.post('/login', authController.iniciarSesion); // Nuevo endpoint de inicio de sesión
     router.post('/logout', authController.logout);
+    router.post('/solicitar-restablecimiento-contrasena', authController.solicitarRestablecimientoContrasena);
+    router.post('/verificar-codigo', authController.verificarCodigo);
+    router.post('/cambiar-contrasena', authController.cambiarContrasena);
 
     router.get('/verify-token', authRequired, (req, res) => {
         res.json({ usuario: req.usuario });
@@ -83,7 +84,8 @@ module.exports = function () {
     router.get('/bitacoras-aprendiz-getAll', BitacorasController.obtenerBitacoras);
     router.get('/bitacoras-download/:nombreArchivo', BitacorasController.descargarBitacora);
     // Rutas para las Bitácoras.
-    router.post('/enviar-observacion/:idBitacora', BitacorasController.enviarObservacion);
+    router.post('/enviar-observacion/:id_bitacora', BitacorasController.enviarObservacion);
+
     // Ruta para actualizar una bitácora existente
     router.put('/bitacoras-update/:idBitacora', BitacorasController.actualizarBitacora);
     router.put('/aprobar-bitacora/:idBitacora', BitacorasController.aprobarBitacora);

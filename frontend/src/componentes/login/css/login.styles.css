@@ -31,6 +31,17 @@ body{
     width: 100%;
 }
 
+.forget{
+    color: #39a900;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.forget:hover{
+    text-decoration: underline;
+}
 @media screen and (max-width: 780px) {
     .seepTitle{
         color: #39a900;
