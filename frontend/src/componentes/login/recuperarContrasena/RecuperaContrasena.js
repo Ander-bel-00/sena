@@ -22,22 +22,38 @@ function RecuperaContrasena() {
         e.preventDefault();
         setShowLoader(true);
         try {
-            const response = await clienteAxios.post('/solicitar-restablecimiento-contrasena', {
+            const response = await clienteAxios.post('/verificar-correo-electronico', {
                 rol_usuario: rolUsuario,
                 numero_documento: numeroDocumento,
                 correo_electronico1: correoElectronico
-            });                     
-            setSuccessMessage(response.data.mensaje);
+            });
+    
+            if (!response.data.coincide) {
+                // Si el correo electrónico no coincide, muestra un mensaje de error
+                setError('El correo electrónico no coincide con el registrado');
+                setShowLoader(false);
+                return;
+            }
+    
+            // Si el correo electrónico coincide, continúa con la solicitud de restablecimiento de contraseña
+            const responseSolicitud = await clienteAxios.post('/solicitar-restablecimiento-contrasena', {
+                rol_usuario: rolUsuario,
+                numero_documento: numeroDocumento,
+                correo_electronico1: correoElectronico
+            });
+            
+            setSuccessMessage(responseSolicitud.data.mensaje);
             setCodigoEnviado(true);
             setShowSolicitarCodigo(false);
             Swal.fire('Código enviado', 'Se ha enviado un código de verificación a tu correo electrónico', 'success');
         } catch (error) {
-            setError(error.response.data.mensaje);
+            console.error('Error de servidor:', error.response);
+            setError('Error del servidor: ' + JSON.stringify(error.response.data));
         } finally {
             setShowLoader(false);
         }
     };
-
+    
     const handleCambiarContrasena = async (e) => {
         e.preventDefault();
         setShowLoader(true);
@@ -99,6 +115,7 @@ function RecuperaContrasena() {
                     <div className="recupera-formulario">
                         <form onSubmit={handleSolicitarCodigo}>
                             <select className="recupera-input" name='rol_usuario' value={rolUsuario} onChange={(e) => setRolUsuario(e.target.value)} required>
+                                <option value="" disabled>Selecciona un rol...</option>
                                 <option value="instructor">Instructor</option>
                                 <option value="aprendiz">Aprendiz</option>
                                 <option value="administrador">Administrador</option>

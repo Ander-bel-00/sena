@@ -4,6 +4,8 @@ const Instructores = require('../models/Instructor');
 const enviarCorreo = require('../utils/enviarCorreo');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const plantillasController = require('../controllers/templatesController');
+
 
 // Función para iniciar sesión
 exports.iniciarSesion = async (req, res, next) => {
@@ -156,8 +158,17 @@ exports.solicitarRestablecimientoContrasena = async (req, res, next) => {
         }
 
         // Generar y enviar el código de verificación por correo electrónico
-        const codigoVerificacion = generarCodigoVerificacion();
-        await enviarCorreo(correo_electronico1, 'S.E.E.P-Código de Verificación para Restablecimiento de Contraseña', `Su código de verificación es: ${codigoVerificacion}`);
+        const codigoVerificacion = generarCodigoVerificacion(); // Aquí estás generando el código de verificación
+        // Llamar a la función para cargar y compilar la plantilla de solicitud de restablecimiento de contraseña
+        const datosPlantilla = {
+            nombreUsuario: usuario.nombres, // Utiliza el nombre del usuario
+            codigoVerificacion: codigoVerificacion // Utiliza el código de verificación generado
+        };
+        const cuerpoCorreo = plantillasController.cargarPlantillaResetPasswordRequest(datosPlantilla);
+
+
+        // Lógica para enviar el correo electrónico con el cuerpo generado
+        await enviarCorreo(correo_electronico1, 'S.E.E.P-Código de Verificación para Restablecimiento de Contraseña', cuerpoCorreo);
 
         // Almacenar temporalmente la información del usuario y el código de verificación
         codigosVerificacion[correo_electronico1] = {
@@ -180,6 +191,33 @@ exports.solicitarRestablecimientoContrasena = async (req, res, next) => {
         next(error); // Pasa el error al siguiente middleware para su gestión
     }
 };
+
+// En el controlador authController.js
+exports.verificarCorreoElectronico = async (req, res, next) => {
+    try {
+        const { rol_usuario, numero_documento, correo_electronico1 } = req.body;
+
+        // Obtener el usuario por número de documento y rol
+        const usuario = await obtenerUsuarioPorNumeroDocumento(numero_documento, rol_usuario);
+
+        if (!usuario) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
+
+        // Verificar si el correo electrónico coincide con el registrado
+        if (usuario.correo_electronico1 !== correo_electronico1) {
+            return res.json({ coincide: false });
+        }
+
+        // Si el correo electrónico coincide, devuelve true
+        res.json({ coincide: true });
+    } catch (error) {
+        console.error('Error al verificar el correo electrónico:', error);
+        res.status(500).json({ mensaje: 'Hubo un error al verificar el correo electrónico', error });
+        next();
+    }
+};
+
 
 // En el controlador de autenticación authController
 exports.verificarCodigo = async (req, res, next) => {

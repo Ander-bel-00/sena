@@ -5,7 +5,7 @@ async function enviarCorreo(destinatario, asunto, cuerpo) {
     try {
         // Configuración del correo electrónico
         const correoOptions = {
-            from: 'beltrananderson283@gmail.com',
+            from: 'seep.sena.edu@gmail.com',
             to: destinatario,
             subject: asunto,
             html: cuerpo

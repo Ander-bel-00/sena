@@ -16,6 +16,7 @@ module.exports = function () {
     router.post('/login', authController.iniciarSesion); // Nuevo endpoint de inicio de sesión
     router.post('/logout', authController.logout);
     router.post('/solicitar-restablecimiento-contrasena', authController.solicitarRestablecimientoContrasena);
+    router.post('/verificar-correo-electronico', authController.verificarCorreoElectronico);
     router.post('/verificar-codigo', authController.verificarCodigo);
     router.post('/cambiar-contrasena', authController.cambiarContrasena);
 
