@@ -30,10 +30,8 @@ app.use(session({
 
 // Habilitar cors.
 app.use(cors({
-    origin: 'https://sena-two.vercel.app',
-    credentials: true,
-    methods: ['GET', 'POST', 'OPTIONS'], // Asegúrate de incluir 'OPTIONS' aquí
-    allowedHeaders: ['Content-Type', 'Authorization'] // También puedes especificar los encabezados permitidos
+  origin: 'https://sena-two.vercel.app',
+  credentials: true
 }));
 
 
