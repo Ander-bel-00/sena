@@ -30,10 +30,9 @@ app.use(session({
 
 // Habilitar cors.
 app.use(cors({
-  origin: 'https://sena-two.vercel.app',
-  credentials: true
+    origin: 'http://10.200.81.26:3000',
+    credentials: true // Establecer las cookies al frontend.
 }));
-
 
 // Configurar Handlebars como motor de plantillas
 app.engine('hbs', exphbs.engine);
