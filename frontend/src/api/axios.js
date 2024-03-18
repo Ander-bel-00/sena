@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from 'js-cookie';
 
 const clienteAxios = axios.create({
-    baseURL: 'http://10.200.81.26:5000',
+    baseURL: 'https://sena-backend.vercel.app',
     withCredentials: true,
 });
 
