@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/Instructor.css';
+import './styles/Instructor-form-estilos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import clienteAxios from '../../api/axios';
 import Swal from 'sweetalert2';
@@ -179,7 +179,7 @@ const InstructorForm = () => {
         </div>
 
         <div className="col-md-12 mb-3">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn-primary">
             Crear Instructor
           </button>
         </div>
