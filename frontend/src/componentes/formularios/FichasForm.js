@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import clienteAxios from '../../api/axios';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import './styles/Fichas.css';
+import './styles/fichas-form-estilos.css';
 
 
 
@@ -58,7 +58,7 @@ function FichasForm() {
     return (
         <Fragment>
             
-
+            
                 <form className='formularioFichas' onSubmit={handleSubmit}>
                     <h1 className='titulo-fichas'>Registro de fichas</h1>
                     <input type="text" placeholder='Ingresa el número de ficha' name="numero_ficha"
@@ -74,6 +74,7 @@ function FichasForm() {
 
                     <button type="submit" className="btn btn-primary">Agregar nueva ficha</button>
                 </form>
+              
         </Fragment>
     )
 }
