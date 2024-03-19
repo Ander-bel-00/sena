@@ -1,12 +1,10 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME || "seep", 
-  process.env.USER_DB || "Ander",
-  process.env.PASSWORD_DB || "Ab%1234567", {
-    host: process.env.HOST_NAME || "SG-bitter-cobweb-9346-8256-mysql-master.servers.mongodirector.com",
-    dialect: process.env.DIALECT_DB || 'mysql',
-    port: process.env.PORTDB || 3306
+
+const sequelize = new Sequelize("seep", "root", "root", {
+  host: 'localhost',
+  dialect: 'mysql',
+  port: 3306
 });
 
 async function testConnection() {
