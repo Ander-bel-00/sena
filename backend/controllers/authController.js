@@ -55,7 +55,7 @@ exports.iniciarSesion = async (req, res, next) => {
         programa_formacion: usuario.programa_formacion,
         numero_ficha: usuario.numero_ficha,
         },
-        'SECRETKEY', {
+        process.env.TOKEN_SECRET_KEY || 'SECRETKEY', {
             expiresIn: '4h'
         });
         res.cookie('token', token);
@@ -110,7 +110,7 @@ exports.logout = (req, res) => {
 exports.verifyToken = async (req, res, next) => {
     try {
         // Verificar y decodificar el token
-        const decodedToken = jwt.verify(token, 'SECRETKEY');
+        const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET_KEY || 'SECRETKEY');
 
         // Obtener el token generado en el inicio de sesión
         const generatedToken = req.cookies.token;

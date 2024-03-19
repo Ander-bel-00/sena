@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars').create({
@@ -30,7 +31,7 @@ app.use(session({
 
 // Habilitar cors.
 app.use(cors({
-    origin: 'http://10.200.81.26:3000',
+    origin: process.env.FRONTEND_URL || 'http://192.168.1.22:3000',
     credentials: true // Establecer las cookies al frontend.
 }));
 
