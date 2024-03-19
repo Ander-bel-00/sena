@@ -288,9 +288,9 @@ exports.cambiarContrasena = async (req, res, next) => {
         // Eliminar el correo electrónico de la variable de sesión
         delete req.session.correoElectronico;
 
-        res.json({ mensaje: 'Contraseña cambiada exitosamente' });
+        res.json({ mensaje: 'Contraseña restablecida exitosamente' });
     } catch (error) {
-        console.error('Error al cambiar la contraseña:', error);
+        console.error('Error al restablecer la contraseña:', error);
         res.status(500).json({ mensaje: 'Hubo un error al cambiar la contraseña', error });
         next();
     }

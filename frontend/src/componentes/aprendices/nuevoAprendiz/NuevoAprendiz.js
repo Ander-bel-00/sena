@@ -16,6 +16,14 @@ function NuevoAprendiz() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            // Verificar si telefonofijo_Contacto está vacío y establecerlo como null si es así
+            if (!formData.telefonofijo_Contacto) {
+                formData.telefonofijo_Contacto = null;
+            }
+
+            if (!formData.numero_celular2) {
+                formData.numero_celular2 = null;
+            }
             const response = await clienteAxios.post('/aprendices-add', formData);
 
             Swal.fire({
@@ -84,8 +92,8 @@ function NuevoAprendiz() {
                         name='municipio_domicilio' onChange={handleChange} />
                     <input type='text' placeholder='Departamento domicilio' required
                         name='departamento_domicilio' onChange={handleChange} />
-                    <input type='number' placeholder='Teléfono fijo de contacto'
-                        name='telefonofijo_Contacto' onChange={handleChange} />
+                    <input type='text' placeholder='Teléfono fijo de contacto'
+                    name='telefonofijo_Contacto' onChange={handleChange} />
                     <input type='number' placeholder='Número de celular 1' required
                         name='numero_celular1' onChange={handleChange} />
                     <input type='number' placeholder='Número de celular 2'

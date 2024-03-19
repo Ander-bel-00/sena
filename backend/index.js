@@ -30,7 +30,7 @@ app.use(session({
 
 // Habilitar cors.
 app.use(cors({
-    origin: 'http://192.168.1.22:3000',
+    origin: 'http://10.200.80.145:3000',
     credentials: true // Establecer las cookies al frontend.
 }));
 
