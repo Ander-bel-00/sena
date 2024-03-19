@@ -43,7 +43,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Rutas
 app.use('/', routes());
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORTG || 5000;
 
 // Listening on port 5000
 app.listen(port, () => {
