@@ -7,7 +7,7 @@ import Footer from './layouts/FooterComponent';
 
 function Administrador() {
   return (
-    <div>
+    <div className='contenedor-admin'>
       <h1 className="titulo-panel">Panel de control</h1>
 
       <Link to="/crear-ficha">
@@ -30,7 +30,7 @@ function Administrador() {
           <span>Crear Aprendiz</span>
         </div>
       </Link>
-      <Footer />
+      <Footer/>
     </div>
   )
 }
