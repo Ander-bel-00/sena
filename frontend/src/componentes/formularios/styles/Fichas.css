@@ -1,12 +1,4 @@
-.contenedor-formulario-2 {
-  max-width: 1900px;
-  width: 950px;
-  margin-top: -90px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+/* Fichas.css */
 
 .formularioFichas {
   width: 500px;
@@ -14,19 +6,17 @@
   border: 1px solid #ccc;
   border-radius: 9px;
   background-color: #ffffff;
-  margin-top: -9%;
+  margin: 0 auto; /* Centra horizontalmente el formulario */
+  margin-top: 5%; /* Ajusta el margen superior según sea necesario */
 }
 
-
-.formularioFichas input::placeholder{
-  color: rgb(0, 0, 0);
+.formularioFichas input::placeholder {
+  color: #000000;
 }
 
-
-
-
-.titulo-fichas{
+.titulo-fichas {
   font-size: 30px;
+  text-align: center; /* Centra el texto horizontalmente */
 }
 
 .formularioFichas input[type="text"],
@@ -40,12 +30,31 @@
 }
 
 .formularioFichas button {
-  background-color: #00324D;
+  background-color: #39a900;
   color: white;
   cursor: pointer;
 }
 
-.formularioFichas button:hover {
-  background-color: #00324de0;
+
+
+
+
+
+/* Media Query para 780px */
+@media screen and (max-width: 780px) {
+  .formularioFichas {
+    width: 90%; /* Cambia el ancho del formulario */
+  }
 }
 
+/* Media Query para 480px */
+@media screen and (max-width: 480px) {
+  .formularioFichas {
+    width: 90%; /* Cambia el ancho del formulario */
+    padding: 10px; /* Ajusta el relleno */
+  }
+
+  .titulo-fichas {
+    font-size: 24px; /* Reduce el tamaño de la fuente */
+  }
+}
