@@ -19,3 +19,23 @@ exports.cargarPlantillaResetPasswordRequest = (datos) => {
         throw error;
     }
 };
+
+
+exports.ChangePasswordTemplate = (datos) => {
+    try {
+        // Cargar el contenido de la plantilla desde el archivo
+        const contenidoPlantilla = fs.readFileSync('./views/emails/change_password.hbs', 'utf8');
+
+        // Compilar la plantilla utilizando Handlebars
+        const template = handlebars.compile(contenidoPlantilla);
+
+        // Interpolar las variables dinámicas en la plantilla
+        const correoInterpolado = template(datos);
+
+        return correoInterpolado;
+    } catch (error) {
+        console.error('Error al cargar la plantilla de solicitud de \n\
+        restablecimiento de cambio de contraseña:', error);
+        throw error;
+    }
+};

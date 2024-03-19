@@ -276,8 +276,14 @@ exports.cambiarContrasena = async (req, res, next) => {
         // Eliminar el código de verificación
         delete codigosVerificacion[correo_electronico];
 
+        // Llamar a la función para cargar y compilar la plantilla de solicitud de restablecimiento de contraseña
+        const datosPlantilla = {
+            nombreUsuario: usuario.nombres, // Utiliza el nombre del usuario
+        };
+        const cuerpoCorreo = plantillasController.ChangePasswordTemplate(datosPlantilla);
+
         // Envía un correo de confirmación de cambio de contraseña
-        await enviarCorreo(correo_electronico, 'S.E.E.P-Contraseña Cambiada Exitosamente', 'Su contraseña ha sido cambiada exitosamente.');
+        await enviarCorreo(correo_electronico, 'S.E.E.P-Contraseña Restablecida Exitosamente', cuerpoCorreo);
 
         // Eliminar el correo electrónico de la variable de sesión
         delete req.session.correoElectronico;
