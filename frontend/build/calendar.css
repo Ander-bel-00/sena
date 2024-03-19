@@ -1,0 +1,105 @@
+.calendar-container {
+  position: relative; /* Cambia la posición a relativa */
+  margin: 0 auto; /* Centra el calendario horizontalmente */
+  max-width: 100%; /* Asegura que el calendario no sea más ancho que el viewport */
+  height: 95vh; /* Establece la altura del calendario */
+}
+
+.calendar-container .rbc-event{
+
+  background-color: #39a900;
+  color: #fff;
+}
+
+.modal-title {
+  text-align: center; /* Centra el texto en todos los dispositivos */
+}
+
+
+@media screen and (max-width: 1508.89px) {
+  .calendar-container {
+    height: 94vh; /* Ajusta la altura en pantallas más pequeñas */
+    width: 60vw;
+    top: 10px;
+  }
+  .calendar-container .rbc-event{
+    position: relative;
+    background-color: #39a900;
+    color: #fff;
+  }
+}
+
+@media screen and (max-width: 1413.33px) {
+  .calendar-container {
+      height: 95vh; /* Ajusta la altura en pantallas aún más pequeñas */
+      width: 65vw;
+      top: -10px;
+  }
+  .calendar-container .rbc-event{
+    position: relative;
+    top: -5px;
+    background-color: #39a900;
+    color: #fff;
+  }
+}
+
+@media screen and (max-width: 1358px) {
+  .calendar-container {
+    height: 97vh; /* Ajusta la altura en pantallas aún más pequeñas */
+    width: 70vw;
+    top: -10px;
+  }
+  .calendar-container .rbc-event{
+    position: relative;
+    top: -5px;
+    background-color: #39a900;
+    color: #fff;
+  }
+
+  .modal-title {
+    text-align: left; /* Ajusta la alineación a la izquierda en dispositivos móviles */
+    position: relative;
+    right: 10px;
+  }
+}
+
+@media screen and (max-width: 1272px) {
+  .calendar-container {
+    height: 110vh; /* Ajusta la altura en pantallas aún más pequeñas */
+    width: 70vw;
+    top: -10px;
+  }
+  .calendar-container .rbc-event{
+    position: relative;
+    top: -5px;
+    background-color: #39a900;
+    color: #fff;
+  }
+} 
+
+@media screen and (max-width: 780px) {
+  .calendar-container {
+    height: 90vh; /* Ajusta la altura en pantallas aún más pequeñas */
+    width: 100vw;
+    top: -10px;
+}
+  .calendar-container .rbc-event{
+    position: relative;
+    top: -5px;
+    background-color: #39a900;
+    color: #fff;
+  }
+
+  .back {
+    display: none;
+  }
+
+  .modal-title {
+    text-align: left; /* Ajusta la alineación a la izquierda en dispositivos móviles */
+    position: relative;
+    right: 45px;
+  }
+}
+
+
+

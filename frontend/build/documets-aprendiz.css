@@ -1,0 +1,126 @@
+/* Estilos para el formulario de carga de documentos */
+.form-docs {
+    margin-bottom: 20px;
+}
+  
+.form-docs select,
+.form-docs input[type='file'],
+.form-docs button {
+    margin-bottom: 15px;
+}
+  
+.form-docs select {
+    width: 30%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #EEEEEE;
+    background-color: #EEEEEE;
+}
+  
+.form-docs input[type='file'] {
+    width: 100%;
+}
+  
+.form-docs button {
+    background-color: #39a900; /* Verde */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.form-docs button:hover {
+    background-color: #45a049; /* Verde más oscuro */
+}
+  
+/* Estilos para la tabla de documentos */
+.table-container {
+    margin-top: 20px;
+}
+  
+  .table-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+.table-container th,
+.table-container td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+  
+.table-container th {
+    background-color: #f2f2f2; /* Gris claro */
+}
+  
+.table-container tr:nth-child(even) {
+    background-color: #f2f2f2; /* Gris claro */
+}
+  
+.table-container tr:hover {
+    background-color: #ddd; /* Gris más oscuro */
+}
+.btnDownloadAprend{
+    color: #39a900;
+}
+.btnDownloadAprend:hover{
+    text-decoration: underline;
+}
+.upTitle{
+    color: #39a900;
+}
+@media screen and (max-width: 1358px) {
+    .form-docs {
+        margin-bottom: 30px;
+        position: relative;
+        width: 1100px;
+        left: 20px;
+    }
+    .form-docs select {
+        position: relative;
+        left: 30px;
+        width: 35%;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #EEEEEE;
+    }
+    .form-docs input[type='file'] {
+        width: 35%;
+        position: relative;
+        left: 10px;
+        background-color: #EEEEEE;
+        border-radius: 5px;
+        border: 1px solid #EEEEEE;
+    }
+}
+
+/* Para celulares grandes */
+@media screen and (max-width: 780px) {
+    .form-docs {
+        margin-bottom: 30px;
+        position: relative;
+        width: 370px;
+        left: 20px;
+    }
+    .form-docs select {
+        display: flex;
+        position: relative;
+        left: -10px;
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #EEEEEE;
+    }
+    .form-docs input[type='file'] {
+        display: flex;
+        position: relative;
+        padding: 8px;
+        left: -10px;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #EEEEEE;
+    }
+} 
+

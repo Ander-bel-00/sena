@@ -1,0 +1,103 @@
+/* Estilos generales para la tabla */
+.docsAprendicesTab {
+  width: 100%;
+  border-collapse: collapse;
+}
+    
+.thh, .td-aprendiz {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+    
+.thh {
+  background-color: #f2f2f2;
+}
+
+.btn-content{
+  margin-top: 30px;
+}
+
+.btnDownload{
+  position: relative;
+  top: -30px;
+  right: 5px;
+  color: #39a900;
+}
+
+.btnActualizar{
+  color: #39a900;
+  position: relative;
+  right: 75px;
+}
+
+
+/* Media query para dispositivos móviles */
+@media screen and (max-width: 780px) {
+  /* Ocultar la tabla encabezados y mostrar celdas como bloques */
+  .docsAprendicesTab, .Thead2, .tbody2, .thh, .td-aprendiz, .trr { 
+    display: block; 
+  }
+
+  /* Ocultar encabezados */
+  .Thead2 .trr { 
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  /* Establecer el ancho de las celdas */
+  .td-aprendiz { 
+    width: 100%; 
+  }
+
+  /* Estilizar las filas */
+  .trr { 
+    margin-bottom: 15px; 
+    border-bottom: 1px solid #ddd; /* Agregar borde inferior a cada fila */
+    padding-bottom: 10px; /* Espacio entre filas */
+  }
+
+  /* Establecer estilos para las celdas */
+  .td-aprendiz { 
+    border: none;
+    position: relative;
+    padding-left: 50%; 
+  }
+
+  /* Establecer estilos para los encabezados en dispositivos móviles */
+  .td-aprendiz:before { 
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%; /* Ancho relativo a la tabla */
+    padding-right: 10px; /* Espacio entre el contenido y el borde */
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+  }
+
+  /* Establecer estilos para el contenido en dispositivos móviles */
+  .td-aprendiz:nth-of-type(1):before { content: "Número de bitácora:"; }
+  .td-aprendiz:nth-of-type(2):before { content: "Observaciones:"; }
+  .td-aprendiz:nth-of-type(3):before { content: "Estado:"; }
+  .td-aprendiz:nth-of-type(4):before { content: "Acciones:"; }
+
+  /* Excluir los input de tipo archivo de la regla que los oculta */
+  input[type="file"] {
+    display: initial; /* Mostrar los input de tipo archivo */
+  }
+
+  .btnActualizar{
+    color: #39a900;
+    position: relative;
+    left: 0px;
+    top: -15px;
+  }
+
+  .btnDownload{
+    position: relative;
+    top: -30px;
+    left: 0px;
+    color: #39a900;
+  }
+}
+
