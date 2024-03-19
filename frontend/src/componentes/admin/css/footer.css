@@ -5,6 +5,7 @@
     height: 30px;
     width: 100vw;
     left: 0;
+    bottom: 0px;
 }
 
 .footer-content {
@@ -49,13 +50,13 @@
     margin: 0 6px; /* Margen lateral reducido */
 }
 
-.footer-bottom {
-    background-color: #222;
-    text-align: center;
-    padding: 8px 0; /* Padding reducido */
-}
-
 .footer-bottom p {
     margin: 0;
     font-size: 0.8em; /* Tamaño de fuente reducido */
+}
+@media screen and (max-width:780px) {
+    .footer {
+        display: none;
+        
+    }
 }
