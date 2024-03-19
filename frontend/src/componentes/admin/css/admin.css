@@ -13,15 +13,21 @@
     margin: 20px;
     cursor: pointer;
     border: 1px solid #ccc;
-    background-color: #00324D;
+    background-color: #ffffff;
     transition: background-color 0.3s; 
     border-radius: 5px;
     padding: 30px;
+    -webkit-box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.75);
   }
   
+  .icon{
+    color: #39a900;
+  }
  
   .icon-box:hover {
-    background-color: #00324ddc; 
+    background-color: #ccc; 
   }
   
   /* Estilos para los textos debajo de los iconos */
@@ -30,7 +36,7 @@
     margin-top: 5px;
     font-size: 19px;
     font-weight: bold; 
-    color: #fff; 
+    color: #333; 
   }
 
  
@@ -48,30 +54,54 @@
 
 
 
-  
-/* Media query para dispositivos de pantalla más pequeña */
-@media (max-width: 768px) {
+
+@media screen and (max-width: 780px) {
     .icon-box {
-        width: 150px; /* Reducimos el ancho en dispositivos más pequeños */
-        padding: 20px; /* Reducimos el padding */
-        margin: 10px; /* Reducimos el margen */
+      display: inline-block;
+      text-align: center;
+      margin: 20px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      background-color: #ffffff;
+      transition: background-color 0.3s; 
+      border-radius: 5px;
+      padding: 30px;
     }
 
+    .contenedor-admin{
+      width: 700px;
+    }
+    
     .titulo-panel {
         margin-top: 20px; 
         margin-bottom: 30px; 
-        font-size: 20px; 
+        font-size: 27px;
     }
 }
 
 
 @media (max-width: 480px) {
-    .icon-box {
-        width: 100%; 
-    }
+  .icon-box {
+    width: 260px;
+    padding: 20px;
+    margin: 10px;
+}
 
-    .titulo-panel {
-        font-size: 18px; 
-    }
-    
+.contenedor-admin{
+  width: 300px;
+}
+
+.titulo-panel {
+    margin-top: 20px; 
+    margin-bottom: 30px; 
+    font-size: 30px;
+}
+.icon{
+  color: #39a900;
+  margin-left: 45px;
+
+
+}
+
+
 }
