@@ -5,21 +5,30 @@ import Swal from 'sweetalert2';
 import './styles/fichas-form-estilos.css';
 
 
-
+//se define el componente 
 function FichasForm() {
     
+
+    // Estado local para almacenar los datos del formulario
     const [formData, setFormData] = useState({});
 
+
+    // esto maneja los cambios en los campos del formulario
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value,});
     };
 
+    // maneja el envío del formulario
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+
+            // Realizar una solicitud POST al servidor con los datos del formulario
             const response = await clienteAxios.post('/fichas-Admin-new', formData);
 
+
+            // Mostrar una alerta de éxito usando SweetAlert2
             Swal.fire({
                 title: 'Ficha registrada exitosamente',
                 icon: 'success',
@@ -27,14 +36,16 @@ function FichasForm() {
                 confirmButtonText: 'Aceptar',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '/';
+                    window.location.href = '/';   // redireccion a la página de inicio
                 }
             });
 
-            console.log(response.data);
+            console.log(response.data); // imprime la respuesta del servidor en la consola
         } catch (error) {
             console.error('Error al crear la ficha:', error);
 
+
+            //alerta de error
             if (error.response && error.response.data && error.response.data.mensaje) {
                 // Si hay un mensaje de error en la respuesta del servidor, mostrarlo
                 Swal.fire({
@@ -55,6 +66,8 @@ function FichasForm() {
         }
     };
 
+
+    //renderiza el componente
     return (
         <Fragment>
             
