@@ -61,18 +61,18 @@ button.btn-primary p {
 
 @media screen and (max-width: 780px) {
   .form-container-instructor {
-    width: 80%; /* Cambia el ancho del contenedor */
+    width: 80%; 
   }
 }
 
 @media screen and (max-width: 480px) {
   .form-container-instructor {
-    width: 90%; /* Cambia el ancho del contenedor */
-    margin-top: 400px;
+    width: 90%; 
+    margin-top: 130px;
   }
 
   .titulo-fichas {
-    font-size: 24px; /* Reduce el tamaño del título */
+    font-size: 24px; 
   }
 }
 
