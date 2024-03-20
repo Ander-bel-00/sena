@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import clienteAxios from '../../api/axios';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import './styles/Aprendiz-form-estilos.css';
 
 function AprendizForm() {
     //inicializa el estado con usestate para almacenar datos en formdata
@@ -66,7 +67,7 @@ function AprendizForm() {
                     <input type="number" placeholder='Número de documento' name="numero_documento"
                         onChange={handleChange} required />
 
-                    <p>Fecha de expedición del documento:
+                    <p className='fecha-label'>Fecha de expedición del documento:
                         <input type='date' placeholder='Fecha de expedición' name='fecha_expedicion'
                             onChange={handleChange} required />
                     </p>
@@ -74,7 +75,7 @@ function AprendizForm() {
                     <input type='text' placeholder='Lugar de expedición' required
                         name='lugar_expedicion' onChange={handleChange} />
 
-                    <p>Fecha de nacimiento: 
+                    <p className='fecha-label'>Fecha de nacimiento: 
                         <input type='date' placeholder='Fecha de nacimiento' required
                             name='fecha_nacimiento' onChange={handleChange} />
                     </p>
@@ -97,7 +98,7 @@ function AprendizForm() {
                     <input type='text' placeholder='Departamento domicilio' required
                         name='departamento_domicilio' onChange={handleChange} />
 
-                    <input type='number' placeholder='Teléfono fijo de contacto'
+                    <input type='number' placeholder='Teléfono fijo'
                         name='telefonofijo_Contacto' onChange={handleChange} />
 
                     <input type='number' placeholder='Número de celular 1' required
@@ -115,7 +116,7 @@ function AprendizForm() {
                     <input type='number' placeholder='Número de ficha' required
                         name='numero_ficha' onChange={handleChange} />
 
-                    <input type='textr' placeholder='Rol de usuario(aprendiz)' required
+                    <input type='textr' placeholder='Rol de usuario' required
                     name='rol_usuario' onChange={handleChange} />
 
                     <input type='password' placeholder='Contraseña' required
