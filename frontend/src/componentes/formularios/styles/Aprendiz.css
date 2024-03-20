@@ -1,59 +1,88 @@
 .contenedor-formulario {
-  max-width: 600px; /* Ancho máximo del contenedor */
-  width: 100%; /* Hacer que el contenedor ocupe todo el ancho disponible */
-  margin: 20px auto; /* Margen superior e inferior de 20px y centrado horizontal */
-  padding: 20px; /* Espaciado interno del contenedor */
-  border: 1px solid #ccc; /* Borde del contenedor */
-  border-radius: 5px; /* Bordes redondeados */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra del contenedor */
-  display: flex; /* Mostrar los elementos en línea (en una sola columna) */
-  flex-direction: column; /* Establecer la dirección de los elementos en columna */
-  align-items: center; /* Centrar los elementos horizontalmente */
-  margin-top: 70%;
-}
-
-.contenedor-formulario p{
-  color: #000000;
-  font-weight: 400;
-}
-
-.formulario-aprendiz input::placeholder {
-  color: #000000; /* Reemplaza 'yourColor' con el color que desees */
-}
-
-.titulo-aprendiz{
-  font-size: 30px;
+  max-width: 800px; /* Ajusta el ancho máximo según tu diseño */
+  width: 100%; 
+  margin: 20px auto; 
+  padding: 20px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
 }
 
 .formulario-aprendiz {
-  max-width: 500px; /* Ancho máximo del formulario */
-  margin: 0 auto; /* Centra el formulario horizontalmente */
-  padding: 20px; /* Espaciado interno del formulario */
+  max-width: 500px; 
+  width: 100%; 
+  margin: 0 auto; 
+  padding: 20px; 
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en múltiples líneas */
+  justify-content: space-between; /* Distribuye los elementos de manera uniforme */
 }
 
-/* Estilos para los inputs */
-.formulario-aprendiz input {
-  width: 100%; /* Ancho completo del input */
-  margin-bottom: 10px; /* Espaciado entre inputs */
+.formulario-aprendiz input[type="text"],
+.formulario-aprendiz input[type="number"],
+.formulario-aprendiz input[type="password"],
+.formulario-aprendiz input[type="email"] {
+  width: calc(50% - 10px); /* Ancho del 50% con un espacio entre los elementos */
+  margin-bottom: 10px; /* Espaciado entre los inputs */
   padding: 10px; /* Espaciado interno del input */
   border: 1px solid #ccc; /* Borde del input */
   border-radius: 5px; /* Bordes redondeados */
 }
 
-/* Estilos para el botón */
-.formulario-aprendiz button {
-  width: 100%;
-  padding: 10px; 
-  background-color: #00324D; 
-  color: #fff; 
-  border: none; 
-  border-radius: 5px; 
-  cursor: pointer; 
+
+
+
+.formulario-aprendiz input[type="password"]
+{
+ 
+ width: 100%;
 }
 
 
 
-/* Estilos para el botón al pasar el cursor */
-.formulario-aprendiz button:hover {
-  background-color: #00324de0; /* Cambia el color de fondo al pasar el cursor */
+
+.formulario-aprendiz .fecha-label,
+.formulario-aprendiz input[type="date"],
+.formulario-aprendiz input[name="lugar_expedicion"],
+.formulario-aprendiz input[name="lugar_nacimiento"]
+ {
+  width: calc(100%); 
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.fecha-label {
+  color: #818080; 
+}
+
+.formulario-aprendiz input::placeholder {
+  color: #818080; 
+  font-size: 16px;
+}
+
+.titulo-aprendiz {
+  font-size: 30px;
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.formulario-aprendiz p {
+  margin-bottom: 20px; /* Espaciado entre los campos */
+}
+
+
+/* Media Query para 780px */
+@media screen and (max-width: 780px) {
+  .formularioFichas {
+    width: 90%; /* Cambia el ancho del formulario */
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .formulario-aprendiz input::placeholder {
+    color: #818080; 
+    font-size: 12px;
+  }
 }
