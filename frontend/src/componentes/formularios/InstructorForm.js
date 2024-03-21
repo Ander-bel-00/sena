@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/Instructor-form-estilos.css';
+import './styles/Instructor.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import clienteAxios from '../../api/axios';
 import Swal from 'sweetalert2';
@@ -66,12 +66,11 @@ const InstructorForm = () => {
       <h1 className='titulo-fichas'>Registro de Instructores</h1>
       <form onSubmit={handleSubmit} className="row">
         <div className="col-md-6 mb-3">
-          
+          <label className="form-label">Número de Documento:</label>
           <input
               type="text"
               className="form-control"
               name='numero_documento'
-              placeholder='Número de documento'
               onChange={handleChange}
               required
           />
@@ -79,22 +78,21 @@ const InstructorForm = () => {
         </div>
 
         <div className="col-md-6 mb-3">
+          <label className="form-label">Tipo de Documento:</label>
           <input
             type="text"
             className="form-control"
             name='tipo_documento'
-            placeholder='Tipo de documento'
             onChange={handleChange}
             required
           />
         </div>
 
         <div className="col-md-6 mb-3">
-          
+          <label className="form-label">Nombres:</label>
           <input
             type="text"
             className="form-control"
-            placeholder='Nombre'
             name='nombres'
             onChange={handleChange}
             required
@@ -102,80 +100,74 @@ const InstructorForm = () => {
         </div>
 
         <div className="col-md-6 mb-3">
-         
+          <label className="form-label">Apellidos:</label>
           <input
             type="text"
             className="form-control"
             name='apellidos'
-            placeholder='Apellidos'
-
             onChange={handleChange}
             required
           />
         </div>
 
         <div className="col-md-6 mb-3">
-         
+          <label className="form-label">Correo Electrónico:</label>
           <input
             type="email"
             className="form-control"
-            placeholder='Correo electrónico'
-            name='correo_electronico'
+            name='correo_electronico1'
             onChange={handleChange}
             required
           />
         </div>
-
         <div className="col-md-6 mb-3">
-         
+          <label className="form-label">Número de Celular 1:</label>
           <input
             type="tel"
             className="form-control"
-            placeholder='Número de celular 1'
             name='numero_celular1'
+
             onChange={handleChange}
             required
           />
         </div>
 
         <div className="col-md-6 mb-3">
-          
+          <label className="form-label">Número de Celular 2:</label>
           <input
             type="tel"
             className="form-control"
-            placeholder='Número de celular 2'
             name='numero_celular2'
             onChange={handleChange}
           />
         </div>
 
         <div className="col-md-6 mb-3">
-          
+            <label className="form-label">Fichas Asignadas:</label>
             <input
                 type="text"
                 name='fichas_asignadas'
                 className="form-control"
                 onChange={handleChange}
-                placeholder="Fichas asignadas"
+                placeholder="Ingrese las fichas asignadas separadas por coma"
                 required
             />
         </div>
 
 
         <div className="col-md-6 mb-3">
-        
+          <label className="form-label">Rol de Usuario:</label>
           <input
             type="text"
             className="form-control"
             name='rol_usuario'
-            placeholder='Rol de usuario'
             onChange={handleChange}
             required
           />
         </div>
 
         <div className="col-md-6 mb-3">
-         
+          <label className="form-label">Contraseña:</label>
           <input
             type="password"
             className="form-control"
@@ -187,11 +179,10 @@ const InstructorForm = () => {
         </div>
 
         <div className="col-md-12 mb-3">
-          <button type="submit" className="btn-primary">
+          <button type="submit" className="btn btn-primary">
             Crear Instructor
           </button>
         </div>
-
       </form>
     </div>
   );
