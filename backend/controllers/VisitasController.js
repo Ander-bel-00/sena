@@ -8,43 +8,45 @@ exports.crearEvento = async (req, res) => {
     const { tipo_visita, fecha, hora } = req.body; // Obtener tipo_visita, fecha y hora del cuerpo de la solicitud
   
     try {
-      const aprendices = await Aprendices.findOne({
-        where: { id_aprendiz: id_aprendiz }
-      });
-  
-      if (aprendices) {
-        // Verificar si ya existe una visita con el mismo tipo de visita para el aprendiz
-        const existeVisita = await Visitas.findOne({
-          where: {
-            tipo_visita: tipo_visita.toLowerCase(),
-            aprendiz: id_aprendiz
-          }
-        });
-  
-        if (existeVisita) {
-          return res.status(400).json({ error: "Ya existe una visita de este tipo para el aprendiz." });
-        }
-  
+
         await Visitas.sync({ force: false });
-        const nuevoEvento = await Visitas.create({
-          tipo_visita: tipo_visita.toLowerCase(), // Convertir a minúsculas
-          fecha,
-          hora,
-          aprendiz: id_aprendiz,
-          documento_aprendiz: aprendices.numero_documento,
-          nombres_aprendiz: aprendices.nombres,
-          apellidos_aprendiz: aprendices.apellidos,
-          numero_ficha_aprendiz: aprendices.numero_ficha,
+        const aprendices = await Aprendices.findOne({
+            where: { id_aprendiz: id_aprendiz }
         });
-  
-        res.json(nuevoEvento);
-      } else {
-        res.status(404).json({ mensaje: "No se encontró el aprendiz" });
-      }
-    } catch (error) {
-      console.error('Error creando el evento:', error);
-      res.status(500).json({ error: 'Error interno del servidor' });
-    }
+    
+        if (aprendices) {
+            // Verificar si ya existe una visita con el mismo tipo de visita para el aprendiz
+            const existeVisita = await Visitas.findOne({
+            where: {
+                tipo_visita: tipo_visita.toLowerCase(),
+                aprendiz: id_aprendiz
+            }
+            });
+    
+            if (existeVisita) {
+            return res.status(400).json({ error: "Ya existe una visita de este tipo para el aprendiz." });
+            }
+    
+            
+            const nuevoEvento = await Visitas.create({
+            tipo_visita: tipo_visita.toLowerCase(), // Convertir a minúsculas
+            fecha,
+            hora,
+            aprendiz: id_aprendiz,
+            documento_aprendiz: aprendices.numero_documento,
+            nombres_aprendiz: aprendices.nombres,
+            apellidos_aprendiz: aprendices.apellidos,
+            numero_ficha_aprendiz: aprendices.numero_ficha,
+            });
+    
+            res.json(nuevoEvento);
+        } else {
+            res.status(404).json({ mensaje: "No se encontró el aprendiz" });
+        }
+        } catch (error) {
+        console.error('Error creando el evento:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+        }
 };
   
   

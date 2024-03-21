@@ -4,8 +4,8 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.USER_EMAIL_SEND || 'seep.sena.edu@gmail.com',
-        pass: process.env.PASS_USER_MAIL || 'rgjl jwlk iinc ouvv'
+        user: 'seep.sena.edu@gmail.com',
+        pass: 'rgjl jwlk iinc ouvv'
     }
 });
 

@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
 
     try {
         // Verificar y decodificar el token
-        const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET_KEY || 'SECRETKEY');
+        const decodedToken = jwt.verify(token, 'SECRETKEY');
 
         // Obtener el token generado en el inicio de sesión
         const generatedToken = req.cookies.token;
